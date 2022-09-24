@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mantenciones extends Model
 {
-    use HasFactory;
+    public $table = 'mantenciones';
+
+ public $fillable = [
+    'codigo_mantencion',
+    'cod_departamento',
+    'fecha',
+    'encargado',
+    'observaciones',
+    'usuario'
+]
+;
+public $timestamps = false;
 }

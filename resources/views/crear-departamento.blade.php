@@ -25,28 +25,29 @@ input[type=number] {
 			</div>
 			<div class="mb-3 col-md-2">
 				<label for="numero">Numero departamento</label>
-				<input style="width:50px"style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">numero departamento.</small>
+				<input style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+				<small class="form-text text-muted">numero departamento</small>
 			</div>
-
+			<div class="mb-3 col-md-2">
+				<label for="direccion">Direccion</label>
+				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+				<small class="form-text text-muted">direccion del departamento</small>
+			</div>
 		</div>
 		<br> 
 		<div class="row" style="background: antiquewhite;"> 
+
+
 			<div class="mb-3 col-md-2">
-				<label for="direccion">Direccion</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">direccion del departamento</small>
+				<label for="region">Región</label>
+				<select class="form-control" id="regiones" name="region"></select>
+				<small class="form-text text-muted">Region del departamento</small>
 			</div>
 
 			<div class="mb-3 col-md-2">
 				<label for="comuna">Comuna</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="comuna" name="comuna"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
+				<select class="form-control" id="comunas" name="comuna"></select>
 				<small class="form-text text-muted">comuna del departamento</small>
-			</div>
-			<div class="mb-3 col-md-2">
-				<label for="region">Región</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="region" name="region" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">Region del departamento</small>
 			</div>
 		</div>
 		<br>

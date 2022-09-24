@@ -29,3 +29,10 @@
   margin-left: 15%;
   list-style: none;
 }
+
+.dataTable-sorter {
+  display: block;
+  height: 1%;
+  position: unset;
+  width: 1%;
+}

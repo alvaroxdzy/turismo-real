@@ -7,16 +7,6 @@ use App\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
     public function create()
     {
         return view('crear-departamento');
@@ -49,7 +39,7 @@ class DepartamentoController extends Controller
     return view('modificar-departamento')->with('departamento',$departamento);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
      $departamento =Departamento::find($request->id);
      $departamento->codigo_departamento=$request->codigo_departamento; 

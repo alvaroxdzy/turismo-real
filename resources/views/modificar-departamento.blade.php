@@ -18,51 +18,70 @@ input[type=number] {
 	<div class="row mb-3">
 		<div class="col-xl-12"> 
 			<br>
-			<form class="form-inline" type="get" action="{{ url('/actualizar-bodega') }}">
+			<form class="form-inline" id="guardar" type="get" action="{{ url('/actualizar-departamento') }}">
 				{{ csrf_field() }}    
-				<div class="form-group">  
-					<label for="codigo_bodega">Código Bodega</label>
-					<input value="{{$bodega->codigo_bodega}}" type="text" class="form-control" id="codigo_bodega" name="codigo_bodega" placeholder="Ingrese codigo" minlength="1" maxlength="6" required readonly>
-					<small id="cod_bod" class="form-text text-muted">con este codigo identificaras la bodega.</small>
+
+				<input value="{{$departamento->id}}" type="hidden" name="id">
+
+				<div class="row" style="background: antiquewhite;"> 
+					<div class="mb-3 col-md-2">
+						<label for="codigo_departamento">Codigo</label>
+						<input value="{{$departamento->codigo_departamento}}" style="width:200px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
+						<small class="form-text text-muted">codigo del departamento</small>
+					</div>
+					<div class="mb-3 col-md-2">
+						<label for="numero">Numero departamento</label>
+						<input value="{{$departamento->numero}}" style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+						<small class="form-text text-muted">numero departamento</small>
+					</div>
+					<div class="mb-3 col-md-2">
+						<label for="estado">Estado</label>
+						<select class="form-control" id="estado" name="estado">
+							<option value="DISPONIBLE">DISPONIBLE</option>
+							<option value="NO DISPONIBLE">NO DISPONIBLE</option>
+						</select>
+						<small class="form-text text-muted">estado del departamento</small>
+					</div>
+
 				</div>
+				<br> 
 
+				<div class="row" style="background: antiquewhite;"> 
+					<div >
+						<label for="direccion">Direccion</label>
+						<input value="{{$departamento->direccion}}" style="text-transform:uppercase;width:1000px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+						<small class="form-text text-muted">direccion del departamento</small>
+					</div>
+					<div class="mb-3 col-md-2">
+						<label for="region">Región</label>
+						<select class="form-control" id="regiones" name="region" required></select>
+						<small class="form-text text-muted">{{$departamento->region}}</small>
+					</div>
 
-				<input value="{{$bodega->id}}" type="hidden" name="id">
-
-
-
-				<div class="form-group">
-					<label for="nombre_bodega">Nombre Bodega</label>
-					<input value="{{$bodega->nombre_bodega}}" type="text" class="form-control" id="nombre_bodega" name="nombre_bodega" placeholder="Ingrese nombre" required maxlength="50" >
-					<small id="nom_bod" class="form-text text-muted">con este nombre identificaras la bodega.</small>
+					<div class="mb-3 col-md-2">
+						<label for="comuna">Comuna</label>
+						<select  class="form-control" id="comunas" name="comuna" required></select>
+						<small class="form-text text-muted">{{$departamento->comuna}}</small>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="direccion_bodega">Dirección Bodega</label>
-					<input value="{{$bodega->direccion_bodega}}" type="text" class="form-control" id="direccion_bodega" name="direccion_bodega" placeholder="Ingrese la direccion bodega" required>
-					<small id="dir_bod" class="form-text text-muted">dirección de la bodega bodega.</small>
+				<br>
+				<div class="row" style="background : antiquewhite;">
+					<div class="mb-3 col-md-2">
+						<label for="cantidad_habitaciones">Cantidad de habitaciones</label>
+						<input value="{{$departamento->cantidad_habitaciones}}" style="text-transform:uppercase" type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+						<small class="form-text text-muted">cantidad de habitaciones</small>
+					</div>
+					<div class="mb-3 col-md-2">
+						<label for="cantidad_banos">Cantidad de baños </label>
+						<input value="{{$departamento->cantidad_banos}}" style="text-transform:uppercase" type="text" class="form-control" id="cantidad_banos" name="cantidad_banos" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+						<small class="form-text text-muted"> cantidad de baños</small>
+					</div>
+
+					<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+
 				</div>
-
-
-				<div class="form-group">
-					<label for="comuna_bodega">Sucursal Bodega</label>
-					<select class="form-control" id="sucursal_bodega" name="comuna_bodega" placeholder="Seleccione comuna bodega" required>
-						<option value="{{$bodega->comuna_bodega}}">{{$bodega->comuna_bodega}}</option>
-						@foreach($comuna as $comunas)
-
-						<option value="{{$comunas->comuna_bodega}}">{{$comunas->comuna_bodega}} </option>
-
-						@endforeach
-					</select> 
-				</div>
-
-
-				<div class="form-group">
-					<label for="telefono_bodega">Teléfono</label>
-					<input value="{{$bodega->telefono_bodega}}" type="tel" class="form-control" id="telefono_bodega" name="telefono_bodega" >
-					<small id="suc_bod" class="form-text text-muted">Sin código de area.</small>
-				</div>
-
-				<input type="submit" class="btn btn-primary"  value="Actualizar ">  </input>
+				<br>
+				<input  class="btn btn-primary" onclick="validarCampos()" value="Actualizar ">  </input>
 			</form>
 			<div id="error"> </div>
 			@if(session()->has('message'))
@@ -78,6 +97,20 @@ input[type=number] {
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function validarCampos() {
+	var region = $('#regiones').val();
+
+	if (region=='sin-region'){
+		alert('Seleccione región');
+		
+	} else {
+    $('#guardar').submit();
+	}
+	console.log(region);
+}
+</script>
 @endsection
 
 
