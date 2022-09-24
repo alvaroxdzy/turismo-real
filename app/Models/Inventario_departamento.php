@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servicios extends Model
+class Inventario_departamento extends Model
 {
-   public $table = 'servicios';
+   public $table = 'Inventario_departamento';
 
    public $fillable = [
-    'codigo_servicio',
-    'nombre_servicio',
+    'cod_departamento',
+    'nombre_producto',
     'disponibilidad',
     'detalles'
 ]

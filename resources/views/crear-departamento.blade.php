@@ -64,10 +64,8 @@ input[type=number] {
 			</div>
 
 			<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-
 		</div>
 		<br>
-		<input class="btn btn-primary sm" onclick="validarCampos()" value="Registrar ">  </input>
 	</div>
 </form>
 
@@ -77,16 +75,13 @@ input[type=number] {
         
          <table class="table table-sm" id="tableMovimiento" style="width:100%">
           <thead>
-            <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn"  > AGREGAR DETALLE </button>
+            <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" onclick="validarDepartamento()" > AGREGAR DETALLE </button>
             <br>
             <tr>
                 <br>
-                <th>Codigo producto:</th>
-                <th>Producto:</th>
-                <th>Cantidad:</th>
-                <th>Valor unitario(neto):</th>
-                <th>IVA</th>
-                <th>Total:</th>
+                <th>Nombre objeto:</th>
+                <th>Detalles:</th>
+                <th>Valoracion:</th>             
                 <th>Gestionar</th>
             </tr>
         </thead>
@@ -96,7 +91,119 @@ input[type=number] {
 
         </tbody>
     </table>
-    <input type="" class="btn btn-primary"  value="GUARDAR MOVIMIENTO " onclick="grabar()">  </input>
+    <input type="" class="btn btn-primary"  value="Guardar departamento" onclick="grabar()">  </input>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        var contador = 0;
+        $('#agregar_btn').on('click',function(){
+        if (contador==0){
+
+        } else {
+            $('#borrar_btn'+contador).attr('hidden',true);
+        }
+
+        contador = contador+1;
+        $('#contador').val(contador);
+        var html = '';
+        html+='<tr>'; 
+        html+='<td><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
+        html+='<td><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
+        html+='<td><input id="valoracion'+contador+'" class="form-control" type="text" name="valoracion" required placeholder=""></td>';
+        html+='<td><button class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
+        html+='<tr>';
+        
+
+        $('tbody').append(html);
+
+        $(document).on('click','#borrar_btn'+contador,function(){
+
+            $(this).closest('tr').remove();
+            contador = contador-1;
+            $('#contador').val(contador);
+            $('#borrar_btn'+contador).attr('hidden',false);
+
+        });
+    })
+
+    });
+</script>
+
+<script>
+    function grabar ()
+    {
+     m = 0;
+     n = $('#contador').val();
+     arrayMovimiento = [];
+
+
+     if (n == 0 ){
+        arrayMovimiento;
+    } else {
+
+        while (m < n) {
+          m ++;
+
+
+          var datos = {
+            'nombre_objetos':$("#nombre_objetos"+m).val(),
+            'detalles':$("#detalles"+m).val(),
+            'valoracion':$('#valoracion'+m).val()          
+            };
+
+            arrayMovimiento.push(datos);
+
+        }
+    console.log(arrayMovimiento);
+
+    codigo_departamento = $('#codigo_departamento').val();
+    direccion = $('#direccion').val();
+    comuna = $('#comunas').val();
+    region = $('#regiones').val();
+    numero = $('#numero').val();
+    cantidad_habitaciones = $('#cantidad_habitaciones').val();
+    cantidad_banos = $('#cantidad_banos').val();
+    estado = $('#estado').val();
+    usuario = $('#usuario').val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
+         url:"/almacenar-departamento", //url guarda la ruta hacia donde se hace la peticion
+         data:{
+             "codigo_departamento":codigo_departamento,
+             "direccion":direccion,
+             "comuna":comuna,
+             "region":region,
+             "numero":numero,
+             "cantidad_habitaciones":cantidad_habitaciones,
+             "cantidad_banos":cantidad_banos,
+             "estado":estado,
+             "usuario":usuario,
+             "arrayMovimiento":arrayMovimiento
+         }, // data recive un objeto con la informacion que se enviara al servidor
+         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
+            console.log(data);
+
+            if (data=='LISTASO') {
+                alert('Departamento registrado');
+                location.reload(); 
+            } else {
+                alert('Ya existe el departamento');
+            }
+        },
+    });
+}
+}
+</script>
+
+
 
 
 
@@ -114,5 +221,7 @@ input[type=number] {
 
 </div>
 @endsection
+
+
 
 
