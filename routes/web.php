@@ -37,8 +37,8 @@ Route::get('/modificar-mantencion/{id}',[App\Http\Controllers\MantencionesContro
 Route::get('/actualizar-mantencion',[App\Http\Controllers\MantencionesController::class, 'update'])->name('mantencion.update');
 
 //RUTAS SERVICIOS
-Route::get('/crear-mantencion',[App\Http\Controllers\MantencionesController::class, 'create'])->name('mantencion.create');
-Route::get('/buscar-mantencion',[App\Http\Controllers\MantencionesController::class, 'search'])->name('mantencion.search');
-Route::get('/almacenar-mantencion',[App\Http\Controllers\MantencionesController::class, 'store'])->name('mantencion.store');
-Route::get('/modificar-mantencion/{id}',[App\Http\Controllers\MantencionesController::class, 'edit'])->name('mantencion.edit');
-Route::get('/actualizar-mantencion',[App\Http\Controllers\MantencionesController::class, 'update'])->name('mantencion.update');
+Route::get('/crear-servicio',[App\Http\Controllers\ServiciosController::class, 'create'])->name('servicio.create');
+Route::get('/buscar-servicio',[App\Http\Controllers\ServiciosController::class, 'search'])->name('servicio.search');
+Route::get('/almacenar-servicio',[App\Http\Controllers\ServiciosController::class, 'store'])->name('servicio.store');
+Route::get('/modificar-servicio/{id}',[App\Http\Controllers\ServiciosController::class, 'edit'])->name('servicio.edit');
+Route::get('/actualizar-servicio',[App\Http\Controllers\ServiciosController::class, 'update'])->name('servicio.update');

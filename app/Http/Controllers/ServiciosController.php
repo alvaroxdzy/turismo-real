@@ -18,7 +18,7 @@ class ServiciosController extends Controller
        $servicio =new Servicios();
        $servicio->codigo_servicio=$request->codigo_servicio;
        $servicio->nombre_servicio=$request->nombre_servicio; 
-       $servicio->disponibilidad=$request->disponibilidad; 
+       $servicio->disponibilidad='DISPONIBLE'; 
        $servicio->detalles=$request->detalles; 
        $servicio->save();
 
