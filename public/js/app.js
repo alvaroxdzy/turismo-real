@@ -107,3 +107,33 @@ jQuery(document).ready(function () {
   });
 
 });
+
+
+  function validarCampos() {
+  var region = $('#regiones').val();
+  var comuna = $('#comunas').val();
+
+  if (region=='sin-region'||comuna=='sin-comuna'){
+    alert('Debe seleccionar los campos de región y de comuna');
+    
+  } else {
+    $('#guardar').submit();
+  }
+  console.log(region);
+}
+
+function valideKey(evt){
+
+   // code is the decimal ASCII representation of the pressed key.
+   var code = (evt.which) ? evt.which : evt.keyCode;
+   
+   if(code==8) { // backspace.
+     return true;
+   } else if(code>=48 && code<=57) { // is a number.
+     return true;
+   } else{ // other keys.
+     return false;
+   }
+ }
+
+ 

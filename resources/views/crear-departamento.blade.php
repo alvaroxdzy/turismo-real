@@ -15,7 +15,7 @@ input[type=number] {
 @section('content')
 
 <div class="container">
-	<form class="form-inline" type="get" action="{{ url('/almacenar-departamento') }}">
+	<form id="guardar" class="form-inline" type="get" action="{{ url('/almacenar-departamento') }}">
 		{{ csrf_field() }}
 		<div class="row" style="background: antiquewhite;"> 
 			<div class="mb-3 col-md-2">
@@ -67,9 +67,39 @@ input[type=number] {
 
 		</div>
 		<br>
-		<input type="submit" class="btn btn-primary"  value=" Registrar "> </input>
+		<input class="btn btn-primary sm" onclick="validarCampos()" value="Registrar ">  </input>
 	</div>
 </form>
+
+<div class="card"> 
+    <div class="card-body">
+
+        
+         <table class="table table-sm" id="tableMovimiento" style="width:100%">
+          <thead>
+            <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn"  > AGREGAR DETALLE </button>
+            <br>
+            <tr>
+                <br>
+                <th>Codigo producto:</th>
+                <th>Producto:</th>
+                <th>Cantidad:</th>
+                <th>Valor unitario(neto):</th>
+                <th>IVA</th>
+                <th>Total:</th>
+                <th>Gestionar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <input type="hidden" name="contador" value="0" id="contador">
+
+        </tbody>
+    </table>
+    <input type="" class="btn btn-primary"  value="GUARDAR MOVIMIENTO " onclick="grabar()">  </input>
+
+
+
 <div id="error"> </div>
 @if(session()->has('message'))
 <div class="alert alert-success">

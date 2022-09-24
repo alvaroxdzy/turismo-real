@@ -98,20 +98,7 @@ input[type=number] {
 	</div>
 </div>
 
-<script type="text/javascript">
-	function validarCampos() {
-	var region = $('#regiones').val();
-	var comuna = $('#comunas').val();
 
-	if (region=='sin-region'||comuna=='sin-comuna'){
-		alert('Debe seleccionar los campos de región y de comuna');
-		
-	} else {
-    $('#guardar').submit();
-	}
-	console.log(region);
-}
-</script>
 @endsection
 
 
