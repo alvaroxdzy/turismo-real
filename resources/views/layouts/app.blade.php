@@ -87,7 +87,7 @@
                                  Bienvenido : {{ Auth::user()->email }}
                              </marquee>
                              <br>
-                             <a style="display:block;text-align:right;" class="indigo" href="{{ route('logout') }}"
+                             <a class="link-secondary" style="display:block;text-align:right;"  href="{{ route('logout') }}"
                              onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                              {{ __('Cerrar sesion') }}
