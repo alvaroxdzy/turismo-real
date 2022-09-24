@@ -81,7 +81,7 @@ input[type=number] {
 
 				</div>
 				<br>
-				<input  class="btn btn-primary" onclick="validarCampos()" value="Actualizar ">  </input>
+				<input class="btn btn-primary sm" onclick="validarCampos()" value="Actualizar ">  </input>
 			</form>
 			<div id="error"> </div>
 			@if(session()->has('message'))
@@ -101,9 +101,10 @@ input[type=number] {
 <script type="text/javascript">
 	function validarCampos() {
 	var region = $('#regiones').val();
+	var comuna = $('#comunas').val();
 
-	if (region=='sin-region'){
-		alert('Seleccione región');
+	if (region=='sin-region'||comuna=='sin-comuna'){
+		alert('Debe seleccionar los campos de región y de comuna');
 		
 	} else {
     $('#guardar').submit();
