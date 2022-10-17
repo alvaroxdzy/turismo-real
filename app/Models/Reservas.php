@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservas extends Model
 {
-    use HasFactory;
+    public $table = 'reservas';
+
+ public $fillable = [
+    'fecha_creacion',
+    'rut',
+    'cod_departamento',
+    'fecha_desde',
+    'fecha_hasta',
+    'costo_base',
+    'estado'
+]
+;
+public $timestamps = false;
 }

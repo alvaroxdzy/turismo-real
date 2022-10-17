@@ -5,7 +5,7 @@
 
 
 <div  class="container"> 
-  <h4>Listado servicios</h4>
+  <h4>Lista de servicios extras</h4>
   <div> 
    <form class="form-text-input" type="get">
 
@@ -21,8 +21,8 @@
 
         <thead>
           <tr>
-            <th>Codigo</th>
-            <th>Nombre servicio</th>
+            <th>ID</th>
+            <th>Nombre </th>
             <th>Detalles</th>
             <th>Gestionar</th>        
           </tr>
@@ -30,10 +30,10 @@
         <tbody>
           @foreach($servicios as $servicio) 
           <tr>
-            <td>{{$servicio->codigo_servicio}} </td>
+            <td>{{$servicio->id}} </td>
             <td>{{$servicio->nombre_servicio}}</td>
             <td>{{$servicio->detalles}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar-servicio/{{$servicio->codigo_servicio}}"> Modificar </a></td>
+            <td><a class="btn btn-outline-primary btn-sm" href="modificar-servicio/{{$servicio->id}}"> Modificar </a></td>
           </tr>
           @endforeach
         </tbody>

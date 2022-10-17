@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mantenciones; 
+use App\Models\Departamento; 
+
 
 class MantencionesController extends Controller
 {
@@ -14,36 +16,58 @@ class MantencionesController extends Controller
 
     public function store(Request $request)
     {
+      $mantencionDisponible = Mantenciones::where('cod_departamento',$request->cod_departamento)->where('fecha',$request->fecha)->first();
+      if($mantencionDisponible) {
+        return redirect()->back()->with('error', 'ERROR YA HAY UNA MANTENCIÓN PARA ESTE DEPARTAMENTO EN LA FECHA SOLICITADA');
+    }
 
-       $mantencion =new Mantenciones();
-       $mantencion->codigo_mantencion=$request->codigo_mantencion;
-       $mantencion->cod_departamento=$request->cod_departamento; 
-       $mantencion->fecha=$request->fecha; 
-       $mantencion->encargado=$request->encargado; 
-       $mantencion->observaciones=$request->observaciones;        
-       $mantencion->usuario=$request->usuario;
-       $mantencion->save();
+    $mantencion =new Mantenciones();
+    $mantencion->cod_departamento=$request->cod_departamento; 
+    $mantencion->fecha=$request->fecha; 
+    $mantencion->encargado=$request->encargado; 
+    $mantencion->observaciones=$request->observaciones;        
+    $mantencion->usuario=$request->usuario;
+    $mantencion->save();
 
-       return redirect()->back()->with('message', 'mantencion registrada correctamente');
-   }
+    return redirect()->back()->with('message', 'mantencion registrada correctamente');
+}
 
-   public function edit($id)
-   {
-    $mantencion = Mantenciones::where('codigo_mantencion',$id)->first();
+public function edit($id)
+{
+    $mantencion = Mantenciones::where('id',$id)->first();
     return view('modificar-mantencion')->with('mantencion',$mantencion);
 }
 
 public function update(Request $request)
 {
-   $mantencion =Mantenciones::find($request->id);
-   $mantencion->codigo_mantencion=$request->codigo_mantencion;
-   $mantencion->cod_departamento=$request->cod_departamento; 
-   $mantencion->fecha=$request->fecha; 
-   $mantencion->encargado=$request->encargado; 
-   $mantencion->observaciones=$request->observaciones;        
-   $mantencion->usuario=$request->usuario;
-   $mantencion->save();
-   return redirect(route('mantencion.search'));
+
+  $validarFecha = Mantenciones::where('cod_departamento',$request->cod_departamento)
+  ->where('fecha',$request->fecha)
+  ->where('id','!=',$request->id)
+  ->first();
+
+  $validarEstado = Departamento::join('mantenciones','departamento.codigo_departamento','=','mantenciones.cod_departamento')
+  ->where('cod_departamento',$request->cod_departamento)
+  ->where('estado','NO DISPONIBLE')
+
+  ->first();
+
+  if($validarFecha) {
+    return redirect()->back()->with('error', 'ERROR YA HAY UNA MANTENCIÓN PARA ESTE DEPARTAMENTO EN LA FECHA SOLICITADA');
+}
+if($validarEstado) {
+    return redirect()->back()->with('error', 'ERROR ESTE DEPARTAMENTO NO SE ENCUENTRA DISPONIBLE');
+}
+
+
+$mantencion =Mantenciones::find($request->id);
+$mantencion->cod_departamento=$request->cod_departamento; 
+$mantencion->fecha=$request->fecha; 
+$mantencion->encargado=$request->encargado; 
+$mantencion->observaciones=$request->observaciones;        
+$mantencion->usuario=$request->usuario;
+$mantencion->save();
+return redirect(route('mantencion.search'));
 }
 
 public function destroy($id)
@@ -55,7 +79,7 @@ public function destroy($id)
 public function search(){
 
 
-    $mantenciones=Mantenciones::all();
+    $mantenciones=Mantenciones::orderBy('fecha','desc')->get();
     return view('busqueda-mantencion',compact('mantenciones'));
 }
 }

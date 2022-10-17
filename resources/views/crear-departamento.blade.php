@@ -21,33 +21,33 @@ input[type=number] {
 			<div class="mb-3 col-md-2">
 				<label for="codigo_departamento">Codigo</label>
 				<input style="width:200px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">ingrese codigo del departamento</small>
+				
 			</div>
 			<div class="mb-3 col-md-2">
 				<label for="numero">Numero departamento</label>
 				<input style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">numero departamento</small>
+				
 			</div>
 			<div class="mb-3 col-md-2">
 				<label for="direccion">Direccion</label>
 				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">direccion del departamento</small>
+				
 			</div>
 		</div>
 		<br> 
 		<div class="row" style="background: antiquewhite;"> 
 
 
-			<div class="mb-3 col-md-2">
+			<div class="mb-3 col-md-4">
 				<label for="region">Región</label>
 				<select class="form-control" id="regiones" name="region"></select>
-				<small class="form-text text-muted">Region del departamento</small>
+				
 			</div>
 
-			<div class="mb-3 col-md-2">
+			<div class="mb-3 col-md-4">
 				<label for="comuna">Comuna</label>
 				<select class="form-control" id="comunas" name="comuna"></select>
-				<small class="form-text text-muted">comuna del departamento</small>
+				
 			</div>
 		</div>
 		<br>
@@ -55,27 +55,25 @@ input[type=number] {
 			<div class="mb-3 col-md-2">
 				<label for="cantidad_habitaciones">Cantidad de habitaciones</label>
 				<input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted">cantidad de habitaciones</small>
+				
 			</div>
 			<div class="mb-3 col-md-2">
 				<label for="cantidad_banos">Cantidad de baños </label>
 				<input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_banos" name="cantidad_banos" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				<small class="form-text text-muted"> cantidad de baños</small>
+				
 			</div>
 
 			<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
 		</div>
 		<br>
-	</div>
-</form>
 
-<div class="card"> 
-    <div class="card-body">
+    </form>
 
-        
+    <div class="card" style="background: antiquewhite;"> 
+        <div class="card-body">
          <table class="table table-sm" id="tableMovimiento" style="width:100%">
           <thead>
-            <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" onclick="validarDepartamento()" > AGREGAR DETALLE </button>
+            <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
             <br>
             <tr>
                 <br>
@@ -91,42 +89,44 @@ input[type=number] {
 
         </tbody>
     </table>
-    <input type="" class="btn btn-primary"  value="Guardar departamento" onclick="grabar()">  </input>
-
-
+    <input type="" class="btn btn-primary"  value="Guardar departamento" onclick="validarDepartamento()">  </input>
+</div>
+</div>
+</div>
 <script type="text/javascript">
 
     $(document).ready(function(){
         var contador = 0;
+
         $('#agregar_btn').on('click',function(){
-        if (contador==0){
+            if (contador==0){
 
-        } else {
-            $('#borrar_btn'+contador).attr('hidden',true);
-        }
+            } else {
+                $('#borrar_btn'+contador).attr('hidden',true);
+            }
 
-        contador = contador+1;
-        $('#contador').val(contador);
-        var html = '';
-        html+='<tr>'; 
-        html+='<td><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
-        html+='<td><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
-        html+='<td><input id="valoracion'+contador+'" class="form-control" type="text" name="valoracion" required placeholder=""></td>';
-        html+='<td><button class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
-        html+='<tr>';
-        
-
-        $('tbody').append(html);
-
-        $(document).on('click','#borrar_btn'+contador,function(){
-
-            $(this).closest('tr').remove();
-            contador = contador-1;
+            contador = contador+1;
             $('#contador').val(contador);
-            $('#borrar_btn'+contador).attr('hidden',false);
+            var html = '';
+            html+='<tr>'; 
+            html+='<td><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
+            html+='<td><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
+            html+='<td><input id="valoracion'+contador+'" class="form-control" type="text" name="valoracion" required placeholder=""></td>';
+            html+='<td><button class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
+            html+='<tr>';
 
-        });
-    })
+
+            $('tbody').append(html);
+
+            $(document).on('click','#borrar_btn'+contador,function(){
+
+                $(this).closest('tr').remove();
+                contador = contador-1;
+                $('#contador').val(contador);
+                $('#borrar_btn'+contador).attr('hidden',false);
+
+            });
+        })
 
     });
 </script>
@@ -151,11 +151,11 @@ input[type=number] {
             'nombre_objetos':$("#nombre_objetos"+m).val(),
             'detalles':$("#detalles"+m).val(),
             'valoracion':$('#valoracion'+m).val()          
-            };
+        };
 
-            arrayMovimiento.push(datos);
+        arrayMovimiento.push(datos);
 
-        }
+    }
     console.log(arrayMovimiento);
 
     codigo_departamento = $('#codigo_departamento').val();
@@ -193,7 +193,8 @@ input[type=number] {
 
             if (data=='LISTASO') {
                 alert('Departamento registrado');
-                location.reload(); 
+                limpiarFormDepartamento();
+                location.reload();
             } else {
                 alert('Ya existe el departamento');
             }

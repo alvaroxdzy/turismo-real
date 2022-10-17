@@ -23,15 +23,11 @@ input[type=number] {
 
 				<input value="{{$servicio->id}}" type="hidden" name="id">
 				<div class="row" style="background: antiquewhite;"> 
-					<div class="mb-3 col-md-2">
-						<label for="codigo_servicio">Codigo</label>
-						<input value="{{$servicio->codigo_servicio}}" style="text-transform:uppercase" type="text" class="form-control" id="codigo_servicio" name="codigo_servicio" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
-						<small class="form-text text-muted">codigo para el servicio</small>
-					</div>
+
 					<div class="mb-3 col-md-4">
 						<label for="nombre_servicio">Nombre servicio</label>
 						<input value="{{$servicio->nombre_servicio}}" style="text-transform:uppercase" type="text" class="form-control" id="nombre_servicio" name="nombre_servicio"  minlength="1" maxlength="10" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">Nombre servicio</small>
+						
 					</div>
 					<div class="mb-3 col-md-2">
 						<label for="disponibilidad">Disponibilidad</label>
@@ -39,7 +35,7 @@ input[type=number] {
 							<option value="DISPONIBLE">DISPONIBLE</option>
 							<option value="NO DISPONIBLE">NO DISPONIBLE</option>
 						</select>
-						<small class="form-text text-muted"></small>
+					
 					</div>
 				</div>
 				<br> 
@@ -48,7 +44,7 @@ input[type=number] {
 					<div >
 						<label for="detalles">Detalles</label>
 						<textarea value="{{$servicio->detalles}}" style="text-transform:uppercase;width:500px" type="text-center" class="form-control" id="detalles"  name="detalles"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto">{{$servicio->detalles}}</textarea>
-						<small class="form-text text-muted">observaciones</small>
+						
 					</div>
 				</div>
 				<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">

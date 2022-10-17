@@ -42,3 +42,14 @@ Route::get('/buscar-servicio',[App\Http\Controllers\ServiciosController::class, 
 Route::get('/almacenar-servicio',[App\Http\Controllers\ServiciosController::class, 'store'])->name('servicio.store');
 Route::get('/modificar-servicio/{id}',[App\Http\Controllers\ServiciosController::class, 'edit'])->name('servicio.edit');
 Route::get('/actualizar-servicio',[App\Http\Controllers\ServiciosController::class, 'update'])->name('servicio.update');
+
+//RUTAS RESERVAS
+
+
+Route::get('/crear-reservas',[App\Http\Controllers\ReservasController::class, 'create'])->name('reservas.create');
+Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, 'filterComuna'])->name('reservas.create');
+
+//RUTAS USUARIO
+Route::get('/mi-cuenta',function(){
+    return view('mi-cuenta');
+});

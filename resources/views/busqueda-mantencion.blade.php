@@ -21,7 +21,7 @@
 
         <thead>
           <tr>
-            <th>Codigo</th>
+            <th>ID</th>
             <th>Departamento</th>
             <th>Fecha</th>
             <th>Encargado</th>
@@ -33,13 +33,13 @@
         <tbody>
           @foreach($mantenciones as $mantencion) 
           <tr>
-            <td>{{$mantencion->codigo_mantencion}} </td>
+            <td>{{$mantencion->id}} </td>
             <td>{{$mantencion->cod_departamento}}</td>
             <td>{{$mantencion->fecha}}</td>
             <td>{{$mantencion->encargado}}</td>
             <td>{{$mantencion->observaciones}}</td>
             <td>{{$mantencion->usuario}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar-mantencion/{{$mantencion->codigo_mantencion}}"> Modificar </a></td>
+            <td><a class="btn btn-outline-primary btn-sm" href="modificar-mantencion/{{$mantencion->id}}"> Modificar </a></td>
           </tr>
           @endforeach
         </tbody>

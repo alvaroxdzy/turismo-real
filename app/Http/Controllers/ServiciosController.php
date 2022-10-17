@@ -16,7 +16,6 @@ class ServiciosController extends Controller
     {
 
        $servicio =new Servicios();
-       $servicio->codigo_servicio=$request->codigo_servicio;
        $servicio->nombre_servicio=$request->nombre_servicio; 
        $servicio->disponibilidad='DISPONIBLE'; 
        $servicio->detalles=$request->detalles; 
@@ -27,16 +26,15 @@ class ServiciosController extends Controller
 
    public function edit($id)
    {
-    $servicio = Servicios::where('codigo_servicio',$id)->first();
+    $servicio = Servicios::where('id',$id)->first();
     return view('modificar-servicio')->with('servicio',$servicio);
 }
 
 public function update(Request $request)
 {
    $servicio =Servicios::find($request->id);
-   $servicio->codigo_servicio=$request->codigo_servicio;
    $servicio->nombre_servicio=$request->nombre_servicio; 
-   $servicio->disponibilidad=$request->disponibilidad; 
+   $servicio->disponibilidad=$request->estado; 
    $servicio->detalles=$request->detalles; 
    $servicio->save();
    return redirect(route('servicio.search'));

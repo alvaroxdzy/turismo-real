@@ -24,15 +24,21 @@ input[type=number] {
 				<input value="{{$departamento->id}}" type="hidden" name="id">
 
 				<div class="row" style="background: antiquewhite;"> 
-					<div class="mb-3 col-md-2">
+					<div class="mb-3 col-md-1">
 						<label for="codigo_departamento">Codigo</label>
-						<input value="{{$departamento->codigo_departamento}}" style="width:200px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
-						<small class="form-text text-muted">codigo del departamento</small>
+						<input value="{{$departamento->codigo_departamento}}" style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
+						
 					</div>
 					<div class="mb-3 col-md-2">
 						<label for="numero">Numero departamento</label>
-						<input value="{{$departamento->numero}}" style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">numero departamento</small>
+						<input value="{{$departamento->numero}}" style="text-transform:uppercase" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+						
+					</div>
+
+					<div class="mb-3 col-md-5">
+						<label for="direccion">Direccion</label>
+						<input value="{{$departamento->direccion}}" style="text-transform:uppercase;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+						
 					</div>
 					<div class="mb-3 col-md-2">
 						<label for="estado">Estado</label>
@@ -40,25 +46,21 @@ input[type=number] {
 							<option value="DISPONIBLE">DISPONIBLE</option>
 							<option value="NO DISPONIBLE">NO DISPONIBLE</option>
 						</select>
-						<small class="form-text text-muted">estado del departamento</small>
+						
 					</div>
 
 				</div>
 				<br> 
 
 				<div class="row" style="background: antiquewhite;"> 
-					<div >
-						<label for="direccion">Direccion</label>
-						<input value="{{$departamento->direccion}}" style="text-transform:uppercase;width:1000px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">direccion del departamento</small>
-					</div>
-					<div class="mb-3 col-md-2">
+
+					<div class="mb-3 col-md-4">
 						<label for="region">Región</label>
 						<select class="form-control" id="regiones" name="region" required></select>
 						<small class="form-text text-muted">{{$departamento->region}}</small>
 					</div>
 
-					<div class="mb-3 col-md-2">
+					<div class="mb-3 col-md-4">
 						<label for="comuna">Comuna</label>
 						<select  class="form-control" id="comunas" name="comuna" required></select>
 						<small class="form-text text-muted">{{$departamento->comuna}}</small>
@@ -69,20 +71,21 @@ input[type=number] {
 					<div class="mb-3 col-md-2">
 						<label for="cantidad_habitaciones">Cantidad de habitaciones</label>
 						<input value="{{$departamento->cantidad_habitaciones}}" style="text-transform:uppercase" type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">cantidad de habitaciones</small>
+						
 					</div>
 					<div class="mb-3 col-md-2">
 						<label for="cantidad_banos">Cantidad de baños </label>
 						<input value="{{$departamento->cantidad_banos}}" style="text-transform:uppercase" type="text" class="form-control" id="cantidad_banos" name="cantidad_banos" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted"> cantidad de baños</small>
+						
 					</div>
 
 					<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
 
 				</div>
 				<br>
-				<input class="btn btn-primary sm" onclick="validarCampos()" value="Actualizar ">  </input>
+				<input class="btn btn-primary sm" onclick="validarDepartamentoModificar()" value="Actualizar ">  </input>
 			</form>
+			
 			<div id="error"> </div>
 			@if(session()->has('message'))
 			<div class="alert alert-success">
