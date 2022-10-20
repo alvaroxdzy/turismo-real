@@ -45,9 +45,9 @@ Route::get('/actualizar-servicio',[App\Http\Controllers\ServiciosController::cla
 
 //RUTAS RESERVAS
 
-
 Route::get('/crear-reservas',[App\Http\Controllers\ReservasController::class, 'create'])->name('reservas.create');
 Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, 'filterComuna'])->name('reservas.create');
+Route::get('/almacenar-reservas',[App\Http\Controllers\ReservasController::class, 'store'])->name('reservas.store');
 
 //RUTAS USUARIO
 Route::get('/mi-cuenta',function(){

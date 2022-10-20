@@ -239,4 +239,37 @@ function valideKey(evt){
    }
  }
 
+function validarReserva() {
+
+  var region = $('#regiones').val();
+  var comuna = $('#comunas').val();
+  var codigo_departamento = $('#cod_departamento :selected').text();
+  var fecha_desde = $('#fecha_desde').val();
+  var fecha_hasta = $('#fecha_hasta').val();
+
+
+  if (fecha_desde==''){
+    $('#fecha_desde').focus();
+    return false;
+  }
+  if (fecha_hasta<fecha_desde){
+    alert('LA FECHA DE TERMINO NO PUEDE SER ANTERIOR A LA FECHA DE INICIO');
+    $('#fecha_hasta').focus();
+    return false;
+  }
+  if (cod_departamento==''){
+    $('#cod_departamento').focus();
+    return false;
+  }
+  if (region=='sin-region'){
+    $('#regiones').focus();
+    return false;
+  }
+  if (comuna=='sin-comuna'){
+    $('#comunas').focus();
+    return false;
+  }
+
+  grabarReserva();
+}
 

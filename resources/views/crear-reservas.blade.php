@@ -22,12 +22,12 @@ input[type=number] {
 	<br>
 
 
-	<form class="form-inline" type="get" action="{{ url('/almacenar-servicio') }}">
+	<form class="form-inline" type="get" action="{{ url('/almacenar-reservas') }}">
 		{{ csrf_field() }}
 		<div class="row" style="background: antiquewhite;"> 
 			<div class="mb-3 col-md-2">
 				<label for="rut">Cliente rut:</label>
-				<a id="usuario" type="text" name="usuario"> {{$userId = Auth::user()->rut;}}-{{$userId = Auth::user()->dig_rut;}}  </a>
+				<input class="form-control" name="rut" type="text" id="rut" required value="{{$userId = Auth::user()->rut;}}-{{$userId = Auth::user()->dig_rut;}}"> 
 			</div>
 
 		</div>
@@ -91,13 +91,16 @@ input[type=number] {
 
 		</div>
 		<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+		<input class="form-control" name="fecha_creacion" type="date" id="fecha_creacion"> 
 		<br>
-		<input type="submit" class="btn btn-primary"  value=" Registrar servicio "> </input>
+
+	</form>
+		<input type="" class="btn btn-primary"  value=" Registrar reserva " onclick="validarReserva()"> </input>
 	</div>
 	<br>
 
 </div>
-</form>
+
 
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
@@ -113,6 +116,9 @@ if(mes<10)
     mes='0'+mes //agrega cero si el menor de 10
 document.getElementById('fecha_desde').value=ano+"-"+mes+"-"+dia;
 document.getElementById('fecha_hasta').value=ano+"-"+mes+"-"+dia;
+
+document.getElementById('fecha_creacion').value=ano+"-"+mes+"-"+dia;
+$('#fecha_creacion').attr("hidden" , true);
 }
 </script>
 
@@ -161,6 +167,61 @@ document.getElementById('fecha_hasta').value=ano+"-"+mes+"-"+dia;
 
 	});
 </script>
+
+
+
+<script type="text/javascript">
+	function grabarReserva()
+	{
+  rut = $('#rut').val();
+  fecha_desde = $('#fecha_desde').val();
+  fecha_hasta = $('#fecha_hasta').val();
+  fecha_creacion = $('#fecha_creacion').val();
+  cod_departamento = $('#cod_departamento :selected').text();
+
+
+  console.log(rut,fecha_desde,fecha_hasta,fecha_creacion,cod_departamento);
+
+  // validaciones and focus();
+
+  $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+  });
+
+ $.ajax({
+         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
+         url:"/almacenar-reservas", //url guarda la ruta hacia donde se hace la peticion
+         data:{
+
+             "rut":rut,
+             "fecha_desde":fecha_desde,
+             "fecha_hasta":fecha_hasta,
+             "fecha_creacion":fecha_creacion,
+             "cod_departamento":cod_departamento
+         },
+
+          // data recive un objeto con la informacion que se enviara al servidor
+         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
+            console.log(data);
+
+
+            if (data=='LISTASO') {
+                alert('RESERVA REGISTRADA');
+                location.reload(); 
+            } else {
+                alert('ERROR');
+            }
+        },
+    });
+}
+
+
+</script>
+
+
+
 
 
 <div id="error"> </div>
