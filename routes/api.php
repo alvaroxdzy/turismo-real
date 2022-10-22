@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('servicios',[App\Http\Controllers\Api\ServicioApiController::class, 'servicios']);
+Route::post('/auth/register', [App\Http\Controllers\Api\AuthApiController::class, 'createUser']);
+Route::post('/auth/login', [App\Http\Controllers\Api\AuthApiController::class, 'loginUser']);

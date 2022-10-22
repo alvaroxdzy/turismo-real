@@ -65,7 +65,6 @@ input[type=number] {
 
 			<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
 		</div>
-		<br>
 
     </form>
 
@@ -74,7 +73,7 @@ input[type=number] {
          <table class="table table-sm" id="tableMovimiento" style="width:100%">
           <thead>
             <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
-            <br>
+
             <tr>
                 <br>
                 <th>Nombre objeto:</th>
@@ -109,9 +108,9 @@ input[type=number] {
             $('#contador').val(contador);
             var html = '';
             html+='<tr>'; 
-            html+='<td><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
-            html+='<td><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
-            html+='<td><input id="valoracion'+contador+'" class="form-control" type="text" name="valoracion" required placeholder=""></td>';
+            html+='<td style="width:400px"><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
+            html+='<td style="width:300px"><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
+            html+='<td style="width:100px"><input id="valoracion'+contador+'" class="form-control" type="text" name="valoracion" required placeholder=""></td>';
             html+='<td><button class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
             html+='<tr>';
 

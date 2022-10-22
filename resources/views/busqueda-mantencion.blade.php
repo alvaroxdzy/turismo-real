@@ -5,7 +5,7 @@
 
 
 <div  class="container"> 
-  <h4>Listado departamentos</h4>
+  <h4>Registro de mantenciones</h4>
   <div> 
    <form class="form-text-input" type="get">
 

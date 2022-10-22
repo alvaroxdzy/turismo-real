@@ -71,62 +71,62 @@
                             </div> 
                         -->
 
-                            <li id="li_layout" class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle font-small"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" href="/bodegas"> Mantenedores  </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/buscar-departamento"> Departamento </a> 
-                                    <a class="dropdown-item" href="/buscar-mantencion"> Mantenciones  </a> 
-                                    <a class="dropdown-item" href="/buscar-servicio"> Servicio </a> 
-                                </div>                     
-                            </ul>
-
-                            <!-- Right Side Of Navbar -->
-                            <ul class="navbar-nav ms-auto">
-                                <!-- Authentication Links -->
-                                @guest
-                                @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
-                                </li>
-                                @endif
-
-                                @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
-                                </li>
-                                @endif
-                                @else
+                        <li id="li_layout" class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle font-small"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" href="/bodegas"> Mantenedores  </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/buscar-departamento"> Departamento </a> 
+                                <a class="dropdown-item" href="/buscar-mantencion"> Mantenciones  </a> 
+                                <a class="dropdown-item" href="/buscar-servicio"> Servicio </a> 
+                            </div>     
+                            <li id="li_layout"><a class="nav-link" href="/crear-reservas" id="linkLayout" >Reservar</a></li>                
+                        </ul>
 
 
-                                <div >
-                                    <marquee  >
-                                     Bienvenido : {{ Auth::user()->email }}
-                                 </marquee>
-                                 <br>
-                                 <a class="link-secondary" style="display:block;text-align:right;"  href="{{ url('/mi-cuenta') }}"
-                                 >
-                             Mi cuenta </a>
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ms-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                            @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
+                            </li>
+                            @endif
 
-                             <a class="link-secondary" style="display:block;text-align:right;"  href="{{ route('logout') }}"
-                             onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                             {{ __('Cerrar sesion') }}
-                         </a>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                            </li>
+                            @endif
+                            @else
 
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-                @endguest
-            </ul>
+
+                            <div >
+                                <marquee  >
+                                 Bienvenido : {{ Auth::user()->nombres }}
+                             </marquee>
+                             
+                             <h6><a class="link-secondary" style="display:block;text-align:right;"  href="{{ url('/mi-cuenta') }}">Mi cuenta</a></h6>
+
+                             <h6><a class="link-secondary" style="display:block;text-align:right;"  href="{{ route('logout') }}"
+                                 onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                 {{ __('Cerrar sesion') }}
+                             </a></h6>
+
+                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<main class="py-4" >
-    @yield('content')
-</main>
+    <main class="py-4" >
+        @yield('content')
+    </main>
 </div>
 </body>
 </html>

@@ -21,11 +21,6 @@
 					<label for="rut" > Rut </label>
 					<input id="rut" type="text" class="form-control" name="rut" required value="{{ auth()->user()->rut }}" readonly>
 				</div>
-				<div class="mb-2 col-md-4">
-					<label for="dig_rut" > Digito verificador </label>
-
-					<input style="width:40px" id="dig_rut" type="text" class="form-control " name="dig_rut" value="{{ auth()->user()->dig_rut }}"readonly >
-				</div>
 			</div>
 
 			<div class="row" > 
@@ -76,8 +71,90 @@
 				</div>
 			</div>
 
+			<br>
+			<div class="card border-primary mb-3"> 
+				<div class="card-body">
+
+							<table id="myTable" hidden class="table dataTable no-footer dtr-inline collapsed" style="width:100%">
+						<thead>
+							<h5> RESERVAS </h5>
+							<tr>
+								<th>ID</th>
+								<th>fecha_reserva</th>
+								<th>cod_departamento</th>
+								<th>fecha_desde</th>
+								<th>fecha_hasta</th>
+								<th>direccion</th>
+								<th>comuna</th>
+								<th>region</th>
+							</tr>
+						</thead>
+						<tbody id="trTable">
+
+						</tbody>
+					</table>  
+					<button class="btn btn-outline-primary btn-sm" type="button" id="revisarReservas"  > Revisar </button>
+					<button class="btn btn-outline-primary btn-sm" type="button" id="ocultarReservas"  > Ocultar </button>
+				</div>
+			</div>
+
 		</div>
 
 
+<script type="text/javascript">
+	$(document).on('click','#ocultarReservas',function(){
+	$('#myTable').attr("hidden", true);
+});
+</script>
 
+
+		<script type="text/javascript">
+			$(document).on('click','#revisarReservas',function(){
+				$('#myTable').removeAttr('hidden');
+				$('#trTable').empty();
+				var rut=$('#rut').val();
+				console.log(rut);
+
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+
+				$.ajax({
+         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
+         url:"/traer-reservas", //url guarda la ruta hacia donde se hace la peticion
+         data:{
+         	"rut":rut,
+         }, // data recive un objeto con la informacion que se enviara al servidor
+         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
+
+         	if (data.length==0) {
+         		console.log('ERROR DE CONSULTA');
+
+         	} else {
+
+         		data.forEach(function(detalle) {
+
+
+         			$('#trTable').append('<tr>'+
+         				'<td>'+detalle.id+'</td>'+
+         				'<td>'+detalle.fecha_creacion+'</td>'+
+         				'<td>'+detalle.cod_departamento+'</td>'+
+         				'<td>'+detalle.fecha_desde+'</td>'+
+         				'<td>'+detalle.fecha_hasta+'</td>'+
+         				'<td>'+detalle.direccion+'</td>'+
+         				'<td>'+detalle.comuna+'</td>'+
+         				'<td>'+detalle.region+'</td>'+
+         				'</tr>');
+         		});
+
+         	}
+         },
+     });
+
+			});
+		</script>
 		@endsection
+
+

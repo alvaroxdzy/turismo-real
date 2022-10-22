@@ -38,9 +38,17 @@ class ReservasController extends Controller
       $reserva->save();
 
       return "LISTASO" ;
-
   }
 
+  public function traerReservasClientes(Request $request)
+  {
+    $rut = $request->rut;
+      //$reservas = Reservas::where('rut',$rut)->get();
+
+      $reservas = Reservas::join('departamento','reservas.cod_departamento', '=','departamento.codigo_departamento')->select('reservas.id','reservas.fecha_creacion','reservas.cod_departamento','reservas.fecha_desde', 'reservas.fecha_hasta' , 'departamento.direccion' , 'departamento.comuna' , 'departamento.region')->where('rut',$rut)->get();
+
+    return $reservas;
+  }
 
   public function show($id)
   {

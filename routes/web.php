@@ -27,6 +27,9 @@ Route::get('/buscar-departamento',[App\Http\Controllers\DepartamentoController::
 Route::get('/almacenar-departamento',[App\Http\Controllers\DepartamentoController::class, 'store'])->name('departamento.store');
 Route::get('/modificar-departamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'edit'])->name('departamento.edit');
 Route::get('/actualizar-departamento',[App\Http\Controllers\DepartamentoController::class, 'update'])->name('departamento.update');
+Route::get('/inventario-departamento/{cod_departamento}',[App\Http\Controllers\DepartamentoController::class, 'traerInventario']);
+Route::get('/modificar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'editInventario'])->name('servicio.edit');
+Route::get('/actualizar-inventario',[App\Http\Controllers\DepartamentoController::class, 'updateInventario'])->name('servicio.update');
 
 
 //RUTAS MANTENCIONES
@@ -46,8 +49,9 @@ Route::get('/actualizar-servicio',[App\Http\Controllers\ServiciosController::cla
 //RUTAS RESERVAS
 
 Route::get('/crear-reservas',[App\Http\Controllers\ReservasController::class, 'create'])->name('reservas.create');
-Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, 'filterComuna'])->name('reservas.create');
+Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, 'filterComuna'])->name('reservas.filtrar');
 Route::get('/almacenar-reservas',[App\Http\Controllers\ReservasController::class, 'store'])->name('reservas.store');
+Route::get('/traer-reservas',[App\Http\Controllers\ReservasController::class, 'traerReservasClientes'])->name('reservas.traerReservasClientes');
 
 //RUTAS USUARIO
 Route::get('/mi-cuenta',function(){

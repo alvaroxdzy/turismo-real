@@ -35,7 +35,7 @@
         <tbody>
           @foreach($departamentos as $departamento) 
           <tr>
-            <td>{{$departamento->codigo_departamento}} </td>
+            <td><a style="color:black " href="/inventario-departamento/{{$departamento->codigo_departamento}} ">{{$departamento->codigo_departamento}} </a></td>
             <td>{{$departamento->direccion}}</td>
             <td>{{$departamento->comuna}}</td>
             <td>{{$departamento->region}}</td>

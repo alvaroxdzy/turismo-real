@@ -113,7 +113,6 @@ function validarCampos() {
   var region = $('#regiones').val();
   var comuna = $('#comunas').val();
   var rut = $('#rut').val();
-  var dig_rut = $('#dig_rut').val();
   var nombres = $('#nombres').val();
   var apellidos = $('#apellidos').val();
   var fecha_nacimiento = $('#fecha_nacimiento').val();
@@ -243,7 +242,7 @@ function validarReserva() {
 
   var region = $('#regiones').val();
   var comuna = $('#comunas').val();
-  var codigo_departamento = $('#cod_departamento :selected').text();
+  var codigo_departamento = $('#cod_departamento :selected').val();
   var fecha_desde = $('#fecha_desde').val();
   var fecha_hasta = $('#fecha_hasta').val();
 

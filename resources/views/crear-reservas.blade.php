@@ -27,7 +27,7 @@ input[type=number] {
 		<div class="row" style="background: antiquewhite;"> 
 			<div class="mb-3 col-md-2">
 				<label for="rut">Cliente rut:</label>
-				<input class="form-control" name="rut" type="text" id="rut" required value="{{$userId = Auth::user()->rut;}}-{{$userId = Auth::user()->dig_rut;}}"> 
+				<input class="form-control" name="rut" type="text" id="rut" required value="{{$userId = Auth::user()->rut;}}" readonly> 
 			</div>
 
 		</div>
@@ -158,7 +158,7 @@ $('#fecha_creacion').attr("hidden" , true);
 '<td>'+detalle.cantidad_banos+'</td>'+
 '</tr>');
 
-         			$('#cod_departamento').append('<option value="'+detalle.cod_departamento+'">'+detalle.numero+'</option>');
+         			$('#cod_departamento').append('<option value="'+detalle.codigo_departamento+'">'+detalle.numero+'</option>');
          		});
 
          	}
@@ -177,7 +177,7 @@ $('#fecha_creacion').attr("hidden" , true);
   fecha_desde = $('#fecha_desde').val();
   fecha_hasta = $('#fecha_hasta').val();
   fecha_creacion = $('#fecha_creacion').val();
-  cod_departamento = $('#cod_departamento :selected').text();
+  cod_departamento = $('#cod_departamento :selected').val();
 
 
   console.log(rut,fecha_desde,fecha_hasta,fecha_creacion,cod_departamento);
@@ -220,7 +220,28 @@ $('#fecha_creacion').attr("hidden" , true);
 
 </script>
 
+<script type="text/javascript">
+	function guardarRangoFecha() {
 
+		const fecha_desde = new Date();
+
+		var fecha_inicio = $('#fecha_desde').val();
+		fecha_desde.setDate(fecha_inicio);
+
+		var fecha_hasta = $('#fecha_hasta').val();
+		var arrayFechas = [];
+
+		//while (fecha_desde <= fecha_hasta) {
+		//	arrayFechas.push(new Date(fecha_desde));
+			//fecha_desde.getDate();
+		//}
+		console.log(fecha_desde, fecha_hasta);
+	}
+
+
+
+
+</script>
 
 
 

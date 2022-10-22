@@ -53,7 +53,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'rut' => ['required', 'string', 'max:255'],
-            'dig_rut' => ['required', 'string', 'max:255'],
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
             'fecha_nacimiento' => ['required', 'date', 'max:255'],
@@ -75,7 +74,6 @@ class RegisterController extends Controller
         return User::create([
             'email' => $data['email'],
             'rut' => $data['rut'],
-            'dig_rut' => $data['dig_rut'],
             'nombres' => $data['nombres'],
             'apellidos' => $data['apellidos'],
             'fecha_nacimiento' => $data['fecha_nacimiento'],

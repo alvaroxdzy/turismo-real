@@ -70,11 +70,7 @@
                         <div class="mb-2 col-md-2">
                             <label for="rut" > Rut </label>
                             <input id="rut" type="text" class="form-control" name="rut" required >
-                        </div>
-                        <div class="mb-2 col-md-4">
-                            <label for="dig_rut" > Digito verificador </label>
-
-                            <input style="width:40px" id="dig_rut" type="text" class="form-control " name="dig_rut" maxlength="1"  required >
+                            <small class="form-text text-muted">formato 11222333-1</small>
                         </div>
                     </div>
 
