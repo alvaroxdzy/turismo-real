@@ -128,46 +128,7 @@ function validarCampos() {
 }
 
 
-function validarDepartamento() {
 
-  var region = $('#regiones').val();
-  var comuna = $('#comunas').val();
-  var codigo_departamento = $('#codigo_departamento').val();
-  var numero = $('#numero').val();
-  var direccion = $('#direccion').val();
-  var habitaciones = $('#cantidad_habitaciones').val();
-  var banos = $('#cantidad_banos').val();
-
-  if (codigo_departamento==''){
-    $('#codigo_departamento').focus();
-    return false;
-  }
-  if (numero==''){
-    $('#numero').focus();
-    return false;
-  }
-  if (direccion==''){
-    $('#direccion').focus();
-    return false;
-  }
-  if (region=='sin-region'){
-    $('#regiones').focus();
-    return false;
-  }
-  if (comuna=='sin-comuna'){
-    $('#comunas').focus();
-    return false;
-  }
-  if (habitaciones==''){
-    $('#cantidad_habitaciones').focus();
-    return false;
-  }
-  if (banos==''){
-    $('#cantidad_banos').focus();
-    return false;
-  }
-  grabar();
-}
 
 function validarDepartamentoModificar() {
 
@@ -272,3 +233,17 @@ function validarReserva() {
   grabarReserva();
 }
 
+function calcularTotal(contador) 
+{
+  a = $('#cantidad'+contador).val();
+  b = $('#valoracion'+contador).val();
+  total = $('#total'+contador).val(a*b);
+}
+
+function traerTotal(contador) 
+{
+  a = $('#cantidad'+contador).val();
+  b = $('#valoracion'+contador).val();
+  total = $('#total'+contador).val(a*b);
+  console.log('no funciona');
+}

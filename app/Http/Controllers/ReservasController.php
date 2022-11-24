@@ -21,7 +21,7 @@ class ReservasController extends Controller
     public function filterComuna(Request $request)
     {
         $comuna = $request->comunas;
-        $departamentoComuna = Departamento::where('comuna',$comuna)->get();
+        $departamentoComuna = Departamento::where('comuna',$comuna)->where('estado','DISPONIBLE')->get();
 
         return $departamentoComuna;
 

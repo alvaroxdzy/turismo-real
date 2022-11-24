@@ -28,14 +28,13 @@
             <th>Número</th>
             <th>Habitaciones</th>
             <th>Baños</th>
-            <th>Estado</th>
-            <th>Gestionar</th>        
+            <th>Estado</th>     
           </tr>
         </thead>
         <tbody>
           @foreach($departamentos as $departamento) 
           <tr>
-            <td><a style="color:black " href="/inventario-departamento/{{$departamento->codigo_departamento}} ">{{$departamento->codigo_departamento}} </a></td>
+            <td><a style="color:black" href="modificar-departamento/{{$departamento->codigo_departamento}}">{{$departamento->codigo_departamento}} </a></td>
             <td>{{$departamento->direccion}}</td>
             <td>{{$departamento->comuna}}</td>
             <td>{{$departamento->region}}</td>
@@ -43,7 +42,6 @@
             <td>{{$departamento->cantidad_habitaciones}}</td>
             <td>{{$departamento->cantidad_banos}}</td>
             <td>{{$departamento->estado}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar-departamento/{{$departamento->codigo_departamento}}"> Modificar </a></td>
           </tr>
           @endforeach
         </tbody>

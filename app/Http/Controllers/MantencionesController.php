@@ -16,11 +16,21 @@ class MantencionesController extends Controller
 
     public function store(Request $request)
     {
-      $mantencionDisponible = Mantenciones::where('cod_departamento',$request->cod_departamento)->where('fecha',$request->fecha)->first();
-      if($mantencionDisponible) {
-        return redirect()->back()->with('error', 'ERROR YA HAY UNA MANTENCIÓN PARA ESTE DEPARTAMENTO EN LA FECHA SOLICITADA');
-    }
+  $validarFecha = Mantenciones::where('cod_departamento',$request->cod_departamento)
+  ->where('fecha',$request->fecha)
+  ->where('id','!=',$request->id)
+  ->first();
 
+  $validarEstado = Departamento::where('codigo_departamento',$request->cod_departamento)
+  ->where('estado','NO DISPONIBLE')
+  ->first();
+
+  if($validarFecha) {
+    return redirect()->back()->with('error', 'ERROR YA HAY UNA MANTENCIÓN PARA ESTE DEPARTAMENTO EN LA FECHA SOLICITADA');
+}
+if($validarEstado) {
+    return redirect()->back()->with('error', 'ERROR ESTE DEPARTAMENTO NO SE ENCUENTRA DISPONIBLE');
+}
     $mantencion =new Mantenciones();
     $mantencion->cod_departamento=$request->cod_departamento; 
     $mantencion->fecha=$request->fecha; 
@@ -49,7 +59,6 @@ public function update(Request $request)
   $validarEstado = Departamento::join('mantenciones','departamento.codigo_departamento','=','mantenciones.cod_departamento')
   ->where('cod_departamento',$request->cod_departamento)
   ->where('estado','NO DISPONIBLE')
-
   ->first();
 
   if($validarFecha) {

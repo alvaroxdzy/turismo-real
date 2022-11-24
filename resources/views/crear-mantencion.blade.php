@@ -25,7 +25,7 @@ input[type=number] {
 			</div>
 			<div class="mb-3 col-md-2">
 				<label for="fecha">Fecha</label>
-				<input style="text-transform:uppercase;width:500px;" type="date" class="form-control" id="fecha" name="fecha" required>
+				<input style="text-transform:uppercase;width:500px;" type="date" class="form-control" id="fecha" name="fecha" required value="<?php echo date("d-m-Y\TH-i");?>">
 			</div>
 
 		</div>
@@ -64,6 +64,27 @@ input[type=number] {
 @endif
 
 </div>
-@endsection
 
+
+
+<script type="text/javascript">
+    function cargarFecha()
+    {
+        var fecha = new Date(); //Fecha actual
+    var mes = fecha.getMonth()+1; //obteniendo mes
+    var dia = fecha.getDate(); //obteniendo dia
+    var ano = fecha.getFullYear(); //obteniendo año
+    if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+document.getElementById('fecha').value=ano+"-"+mes+"-"+dia;
+}
+</script>
+
+
+<script type="text/javascript">
+	window.onload=cargarFecha();
+</script>
+@endsection
 

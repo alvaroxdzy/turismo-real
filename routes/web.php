@@ -31,6 +31,8 @@ Route::get('/inventario-departamento/{cod_departamento}',[App\Http\Controllers\D
 Route::get('/modificar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'editInventario'])->name('servicio.edit');
 Route::get('/actualizar-inventario',[App\Http\Controllers\DepartamentoController::class, 'updateInventario'])->name('servicio.update');
 
+Route::get('/traer-departamento',[App\Http\Controllers\DepartamentoController::class, 'traerDepartamento'])->name('departamento.traer');
+
 
 //RUTAS MANTENCIONES
 Route::get('/crear-mantencion',[App\Http\Controllers\MantencionesController::class, 'create'])->name('mantencion.create');

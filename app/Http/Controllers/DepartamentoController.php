@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Departamento; 
 use App\Models\Inventario_departamento; 
+use App\Models\Folios; 
 use DB;
 
 
@@ -12,46 +13,58 @@ class DepartamentoController extends Controller
 {
     public function create()
     {
-        return view('crear-departamento');
+        $folio = Folios::select('folio')->where('tipo','D')->first();
+        return view('crear-departamento')->with('folio',$folio);
+
     }
 
     public function store(Request $request)
     {
         $departamentoValidar = Departamento::where('codigo_departamento',$request->codigo_departamento)->first();
         if ($departamentoValidar) {
-         return 'YA ESTA EN USO EL CODIGO DEPARTAMENTO';
-     }
-     $departamento =new Departamento();
-     $departamento->codigo_departamento=$request->codigo_departamento; 
-     $departamento->direccion=$request->direccion; 
-     $departamento->comuna=$request->comuna; 
-     $departamento->region=$request->region; 
-     $departamento->numero=$request->numero;        
-     $departamento->cantidad_habitaciones=$request->cantidad_habitaciones; 
-     $departamento->cantidad_banos=$request->cantidad_banos;
-     $departamento->estado='DISPONIBLE';
-     $departamento->usuario=$request->usuario;
+           return 'YA ESTA EN USO EL CODIGO DEPARTAMENTO';
+       }
+       $departamento =new Departamento();
+       $departamento->codigo_departamento=$request->codigo_departamento; 
+       $departamento->direccion=$request->direccion; 
+       $departamento->comuna=$request->comuna; 
+       $departamento->region=$request->region; 
+       $departamento->numero=$request->numero;        
+       $departamento->cantidad_habitaciones=$request->cantidad_habitaciones; 
+       $departamento->cantidad_banos=$request->cantidad_banos;
+       $departamento->estado='DISPONIBLE';
+       $departamento->usuario=$request->usuario;
+       $departamento->costo_base = $request->costo_base;
 
 
-     $arrayDatos = $request->arrayMovimiento;
-     if($arrayDatos) {
+       $arrayDatos = $request->arrayMovimiento;
+       if($arrayDatos) {
 
-         foreach ($arrayDatos as $datos) {
+           foreach ($arrayDatos as $datos) {
 
             $inventario = new Inventario_departamento();
             $inventario->cod_departamento=$request->codigo_departamento;
             $inventario->nombre=$datos['nombre_objetos'];
             $inventario->detalles=$datos['detalles'];
+            $inventario->cantidad=$datos['cantidad'];
             $inventario->valoracion=$datos['valoracion'];
+            $inventario->total=$datos['total'];
             $inventario->save();
 
         }
     } else {
         $departamento->save();
 
+        $folio =DB::table('folios')
+        ->where('tipo','D')
+        ->update(['folio' => $request->codigo_departamento+1]);
         return "LISTASO";
+
     }
     $departamento->save();
+    $folio =DB::table('folios')
+    ->where('tipo','D')
+    ->update(['folio' => $request->codigo_departamento+1]);
 
     return "LISTASO";
 }
@@ -64,18 +77,36 @@ public function edit($id)
 
 public function update(Request $request)
 {
- $departamento =Departamento::find($request->id);
- $departamento->codigo_departamento=$request->codigo_departamento; 
- $departamento->direccion=$request->direccion; 
- $departamento->comuna=$request->comuna; 
- $departamento->region=$request->region; 
- $departamento->numero=$request->numero;        
- $departamento->cantidad_habitaciones=$request->cantidad_habitaciones; 
- $departamento->cantidad_banos=$request->cantidad_banos;
- $departamento->estado=$request->estado;
- $departamento->usuario=$request->usuario;
- $departamento->save();
- return redirect(route('departamento.search'));
+   $departamento = DB::table('departamento')
+   ->where('codigo_departamento',$request->codigo_departamento)
+   ->update(['direccion' => $request->direccion,
+    'comuna' => $request->comuna,
+    'region' => $request->region,
+    'numero' => $request->numero,
+    'cantidad_habitaciones' => $request->cantidad_habitaciones,
+    'cantidad_banos' => $request->cantidad_banos,
+    'estado' => $request->estado]) ;
+
+   $depInventario = DB::delete('delete from inventario_departamento where cod_departamento="'.$request->codigo_departamento.'"');
+
+   $arrayInventarios = $request->arrayMovimiento;
+   if ($arrayInventarios) {
+    foreach ($arrayInventarios as $inventario)
+    {
+        $inventarioDepa = new Inventario_departamento();
+
+        $inventarioDepa->nombre = $inventario['nombre_objetos'];
+        $inventarioDepa->detalles = $inventario['detalles'];
+        $inventarioDepa->cantidad = $inventario['cantidad'];
+        $inventarioDepa->valoracion = $inventario['valoracion'];
+        $inventarioDepa->total = $inventario['total'];
+        $inventarioDepa->cod_departamento = $request->codigo_departamento;
+        $inventarioDepa->save();
+
+    } 
+}
+
+return 'LISTASO';
 }
 
 public function destroy($id)
@@ -91,34 +122,15 @@ public function search(){
     return view('busqueda-departamento',compact('departamentos'));
 }
 
-public function traerInventario($cod_departamento) 
+
+public function traerDepartamento(Request $request)
 {
-    $inventario = DB::table('inventario_departamento')
-    ->where('cod_departamento', '=', $cod_departamento)
-    ->get();
-    
-    $departamento = Departamento::where('codigo_departamento',$cod_departamento)->first();
+    $cod = $request->codigo_departamento;
 
-    return view('inventario-departamento',compact('inventario'))->with('departamento',$departamento);
+    $departamento = Departamento::where('codigo_departamento',$cod)->first();
+    $depInventario = Inventario_departamento::where('cod_departamento',$cod)->get();
+    return [$departamento, $depInventario]; 
 }
-
-public function editInventario($id)
-   {
-    $inventario = Inventario_departamento::where('id',$id)->first();
-    return view('modificar-inventario')->with('inventario',$inventario);
-}
-
-public function updateInventario(Request $request)
-{
-   $inventario =Inventario_departamento::find($request->id);
-   $inventario->nombre=$request->nombre; 
-   $inventario->detalles=$request->detalles; 
-   $inventario->valoracion=$request->valoracion; 
-   $inventario->save();
-
-   return redirect(route('departamento.search'));
-}
-
 
 
 }
