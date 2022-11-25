@@ -54,7 +54,12 @@
               <div> &#128506; &#128205; soy el 3</div>
             </td>
             <td>
-              <div class="box1">soy el 1</div>
+              <div class="box1">soy el 1
+                <table>
+                  <td > <div class="box2">&#128701; baño </div></td>
+                  <td> <div class="box2"> &#x1F6AA; {{$departamento->cantidad_habitaciones}}</div></td>
+                </table>
+              </div>
               <div>
                 <table>
                   <td > <div class="box2">&#128701; baño </div></td>
