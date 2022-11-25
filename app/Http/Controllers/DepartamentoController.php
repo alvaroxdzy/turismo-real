@@ -115,11 +115,25 @@ public function destroy($id)
     $departamento->delete();
     return redirect(route('departamento.search'));
 }
-public function search(){
 
+public function eliminarInventario($id)
+{
+  $inventario = Inventario_departamento::find($id);
+  $inventario->delete();
+  return 1;
+}
+
+public function search(){
 
     $departamentos=Departamento::all();
     return view('busqueda-departamento',compact('departamentos'));
+}
+
+public function departamentosDisponibles(){
+
+    $departamentos=Departamento::orderBy('region','asc')
+    ->where('estado','DISPONIBLE')->get();
+    return view('departamentos-disponibles',compact('departamentos'));
 }
 
 
@@ -132,5 +146,13 @@ public function traerDepartamento(Request $request)
     return [$departamento, $depInventario]; 
 }
 
+
+public function departamentoReserva($id)
+{
+    
+    $departamento = Departamento::where('codigo_departamento',$id)->first();
+    $depInventario = Inventario_departamento::where('cod_departamento',$id)->get();
+    return [$departamento, $depInventario]; 
+}
 
 }

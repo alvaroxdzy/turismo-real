@@ -28,11 +28,14 @@ Route::get('/almacenar-departamento',[App\Http\Controllers\DepartamentoControlle
 Route::get('/modificar-departamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'edit'])->name('departamento.edit');
 Route::get('/actualizar-departamento',[App\Http\Controllers\DepartamentoController::class, 'update'])->name('departamento.update');
 Route::get('/inventario-departamento/{cod_departamento}',[App\Http\Controllers\DepartamentoController::class, 'traerInventario']);
-Route::get('/modificar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'editInventario'])->name('servicio.edit');
-Route::get('/actualizar-inventario',[App\Http\Controllers\DepartamentoController::class, 'updateInventario'])->name('servicio.update');
+Route::get('/modificar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'editInventario'])->name('departamento.edit');
+Route::get('/actualizar-inventario',[App\Http\Controllers\DepartamentoController::class, 'updateInventario'])->name('departamento.update');
+Route::get('/eliminar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'eliminarInventario'])->name('departamento.eliminar');
 
+
+Route::get('/reservar-departamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'departamentoReserva'])->name('departamento.traer');
 Route::get('/traer-departamento',[App\Http\Controllers\DepartamentoController::class, 'traerDepartamento'])->name('departamento.traer');
-
+Route::get('/departamentos-disponibles',[App\Http\Controllers\DepartamentoController::class, 'departamentosDisponibles'])->name('departamento.departamentosDisponibles');
 
 //RUTAS MANTENCIONES
 Route::get('/crear-mantencion',[App\Http\Controllers\MantencionesController::class, 'create'])->name('mantencion.create');

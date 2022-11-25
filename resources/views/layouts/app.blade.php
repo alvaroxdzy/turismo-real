@@ -78,7 +78,7 @@
                                 <a class="dropdown-item" href="/buscar-mantencion"> Mantenciones  </a> 
                                 <a class="dropdown-item" href="/buscar-servicio"> Servicio </a> 
                             </div>     
-                            <li id="li_layout"><a class="nav-link" href="/crear-reservas" id="linkLayout" >Reservar</a></li>                
+                            <li id="li_layout"><a class="nav-link" href="/departamentos-disponibles" id="linkLayout" >Reservar</a></li>                
                         </ul>
 
 

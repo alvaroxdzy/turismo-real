@@ -99,17 +99,16 @@ input[type=number] {
 
 				<div class="card" > 
 					<div class="card-body">
-						<table class="table table-sm" id="tablaInventario" style="width:100%">
+						<table class="table table-sm" id="tablaInventario">
 							<thead>
 								<button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
-								<br>
 								<tr>
 									<th>Nombre objeto:</th>
 									<th>Detalles:</th>
 									<th>Cantidad:</th>
 									<th>Valoracion:</th>   
 									<th>Total</th>          
-									<th style="margin-left: 200px;">Gestionar</th>
+									<th>Gestionar</th>
 								</tr>
 							</thead>
 							<tbody id="tbodyInventario">
@@ -159,12 +158,12 @@ input[type=number] {
 
 				var html = '';
 				html+='<tr>'; 
-				html+='<td><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
-				html+='<td><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
-				html+='<td><input id="cantidad'+contador+'" class="form-control" type="text"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
-				html+='<td><input id="valoracion'+contador+'" class="form-control" onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
-				html+='<td><input id="total'+contador+'"  class="form-control" type="text" name="total" required placeholder=""></td>';
-				html+='<td><button  class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
+				html+='<td><input style="width:150px" id="nombre_objetos'+contador+'"  type="text" name="nombre" required placeholder=""></td>';
+				html+='<td><input style="width:150px" id="detalles'+contador+'"  type="text" name="detalles" required placeholder=""></td>';
+				html+='<td><input style="width:150px" id="cantidad'+contador+'"  type="text"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
+				html+='<td><input style="width:150px" id="valoracion'+contador+'"  onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
+				html+='<td><input style="width:150px" id="total'+contador+'"  type="text" name="total" required placeholder=""></td>';
+				html+='<td><button id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
 				html+='<tr>';
 
 
@@ -216,11 +215,13 @@ input[type=number] {
 
 
          		$('#tbodyInventario').append('<tr>'+
-         			'<td><input id="nombre_objetos'+contadorInventario+'" type="text" value="'+detalle.nombre+'" ></td>'+
-         			'<td><input id="detalles'+contadorInventario+'" type="text" value="'+detalle.detalles+'" ></td>'+
-         			'<td><input id="cantidad'+contadorInventario+'" onblur="traerTotal('+contadorInventario+')" onchange="traerTotal('+contadorInventario+')" type="text" value="'+detalle.cantidad+'" ></td>'+
-         			'<td><input id="valoracion'+contadorInventario+'"  onblur="traerTotal('+contadorInventario+')" onchange="traerTotal('+contadorInventario+')" type="text" value="'+detalle.valoracion+'" ></td>'+
-         			'<td><input id="total'+contadorInventario+'" type="text" value="'+detalle.total+'" ></td>'+
+         			'<td><input style="width:150px" id="nombre_objetos'+contadorInventario+'" type="text" value="'+detalle.nombre+'" ></td>'+
+         			'<td><input style="width:150px" id="detalles'+contadorInventario+'" type="text" value="'+detalle.detalles+'" ></td>'+
+         			'<td><input style="width:150px" id="cantidad'+contadorInventario+'" onblur="traerTotal('+contadorInventario+')" onchange="traerTotal('+contadorInventario+')" type="text" value="'+detalle.cantidad+'" ></td>'+
+         			'<td><input style="width:150px" id="valoracion'+contadorInventario+'"  onblur="traerTotal('+contadorInventario+')" onchange="traerTotal('+contadorInventario+')" type="text" value="'+detalle.valoracion+'" ></td>'+
+         			'<td><input style="width:150px" id="total'+contadorInventario+'" type="text" value="'+detalle.total+'" ></td>'+
+         			'<td><button type="button" onclick="eliminarInventario('+detalle.id+')"> Eliminar </button> </td>'+
+
          			'</tr>');
 
 
@@ -243,6 +244,31 @@ input[type=number] {
 
 		}
 	</script>
+
+	<script type="text/javascript">
+		function eliminarInventario(id)
+		{
+			var result = confirm("SEGURO QUE DESEA ELIMINAR?");
+			if (result){
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+
+				$.ajax({
+         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
+         url:"/eliminar-inventario/" +id, //url guarda la ruta hacia donde se hace la peticion
+         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
+         	if(data==1){
+         		location.reload();
+         	}
+         },
+     });
+			}
+		} 
+	</script>
+
 
 	<script type="text/javascript">
 		window.onload=traerDepartamento();
