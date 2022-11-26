@@ -23,7 +23,7 @@
             </td>
             <td> 
               <div class="box-datos">
-                <div> Nombre dpto </div>
+                <div> {{$departamento->nombre_departamento}} </div>
                 <div> &#128205; Direccion </div>
                 <div> &#128506; Region</div>
               </div>
