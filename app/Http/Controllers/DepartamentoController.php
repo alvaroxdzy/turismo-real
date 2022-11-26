@@ -22,25 +22,26 @@ class DepartamentoController extends Controller
     {
         $departamentoValidar = Departamento::where('codigo_departamento',$request->codigo_departamento)->first();
         if ($departamentoValidar) {
-           return 'YA ESTA EN USO EL CODIGO DEPARTAMENTO';
-       }
-       $departamento =new Departamento();
-       $departamento->codigo_departamento=$request->codigo_departamento; 
-       $departamento->direccion=$request->direccion; 
-       $departamento->comuna=$request->comuna; 
-       $departamento->region=$request->region; 
-       $departamento->numero=$request->numero;        
-       $departamento->cantidad_habitaciones=$request->cantidad_habitaciones; 
-       $departamento->cantidad_banos=$request->cantidad_banos;
-       $departamento->estado='DISPONIBLE';
-       $departamento->usuario=$request->usuario;
-       $departamento->costo_base = $request->costo_base;
+         return 'YA ESTA EN USO EL CODIGO DEPARTAMENTO';
+     }
+     $departamento =new Departamento();
+     $departamento->codigo_departamento=$request->codigo_departamento; 
+     $departamento->nombre_departamento=$request->nombre_departamento;
+     $departamento->direccion=$request->direccion; 
+     $departamento->comuna=$request->comuna; 
+     $departamento->region=$request->region; 
+     $departamento->numero=$request->numero;        
+     $departamento->cantidad_habitaciones=$request->cantidad_habitaciones; 
+     $departamento->cantidad_banos=$request->cantidad_banos;
+     $departamento->estado='DISPONIBLE';
+     $departamento->usuario=$request->usuario;
+     $departamento->costo_base = $request->costo_base;
 
 
-       $arrayDatos = $request->arrayMovimiento;
-       if($arrayDatos) {
+     $arrayDatos = $request->arrayMovimiento;
+     if($arrayDatos) {
 
-           foreach ($arrayDatos as $datos) {
+         foreach ($arrayDatos as $datos) {
 
             $inventario = new Inventario_departamento();
             $inventario->cod_departamento=$request->codigo_departamento;
@@ -77,20 +78,21 @@ public function edit($id)
 
 public function update(Request $request)
 {
-   $departamento = DB::table('departamento')
-   ->where('codigo_departamento',$request->codigo_departamento)
-   ->update(['direccion' => $request->direccion,
+ $departamento = DB::table('departamento')
+ ->where('codigo_departamento',$request->codigo_departamento)
+ ->update(['direccion' => $request->direccion,
     'comuna' => $request->comuna,
+    'nombre_departamento' => $request->nombre_departamento,
     'region' => $request->region,
     'numero' => $request->numero,
     'cantidad_habitaciones' => $request->cantidad_habitaciones,
     'cantidad_banos' => $request->cantidad_banos,
     'estado' => $request->estado]) ;
 
-   $depInventario = DB::delete('delete from inventario_departamento where cod_departamento="'.$request->codigo_departamento.'"');
+ $depInventario = DB::delete('delete from inventario_departamento where cod_departamento="'.$request->codigo_departamento.'"');
 
-   $arrayInventarios = $request->arrayMovimiento;
-   if ($arrayInventarios) {
+ $arrayInventarios = $request->arrayMovimiento;
+ if ($arrayInventarios) {
     foreach ($arrayInventarios as $inventario)
     {
         $inventarioDepa = new Inventario_departamento();
@@ -149,7 +151,7 @@ public function traerDepartamento(Request $request)
 
 public function departamentoReserva($id)
 {
-    
+
     $departamento = Departamento::where('codigo_departamento',$id)->first();
     $depInventario = Inventario_departamento::where('cod_departamento',$id)->get();
     return [$departamento, $depInventario]; 

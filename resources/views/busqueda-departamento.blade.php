@@ -25,6 +25,7 @@
             <th>Dirección</th>
             <th>Comuna</th>
             <th>Región</th>
+            <th>Nombre</th>
             <th>Número</th>
             <th>Habitaciones</th>
             <th>Baños</th>
@@ -38,6 +39,7 @@
             <td>{{$departamento->direccion}}</td>
             <td>{{$departamento->comuna}}</td>
             <td>{{$departamento->region}}</td>
+            <td>{{$departamento->nombre_departamento}}</td>
             <td>{{$departamento->numero}}</td>
             <td>{{$departamento->cantidad_habitaciones}}</td>
             <td>{{$departamento->cantidad_banos}}</td>

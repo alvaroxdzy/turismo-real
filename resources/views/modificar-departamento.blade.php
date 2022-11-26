@@ -29,10 +29,16 @@ input[type=number] {
 						{{ csrf_field() }}
 
 						<div class="mb-2 row">
+							<label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+							</div>
+							
 							<label  class="col-sm-1 col-form-label" for="numero">Numero</label>
 							<div class="col-sm-2">
 								<input style="width:100px" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
 							</div>
+
 							<label  class="col-sm-1 col-form-label" for="numero">ESTADO</label>
 							<div class="col-sm-2">
 								<select class="form-control" id="estado" name="estado">
@@ -236,6 +242,7 @@ input[type=number] {
          	$('#cantidad_habitaciones').val(data[0].cantidad_habitaciones);
          	$('#cantidad_banos').val(data[0].cantidad_banos);
          	$('#costo_base').val(data[0].costo_base);
+         	$('#nombre_departamento').val(data[0].nombre_departamento);
 
          },
      });
