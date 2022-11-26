@@ -313,6 +313,7 @@ input[type=number] {
 			}
 
 			codigo_departamento = $('#codigo_departamento').val();
+			nombre_departamento = $('#nombre_departamento').val();
 			direccion = $('#direccion').val();
 			comuna = $('#comuna').val();
 			region = $('#region').val();
@@ -334,6 +335,7 @@ input[type=number] {
          data:{
          	"codigo_departamento":codigo_departamento,
          	"direccion":direccion,
+         	"nombre_departamento":nombre_departamento,
          	"comuna":comuna,
          	"region":region,
          	"numero":numero,
@@ -349,7 +351,6 @@ input[type=number] {
 
          	if (data=='LISTASO') {
          		alert('Departamento actualizado');
-         		limpiarFormDepartamento();
          		location.reload();
          	} else {
          		alert('ERROR, REVISE QUE TODOS LOS CAMPOS ESTEN COMPLETOS');	
