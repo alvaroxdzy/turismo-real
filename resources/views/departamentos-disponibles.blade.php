@@ -21,16 +21,18 @@
             <td>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYGdJMf9acTXCn387AkZts7qk_B9kHxjTgVeHsEb9-Vs6IeHxA_o3-OLGFtHJls9OgRw&usqp=CAU">
             </td>
-            <td>
-              <div>dfgsdg</div>
-              <div>soy el 2</div>
-              <div> &#128506; &#128205; soy el 3</div>
+            <td> 
+              <div class="box-datos">
+                <div> Nombre dpto </div>
+                <div> &#128205; Direccion </div>
+                <div> &#128506; Region</div>
+              </div>
             </td>
             <td>
-              <div class="box1">Turismo Real
+              <div class="box1"> <div class="cia ">Turismo Real</div>
                 <table>
-                  <td > <div class="box2">${{$departamento->costo_base}}</div></td>
-                  <td> <div class="box2"> <button> VER OFERTA</button></div></td>
+                  <td > <div class="precio">${{$departamento->costo_base}}</div></td>
+                  <td> <div class=""> <button> Ver oferta &#10095; </button></div></td>
                 </table>
               </div>
               <div>
@@ -45,30 +47,6 @@
   <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
 </svg> 
 </button>  </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYGdJMf9acTXCn387AkZts7qk_B9kHxjTgVeHsEb9-Vs6IeHxA_o3-OLGFtHJls9OgRw&usqp=CAU">
-            </td>
-            <td>
-              <div>dfgsdg</div>
-              <div>soy el 2</div>
-              <div> &#128506; &#128205; soy el 3</div>
-            </td>
-            <td>
-              <div class="box1">Turismo Real
-                <table>
-                  <td > <div class="box2">${{$departamento->costo_base}}</div></td>
-                  <td> <div class="box2"> <button> VER OFERTA</button></div></td>
-                </table>
-              </div>
-              <div>
-                <table>
-                  <td > <div class="box2">&#128701; baño </div></td>
-                  <td> <div class="box2"> &#x1F6AA; {{$departamento->cantidad_habitaciones}}</div></td>
-                </table>
-              </div>
-            </td>
           </tr>
           @endforeach
         </tbody>
@@ -95,16 +73,66 @@
 </div>  
 
 <style type="text/css">
+
+  .cia {
+    padding-top: 5px;
+    margin-left: 20px;
+    color: #232323;
+    font-family: "Calibri";
+    font-size: small;
+    font-weight: bold;
+  }
+
+  .precio {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: green;
+    font-size: 150%;
+    font-family: Helvetica;
+  }
+
+  .box-datos {
+    width: 250px;
+  }
+
   .box1 {
-    background: green;
+    margin: 30px;
+    background: #cbfac4;
     border-radius: 5px;
     height: 100px;
+    width: 400px;
   }
 
   .box2 {
+    margin-left: 20px;
     border: 2px solid gray;
     border-radius: 5px;
-    background: lightgray;
+    background: #eeeeee;
+    height: 50px;
+    padding: 10px;
+    font-size: 175%;
+  }
+
+  button {
+    margin-top: 27px;
+    margin-left: 145px;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    color: #eeeeee;
+    padding: 7px 23px;
+    font-family: Helvetica;
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  button:hover {
+    color: #eeeeee;
+    background-color: #006f00;
+
+
   }
 </style>
 
