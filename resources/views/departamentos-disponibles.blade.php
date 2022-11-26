@@ -23,7 +23,7 @@
             </td>
             <td style="width:500px;"> 
               <div class="box-datos">
-                <div class="nombre-dpto"> $departamento->nombre_departamento</div>
+                <div class="nombre-dpto"> {{$departamento->nombre_departamento}}</div>
                 <div class="texto"> &#128205;  Direccion </div>
                 <div class="texto"> &#127970; Numero </div> 	
                 <div class="texto"> &#128506; Region </div> 	
@@ -43,15 +43,11 @@
                 </table>
               </div>
             </td>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+
           </td>
-=======
->>>>>>> Stashed changes
+
            
 </button>  </td>
->>>>>>> 9af1f50080c3e94da735197acefbd1b2cb43ab9d
           </tr>
           @endforeach
         </tbody>
