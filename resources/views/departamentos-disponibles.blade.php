@@ -21,7 +21,7 @@
             <td style="width:240px;">
               <img class="miniatura" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYGdJMf9acTXCn387AkZts7qk_B9kHxjTgVeHsEb9-Vs6IeHxA_o3-OLGFtHJls9OgRw&usqp=CAU">
             </td>
-            <td style="width:500px;"> 
+            <td style="width:600px;"> 
               <div class="box-datos">
                 <div class="nombre-dpto"> {{$departamento->nombre_departamento}}</div>
                 <div class="texto"> &#128205;  {{$departamento->direccion}} </div>
@@ -33,13 +33,13 @@
               <div class="box1"> <div class="cia ">Turismo Real</div>
                 <table>
                   <td > <div class="precio">${{$departamento->costo_base}}</div></td>
-                  <td> <div class=""> <button> Ver oferta &#10095; </button></div></td>
+                  <td> <div class=""> <button> Ver detalle &#10095; </button></div></td>
                 </table>
               </div>
               <div>
                 <table>
-                  <td > <div class="box2">&#128701; {{$departamento->cantidad_banos}} </div></td>
-                  <td> <div class="box2"> &#x1F6AA; {{$departamento->cantidad_habitaciones}}</div></td>
+                  <td > <div class="box2"> Habitaciones: {{$departamento->cantidad_banos}} </div></td>
+                  <td> <div class="box2"> Baños:  {{$departamento->cantidad_habitaciones}}</div></td>
                 </table>
               </div>
             </td>
@@ -92,7 +92,7 @@
   }
 
   .precio {
-    margin-top: 30px;
+    margin-top: 48px;
     margin-left: 20px;
     font-weight: bold;
     color: green;
@@ -101,8 +101,7 @@
   }
 
   .box-datos {
-    width: 350px;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 30px;
   }
 
@@ -112,22 +111,25 @@
     margin-bottom: 10px;
     background: #cbfac4;
     border-radius: 5px;
-    height: 110px;
+    height: 120px;
     width: 400px;
   }
 
   .box2 {
     margin-left: 20px;
-    border: 2px solid gray;
     border-radius: 5px;
-    background: #eeeeee;
-    height: 50px;
+    background: #f1f1f1;
+    height: 40px;
+    width: 190px;
     padding: 5px;
-    font-size: 125%;
+    text-align: center;
+    color: #606060;
+    font-weight: 200;
+    font-size: 110%;
   }
 
   button {
-    margin-top: 27px;
+    margin-top: 45px;
     margin-left: 145px;
     border: none;
     border-radius: 10px;
@@ -155,7 +157,9 @@
   .texto {
     font-size: medium;
     margin-top: 3px;
-    margin-left: 10px;
+    margin-left: 15px;
+    color: #606060;
+    font-weight: 400;
   }
 </style>
 
