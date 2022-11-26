@@ -18,14 +18,15 @@
         <tbody>
           @foreach($departamentos as $departamento) 
           <tr>
-            <td>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYGdJMf9acTXCn387AkZts7qk_B9kHxjTgVeHsEb9-Vs6IeHxA_o3-OLGFtHJls9OgRw&usqp=CAU">
+            <td style="width:240px;">
+              <img class="miniatura" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYGdJMf9acTXCn387AkZts7qk_B9kHxjTgVeHsEb9-Vs6IeHxA_o3-OLGFtHJls9OgRw&usqp=CAU">
             </td>
-            <td> 
+            <td style="width:500px;"> 
               <div class="box-datos">
-                <div> {{$departamento->nombre_departamento}} </div>
-                <div> &#128205; Direccion </div>
-                <div> &#128506; Region</div>
+                <div class="nombre-dpto"> $departamento->nombre_departamento</div>
+                <div class="texto"> &#128205;  Direccion </div>
+                <div class="texto"> &#127970; Numero </div> 	
+                <div class="texto"> &#128506; Region </div> 	
               </div>
             </td>
             <td>
@@ -42,11 +43,15 @@
                 </table>
               </div>
             </td>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-  <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-</svg> 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+          </td>
+=======
+>>>>>>> Stashed changes
+           
 </button>  </td>
+>>>>>>> 9af1f50080c3e94da735197acefbd1b2cb43ab9d
           </tr>
           @endforeach
         </tbody>
@@ -74,6 +79,12 @@
 
 <style type="text/css">
 
+  .miniatura {
+    border-radius: 5px;
+    height: 180px;
+    width: 240px;
+  }
+
   .cia {
     padding-top: 5px;
     margin-left: 20px;
@@ -93,11 +104,15 @@
   }
 
   .box-datos {
-    width: 250px;
+    width: 350px;
+    margin-top: 20px;
+    margin-left: 30px;
   }
 
   .box1 {
-    margin: 30px;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 10px;
     background: #cbfac4;
     border-radius: 5px;
     height: 100px;
@@ -132,7 +147,17 @@
     color: #eeeeee;
     background-color: #006f00;
 
+  }
 
+  .nombre-dpto {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .texto {
+    font-size: medium;
+    margin-top: 3px;
   }
 </style>
 
