@@ -313,6 +313,7 @@ input[type=number] {
 			}
 
 			codigo_departamento = $('#codigo_departamento').val();
+			nombre_departamento = $('#nombre_departamento').val();
 			direccion = $('#direccion').val();
 			comuna = $('#comuna').val();
 			region = $('#region').val();
@@ -333,6 +334,7 @@ input[type=number] {
          url:"/actualizar-departamento", //url guarda la ruta hacia donde se hace la peticion
          data:{
          	"codigo_departamento":codigo_departamento,
+         	"nombre_departamento":nombre_departamento,
          	"direccion":direccion,
          	"comuna":comuna,
          	"region":region,
