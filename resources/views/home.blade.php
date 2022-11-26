@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="container">
+<div class="container" id="container-home">
   <h3> Encuentre su proximo destino</h3>
   <h7> Revise entre la variedad de departamentos que tenemos para usted en las zonas mas turisticas del pais </h7>
   <br>

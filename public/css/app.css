@@ -66,3 +66,19 @@ nav {
   padding: 0.6rem 2.0rem;
   border-bottom-color: #d2cac3;
 }
+
+div .container {
+  background-color: red;
+}
+
+body {
+  background-color: blue;
+}
+
+#container-home{
+  background-color: green;
+}
+
+#container-nav {
+  background-color: #f9fbeb;
+}
