@@ -24,9 +24,9 @@
             <td style="width:500px;"> 
               <div class="box-datos">
                 <div class="nombre-dpto"> {{$departamento->nombre_departamento}}</div>
-                <div class="texto"> &#128205;  Direccion </div>
-                <div class="texto"> &#127970; Numero </div> 	
-                <div class="texto"> &#128506; Region </div> 	
+                <div class="texto"> &#128205;  {{$departamento->direccion}} </div>
+                <div class="texto"> &#127970; {{$departamento->numero}} </div> 	
+                <div class="texto"> &#128506; {{$departamento->region}} </div> 	
               </div>
             </td>
             <td>
@@ -38,7 +38,7 @@
               </div>
               <div>
                 <table>
-                  <td > <div class="box2">&#128701; baño </div></td>
+                  <td > <div class="box2">&#128701; {{$departamento->cantidad_banos}} </div></td>
                   <td> <div class="box2"> &#x1F6AA; {{$departamento->cantidad_habitaciones}}</div></td>
                 </table>
               </div>
@@ -76,9 +76,10 @@
 <style type="text/css">
 
   .miniatura {
-    border-radius: 5px;
+    border-radius: 7px;
     height: 180px;
     width: 240px;
+    margin: 5px;
   }
 
   .cia {
@@ -106,12 +107,12 @@
   }
 
   .box1 {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 20px;
     margin-bottom: 10px;
     background: #cbfac4;
     border-radius: 5px;
-    height: 100px;
+    height: 110px;
     width: 400px;
   }
 
@@ -121,8 +122,8 @@
     border-radius: 5px;
     background: #eeeeee;
     height: 50px;
-    padding: 10px;
-    font-size: 175%;
+    padding: 5px;
+    font-size: 125%;
   }
 
   button {
@@ -148,12 +149,13 @@
   .nombre-dpto {
     font-size: large;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .texto {
     font-size: medium;
     margin-top: 3px;
+    margin-left: 10px;
   }
 </style>
 
