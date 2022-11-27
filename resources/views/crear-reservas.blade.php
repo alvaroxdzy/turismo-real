@@ -99,6 +99,19 @@ input[type=number] {
 
 	<input type="" class="btn btn-primary"  value=" Registrar reserva" onclick="grabarReserva()" > </input>
 
+			<h5 style="text-align: center;"> Servicios adicionales</h5>
+
+		@foreach($servicio as $servicios) 
+
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->id}}">
+			<label class="form-check-label" for="flexCheckDefault">
+				{{$servicios->nombre_servicio}}
+			</label>
+		</div>
+
+		@endforeach
+	
 </div>
 
 
