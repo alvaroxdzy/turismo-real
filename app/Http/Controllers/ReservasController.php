@@ -7,6 +7,7 @@ use App\Models\Departamento;
 use App\Models\Inventario_departamento;
 use App\Models\Reservas;  
 use App\Models\Servicios;  
+use App\Models\ServicioSolicitados;  
 
 class ReservasController extends Controller
 {
@@ -40,6 +41,21 @@ class ReservasController extends Controller
     $reserva->fecha_creacion=$request->fecha_creacion;
     $reserva->cod_departamento=$request->codigo_departamento;
     $reserva->save();
+
+    $arrayServ = $request->arrayServiciosSeleccionados;
+
+    foreach ($arrayServ as $servicio) 
+    {
+      $servicio = Servicios::where('function',$servicio)->first();
+
+      $servicios_solicitados = new ServicioSolicitados();
+      $servicios_solicitados->cod_Servicio = $servicio->id;
+      $servicios_solicitados->fecha =$request->fecha_creacion;
+      $servicios_solicitados->costo =$servicio->precio;
+      $servicios_solicitados->cod_reserva = $reserva->id;
+      $servicios_solicitados->save();
+    }
+
 
     return "LISTASO" ;
   }

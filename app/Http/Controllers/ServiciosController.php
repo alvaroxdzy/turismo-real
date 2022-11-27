@@ -15,11 +15,13 @@ class ServiciosController extends Controller
     public function store(Request $request)
     {
 
+       $servicioNombre = str_replace(" ", "_", $request->nombre_servicio);
        $servicio =new Servicios();
        $servicio->nombre_servicio=$request->nombre_servicio; 
        $servicio->disponibilidad='DISPONIBLE'; 
        $servicio->detalles=$request->detalles; 
        $servicio->precio = $request->precio;
+       $servicio->function = $servicioNombre;
        $servicio->save();
 
        return redirect()->back()->with('message', 'servicio registrado correctamente');
@@ -33,11 +35,13 @@ class ServiciosController extends Controller
 
 public function update(Request $request)
 {
+    $servicioNombre = str_replace(" ", "_", $request->nombre_servicio);
    $servicio =Servicios::find($request->id);
    $servicio->nombre_servicio=$request->nombre_servicio; 
    $servicio->disponibilidad=$request->estado; 
    $servicio->detalles=$request->detalles; 
    $servicio->precio=$request->precio;
+   $servicio->function = $servicioNombre;
    $servicio->save();
    return redirect(route('servicio.search'));
 }

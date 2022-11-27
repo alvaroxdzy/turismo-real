@@ -101,17 +101,23 @@ input[type=number] {
 
 			<h5 style="text-align: center;"> Servicios adicionales</h5>
 
+		<select id="servicios_oculto" hidden>
+			@foreach($servicio as $servicios) 
+			<option value="{{$servicios->function}}">{{$servicios->function}}</option>
+		@endforeach
+			
+	</select>
+
 		@foreach($servicio as $servicios) 
 
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->id}}">
+			<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->function}}">
 			<label class="form-check-label" for="flexCheckDefault">
 				{{$servicios->nombre_servicio}}
 			</label>
 		</div>
-
 		@endforeach
-	
+
 </div>
 
 
@@ -146,37 +152,58 @@ input[type=number] {
 <script type="text/javascript">
 	function grabarReserva()
 	{
-		rut = $('#rut').val();
-		email = $('#email').val();
-		nombres = $('#nombres').val();
-		apellidos = $('#apellidos').val();
-		costo_base = $('#costo_base').val();
-		fecha_desde = $('#fecha_desde').val();
-		fecha_hasta = $('#fecha_hasta').val();
-		fecha_creacion = $('#fecha_creacion').val();
-		codigo_departamento = $('#codigo_departamento').val();
 
+		arrayServicios = [];
+		arrayServiciosSeleccionados = [];
 
-		var first = fecha_hasta;
-		var second =fecha_desde;
+		$("#servicios_oculto option").each(function() {
 
-		var x = new Date(first);
-		var y = new Date(second);
-		var diff = x - y;
-		var dias = diff/(1000*60*60*24) ;
-		costo_base = costo_base * dias;
+			arrayServicios.push($(this).val());
 
-		console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
-
-  // validaciones and focus();
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
 		});
 
-		$.ajax({
+		arrayServicios.forEach(function(servicio){
+
+			//var element = document.getElementById(servicio);
+			//console.log(element);
+			if( $('#'+servicio).prop('checked') ) {
+			    arrayServiciosSeleccionados.push(servicio);
+			}
+
+		});
+
+		
+
+
+	  rut = $('#rut').val();
+	  email = $('#email').val();
+	  nombres = $('#nombres').val();
+	  apellidos = $('#apellidos').val();
+	  costo_base = $('#costo_base').val();
+	  fecha_desde = $('#fecha_desde').val();
+	  fecha_hasta = $('#fecha_hasta').val();
+	  fecha_creacion = $('#fecha_creacion').val();
+	  codigo_departamento = $('#codigo_departamento').val();
+
+	 
+	  var first = fecha_hasta;
+	  var second =fecha_desde;
+
+	  var x = new Date(first);
+	  var y = new Date(second);
+	  var diff = x - y;
+	  var dias = diff/(1000*60*60*24) ;
+	  costo_base = costo_base * dias;
+
+	  console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
+
+	  $.ajaxSetup({
+	  	headers: {
+	  		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	  	}
+	  });
+
+	  $.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/almacenar-reservas", //url guarda la ruta hacia donde se hace la peticion
          data:{
@@ -186,7 +213,8 @@ input[type=number] {
          	"fecha_desde":fecha_desde,
          	"fecha_hasta":fecha_hasta,
          	"fecha_creacion":fecha_creacion,
-         	"codigo_departamento":codigo_departamento
+         	"codigo_departamento":codigo_departamento,
+         	"arrayServiciosSeleccionados":arrayServiciosSeleccionados
          },
 
           // data recive un objeto con la informacion que se enviara al servidor

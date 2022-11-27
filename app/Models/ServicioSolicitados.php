@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servicios extends Model
+class ServicioSolicitados extends Model
 {
-   public $table = 'servicios';
+   public $table = 'servicios-solicitados';
 
    public $fillable = [
-    'codigo_servicio',
-    'nombre_servicio',
-    'disponibilidad',
-    'detalles',
-    'function'
+    'cod_servicio',
+    'cod_reserva',
+    'fecha',
+    'costo'
 ]
 ;
 

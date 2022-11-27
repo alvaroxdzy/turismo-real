@@ -57,7 +57,7 @@ Route::get('/crear-reservas/{codigo_departamento}',[App\Http\Controllers\Reserva
 Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, 'filterComuna'])->name('reservas.filtrar');
 Route::get('/almacenar-reservas',[App\Http\Controllers\ReservasController::class, 'store'])->name('reservas.store');
 Route::get('/traer-reservas',[App\Http\Controllers\ReservasController::class, 'traerReservasClientes'])->name('reservas.traerReservasClientes');
-Route::get('/revisar-reservas/{id}/{codigo_departamento}',[App\Http\Controllers\ReservasController::class, 'revisarReservas'])->name('reservas.traerReservasClientes');
+
 
 
 //RUTAS USUARIO
