@@ -30,6 +30,11 @@ input[type=number] {
 				<input style="text-transform:uppercase" type="text" class="form-control" id="nombre_servicio" name="nombre_servicio"  minlength="1" required onkeyup="javascript:this.value=this.value.toUpperCase();">
 				
 			</div>
+			<div class="mb-3 col-md-5">
+				<label for="precio">Precio</label>
+				<input style="text-transform:uppercase" type="text" class="form-control" id="precio" name="precio"  required onkeypress="return valideKey(event);">
+				
+			</div>
 		</div>
 		<br> 
 		<div class="row" style="background: antiquewhite;"> 

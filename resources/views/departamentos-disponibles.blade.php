@@ -33,7 +33,7 @@
               <div class="box1"> <div class="cia ">Turismo Real</div>
                 <table>
                   <td > <div class="precio">${{$departamento->costo_base}}</div></td>
-                  <td> <div class=""> <button> Ver detalle &#10095; </button></div></td>
+                  <td> <div class=""> <button><a style="color:whitesmoke;" href="crear-reservas/{{$departamento->codigo_departamento}}"> Ver detalle &#10095; </a></button></div></td>
                 </table>
               </div>
               <div>

@@ -27,19 +27,19 @@
             <th>Encargado</th>
             <th>Observaciones</th>
             <th>Usuario</th>
-            <th>Gestionar</th>        
+        
           </tr>
         </thead>
         <tbody>
           @foreach($mantenciones as $mantencion) 
-          <tr>
+          <tr class='clickable-row' data-href="modificar-mantencion/{{$mantencion->id}}">
             <td>{{$mantencion->id}} </td>
             <td>{{$mantencion->cod_departamento}}</td>
             <td>{{$mantencion->fecha}}</td>
             <td>{{$mantencion->encargado}}</td>
             <td>{{$mantencion->observaciones}}</td>
             <td>{{$mantencion->usuario}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar-mantencion/{{$mantencion->id}}"> Modificar </a></td>
+
           </tr>
           @endforeach
         </tbody>
@@ -63,7 +63,15 @@
 </div> 
 </div> 
 </div>      
-</div>  
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 
 
 @endsection

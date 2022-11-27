@@ -72,23 +72,12 @@
 			</div>
 
 			<br>
+									<h5 style="text-align: center;"> Mis reservas </h5>
 			<div class="card border-primary mb-3"> 
 				<div class="card-body">
 
-							<table id="myTable" hidden class="table dataTable no-footer dtr-inline collapsed" style="width:100%">
-						<thead>
-							<h5> RESERVAS </h5>
-							<tr>
-								<th>ID</th>
-								<th>fecha_reserva</th>
-								<th>cod_departamento</th>
-								<th>fecha_desde</th>
-								<th>fecha_hasta</th>
-								<th>direccion</th>
-								<th>comuna</th>
-								<th>region</th>
-							</tr>
-						</thead>
+					<table id="myTable" hidden class="table dataTable no-footer dtr-inline collapsed" style="width:100%">
+						
 						<tbody id="trTable">
 
 						</tbody>
@@ -101,11 +90,11 @@
 		</div>
 
 
-<script type="text/javascript">
-	$(document).on('click','#ocultarReservas',function(){
-	$('#myTable').attr("hidden", true);
-});
-</script>
+		<script type="text/javascript">
+			$(document).on('click','#ocultarReservas',function(){
+				$('#myTable').attr("hidden", true);
+			});
+		</script>
 
 
 		<script type="text/javascript">
@@ -136,17 +125,46 @@
 
          		data.forEach(function(detalle) {
 
+         			var first = detalle.fecha_hasta;
+         			var second = detalle.fecha_desde;
+
+         			var x = new Date(first);
+         			var y = new Date(second);
+         			var diff = x - y;
+         			var dias = diff/(1000*60*60*24) ;
 
          			$('#trTable').append('<tr>'+
-         				'<td>'+detalle.id+'</td>'+
-         				'<td>'+detalle.fecha_creacion+'</td>'+
-         				'<td>'+detalle.cod_departamento+'</td>'+
-         				'<td>'+detalle.fecha_desde+'</td>'+
-         				'<td>'+detalle.fecha_hasta+'</td>'+
-         				'<td>'+detalle.direccion+'</td>'+
-         				'<td>'+detalle.comuna+'</td>'+
-         				'<td>'+detalle.region+'</td>'+
+         				'<td style="width:450px;">'+
+         				'<div class="box-datos">'+
+         				'<div class="texto">Reserva ID: ' +detalle.id+'</div>'+
+         				'<div class="texto">Nombre dpto: ' +detalle.nombre_departamento+'</div>'+
+         				'<div class="texto">Numero dpto: ' +detalle.numero+'</div>'+	
+         				'</div>'+
+         				'</td>'+
+
+         				'<td style="width:450px;">'+
+         				'<div class="box-datos">'+
+         				'<div class="texto">Fecha desde: ' +detalle.fecha_desde+'</div>'+
+         				'<div class="texto">Fecha hasta: '  +detalle.fecha_hasta+'</div>'+	
+         				'</div>'+
+         				'</td>'+
+
+         				'<td style="width:450px;">'+
+         				'<div class="box-datos">'+
+         				'<div class="texto">Direccion: ' +detalle.direccion+'</div>'+
+         				'<div class="texto">Comuna: ' +detalle.comuna+'</div>'+
+         				'<div class="texto">Region: ' +detalle.region+'</div>'+	
+         				'</div>'+
+         				'</td>'+
+
+         				'<td style="width:450px;">'+
+         				'<div class="box-datos">'+
+         				'<div class="texto">Dias reservados: ' +dias+'</div>'+
+         				'</div>'+
+         				'</td>'+
+
          				'</tr>');
+
          		});
 
          	}

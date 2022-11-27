@@ -29,6 +29,12 @@ input[type=number] {
 						<input value="{{$servicio->nombre_servicio}}" style="text-transform:uppercase" type="text" class="form-control" id="nombre_servicio" name="nombre_servicio"  minlength="1" maxlength="10" required onkeyup="javascript:this.value=this.value.toUpperCase();">
 						
 					</div>
+					<div class="mb-3 col-md-4">
+						<label for="precio">Precio</label>
+						<input value="{{$servicio->precio}}" style="text-transform:uppercase" type="text" class="form-control" id="precio" name="precio"  minlength="1" maxlength="10" onkeypress="return valideKey(event);">
+						
+					</div>
+
 					<div class="mb-3 col-md-2">
 						<label for="disponibilidad">Disponibilidad</label>
 						<select class="form-control" id="estado" name="estado">

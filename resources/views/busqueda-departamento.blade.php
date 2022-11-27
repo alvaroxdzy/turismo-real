@@ -34,8 +34,8 @@
         </thead>
         <tbody>
           @foreach($departamentos as $departamento) 
-          <tr>
-            <td><a style="color:black" href="modificar-departamento/{{$departamento->codigo_departamento}}">{{$departamento->codigo_departamento}} </a></td>
+          <tr class='clickable-row' data-href="modificar-departamento/{{$departamento->codigo_departamento}}">
+            <td>{{$departamento->codigo_departamento}} </a></td>
             <td>{{$departamento->direccion}}</td>
             <td>{{$departamento->comuna}}</td>
             <td>{{$departamento->region}}</td>
@@ -61,6 +61,13 @@
           info: "Mostrando registros del {start} hasta el {end} de un total de {rows} registros",
         }
 
+      });
+    </script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+          window.location = $(this).data("href");
+        });
       });
     </script>
   </div> 

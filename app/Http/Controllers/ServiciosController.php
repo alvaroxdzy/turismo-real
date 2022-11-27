@@ -19,6 +19,7 @@ class ServiciosController extends Controller
        $servicio->nombre_servicio=$request->nombre_servicio; 
        $servicio->disponibilidad='DISPONIBLE'; 
        $servicio->detalles=$request->detalles; 
+       $servicio->precio = $request->precio;
        $servicio->save();
 
        return redirect()->back()->with('message', 'servicio registrado correctamente');
@@ -36,6 +37,7 @@ public function update(Request $request)
    $servicio->nombre_servicio=$request->nombre_servicio; 
    $servicio->disponibilidad=$request->estado; 
    $servicio->detalles=$request->detalles; 
+   $servicio->precio=$request->precio;
    $servicio->save();
    return redirect(route('servicio.search'));
 }
@@ -47,7 +49,6 @@ public function destroy($id)
     return redirect(route('servicio.search'));
 }
 public function search(){
-
 
     $servicios=Servicios::all();
     return view('busqueda-servicio',compact('servicios'));

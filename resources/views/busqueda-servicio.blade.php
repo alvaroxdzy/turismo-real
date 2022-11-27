@@ -24,16 +24,16 @@
             <th>ID</th>
             <th>Nombre </th>
             <th>Detalles</th>
-            <th>Gestionar</th>        
+            <th>Precio</th>        
           </tr>
         </thead>
         <tbody>
           @foreach($servicios as $servicio) 
-          <tr>
+          <tr class='clickable-row' data-href="modificar-servicio/{{$servicio->id}}">            
             <td>{{$servicio->id}} </td>
             <td>{{$servicio->nombre_servicio}}</td>
             <td>{{$servicio->detalles}}</td>
-            <td><a class="btn btn-outline-primary btn-sm" href="modificar-servicio/{{$servicio->id}}"> Modificar </a></td>
+            <td>{{$servicio->precio}}</td>
           </tr>
           @endforeach
         </tbody>
@@ -53,6 +53,15 @@
 
       });
     </script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+          window.location = $(this).data("href");
+        });
+      });
+    </script>
+
+
   </div> 
 </div> 
 </div> 

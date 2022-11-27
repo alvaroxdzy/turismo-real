@@ -24,151 +24,83 @@ input[type=number] {
 
 	<form class="form-inline" type="get" action="{{ url('/almacenar-reservas') }}">
 		{{ csrf_field() }}
+
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="numero">Numero</label>
 			<div class="col-sm-2">
-				<input style="width:100px" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-			</div>
-			<label  class="col-sm-1 col-form-label" for="numero">ESTADO</label>
-			<div class="col-sm-2">
-				<select class="form-control" id="estado" name="estado">
-					<option value="DISPONIBLE">DISPONIBLE</option>
-					<option value="NO DISPONIBLE">NO DISPONIBLE</option>
-				</select>
-
+				<input style="width:100px" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6"  onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}">
 			</div>
 		</div>
+
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="direccion">Direccion</label>
 			<div class="col-sm-2">
-				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion"  maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->direccion}}">
 			</div>
 		</div>
 
 		<input type="text" id="id" name="id" hidden> 
 
-		<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" hidden>		
-
-		<div class="row"> 
-
-
-			<div class="mb-2 col-md-4">
-				<label for="region">Región</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="region" name="region" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
-
-			</div>
-
-			<div class="mb-2 col-md-4">
-				<label for="comuna">Comuna</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="comuna" name="comuna" required onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
-
-			</div>
-		</div>
-		<div class="row">
-			<div class="mb-2 col-md-2">
-				<label for="cantidad_habitaciones">Cantidad de habitaciones</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-			</div>
-			<div class="mb-3 col-md-2">
-				<label for="cantidad_banos">Cantidad de baños </label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_banos" name="cantidad_banos" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-			</div>
-
-			<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-		</div>
-
+		<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20"  onkeyup="javascript:this.value=this.value.toUpperCase();" hidden value="{{$departamento->codigo_departamento}}">		
 
 		<div class="mb-2 row">
-			<label  class="col-sm-3 col-form-label" for="costo_base">Arriendo diario departamento en CLP</label>
-			<div class="col-sm-2">
-				<input type="text" onkeypress="return valideKey(event);" class="form-control" id="costo_base" name="costo_base" placeholder="$" >
+			<label  class="col-sm-1 col-form-label" for="comuna">Comuna</label>
+			<div class="col-sm-6">
+				<input  value="{{$departamento->comuna}} , {{$departamento->region}}" id="comuna" name="comuna" type="text" class="form-control">
 			</div>
-
 		</div>
-	</div>
-</div>
+
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="cantidad_habitaciones">Habitaciones</label>
+			<div class="col-sm-6">
+				<input  value="{{$departamento->cantidad_habitaciones}}" id="cantidad_habitaciones" name="cantidad_habitaciones" type="text" class="form-control">
+			</div>
+		</div>
+
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="cantidad_banos">Baños</label>
+			<div class="col-sm-6">
+				<input  value="{{$departamento->cantidad_banos}}" id="cantidad_banos" name="cantidad_banos" type="text" class="form-control">
+			</div>
+		</div>
+
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="costo_base">Arriendo</label>
+			<div class="col-sm-6">
+				<input  value="{{$departamento->costo_base}}" id="costo_base" name="costo_base" type="text" class="form-control">
+			</div>
+		</div>
+		<input value="{{$departamento->codigo_departamento}}" type="hidden" name="codigo_departamento" id="codigo_departamento">
+		<input value="{{$userId = Auth::user()->email;}}" id="email" type="hidden" name="email">
+		<input value="{{$userId = Auth::user()->rut;}}" id="rut" type="hidden" name="rut">
+		<input value="{{$userId = Auth::user()->nombres;}}" id="nombres" type="hidden" name="nombres">
+		<input value="{{$userId = Auth::user()->apellidos;}}" id="apellidos" type="hidden" name="apellidos">
+		<input name="fecha_creacion" type="date" id="fecha_creacion"> 
+
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="fecha_desde">Fecha desde</label>
+			<div class="col-sm-6">
+				<input  id="fecha_desde" name="fecha_desde" type="date" class="form-control">
+			</div>
+		</div>
+
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="fecha_hasta">Fecha hasta</label>
+			<div class="col-sm-6">
+				<input  id="fecha_hasta" name="fecha_hasta" type="date" class="form-control">
+			</div>
+		</div>
 
 
 
-<div class="row" style="background: antiquewhite;"> 
-	<div class="mb-3 col-md-2">
-		<label for="rut">Cliente rut:</label>
-		<input class="form-control" name="rut" type="text" id="rut" required value="{{$userId = Auth::user()->rut;}}" readonly> 
-	</div>
 
-</div>
-<br>
-<div class="row" style="background: antiquewhite;"> 
-	<div class="mb-3 col-md-2">
-		<label> Fecha desde </label >
-		<input class="form-control" name="fecha_desde" type="date" id="fecha_desde" required> 
+	</form>
 
-	</div> 
-	<div class="mb-3 col-md-2">
-		<label> Fecha hasta  </label >
-		<input class="form-control" name="fecha_hasta" type="date" id="fecha_hasta" required> 
-
-	</div>
-</div>
-<br> 
-
-<div class="row" style="background: antiquewhite;"> 
-
-
-	<div class="mb-3 col-md-4">
-		<label for="region">Región</label>
-		<select class="form-control" id="regiones" name="region"></select>
-
-	</div>
-
-	<div class="mb-3 col-md-4">
-		<label for="comuna">Comuna</label>
-		<select class="form-control" id="comunas" name="comuna"></select>
-
-	</div>
-</div>
-<br>
-<h5 style="text-align: center ;"> Departamentos Disponibles </h5>
-<table id="myTable" class="table dataTable no-footer dtr-inline collapsed">
-
-	<thead>
-		<tr>
-			<th>Dirección</th>
-			<th>Número</th>
-			<th>Habitaciones</th>
-			<th>Baños</th>
-		</tr>
-	</thead>
-	<tbody id="trTable">
-
-	</tbody>
-</table> 
-
-<br> 
-<div class="row" style="background: antiquewhite;"> 
-
-	<div class="mb-3 col-md-4">
-		<label for="codigo_departamento">Seleccione el número del departamento a elección</label>
-		<select style="width:75px" class="form-control" name="cod_departamento" id="cod_departamento" required >
-
-		</select>
-		<br>
-	</div>
+	<input type="" class="btn btn-primary"  value=" Registrar reserva" onclick="grabarReserva()" > </input>
 
 </div>
-<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-<input class="form-control" name="fecha_creacion" type="date" id="fecha_creacion"> 
-<br>
 
-</form>
-<input type="" class="btn btn-primary"  value=" Registrar reserva " onclick="validarReserva()"> </input>
-</div>
-<br>
-
-</div>
 
 
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -181,115 +113,47 @@ input[type=number] {
   var ano = fecha.getFullYear(); //obteniendo año
   if(dia<10)
     dia='0'+dia; //agrega cero si el menor de 10
-if(mes<10)
+  if(mes<10)
     mes='0'+mes //agrega cero si el menor de 10
-document.getElementById('fecha_desde').value=ano+"-"+mes+"-"+dia;
-document.getElementById('fecha_hasta').value=ano+"-"+mes+"-"+dia;
+  document.getElementById('fecha_desde').value=ano+"-"+mes+"-"+dia;
+  document.getElementById('fecha_hasta').value=ano+"-"+mes+"-"+dia;
 
-document.getElementById('fecha_creacion').value=ano+"-"+mes+"-"+dia;
-$('#fecha_creacion').attr("hidden" , true);
+  document.getElementById('fecha_creacion').value=ano+"-"+mes+"-"+dia;
+  $('#fecha_creacion').attr("hidden" , true);
 }
 </script>
 
-<script type="text/javascript">
-	$(document).on('change','#comunas',function(){
 
-		$('#myTable').DataTable().clear().destroy();
-		$('#cod_departamento').empty();
 
-		var comuna_seleccionada=$('#comunas option:selected').val();
-		console.log(comuna_seleccionada);
 
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
 
-		$.ajax({
-         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
-         url:"/filtrar-comunas", //url guarda la ruta hacia donde se hace la peticion
-         data:{
-         	"comunas":comuna_seleccionada,
-         }, // data recive un objeto con la informacion que se enviara al servidor
-         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
 
-         	if (data.length==0) {
-         		console.log('ERROR DE CONSULTA');
-         	} else {
-         		data.forEach(function(detalle) {
-
-         			$('#trTable').append('<tr>'+
-//          			'<td>'+detalle.codigo_departamento+'</td>'+
-         				'<td>'+detalle.direccion+'</td>'+
-         				'<td>'+detalle.numero+'</td>'+
-         				'<td>'+detalle.cantidad_habitaciones+'</td>'+
-         				'<td>'+detalle.cantidad_banos+'</td>'+
-         				'</tr>');
-
-         			$('#cod_departamento').append('<option value="'+detalle.codigo_departamento+'">'+detalle.numero+'</option>');
-         		});
-
-         	}
-         },
-     });
-
-	});
-</script>
-
-<script type="text/javascript">
-		function traerDepartamento()
-		{
-
-			var codigo_departamento = $('#codigo_departamento').val();
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			}); 
-
-			$.ajax({
-         type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
-         url:"/traer-departamento-reserva"+, //url guarda la ruta hacia donde se hace la peticion
-         data:{
-         	"codigo_departamento":codigo_departamento,
-         }, // data recive un objeto con la informacion que se enviara al servidor
-         success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
-
-         	console.log(data);
-
-         	$('#id').val(data[0].codigo_departamento);
-         	$('#numero').val(data[0].numero);
-         	$('#direccion').val(data[0].direccion);
-         	$('#comuna').val(data[0].comuna);
-         	$('#region').val(data[0].region);
-         	$('#cantidad_habitaciones').val(data[0].cantidad_habitaciones);
-         	$('#cantidad_banos').val(data[0].cantidad_banos);
-         	$('#costo_base').val(data[0].costo_base);
-
-         },
-     });
-
-		}
-	</script>
-
-	<script type="text/javascript">
-		window.onload=traerDepartamento();
-	</script>
 
 
 <script type="text/javascript">
 	function grabarReserva()
 	{
 		rut = $('#rut').val();
+		email = $('#email').val();
+		nombres = $('#nombres').val();
+		apellidos = $('#apellidos').val();
+		costo_base = $('#costo_base').val();
 		fecha_desde = $('#fecha_desde').val();
 		fecha_hasta = $('#fecha_hasta').val();
 		fecha_creacion = $('#fecha_creacion').val();
-		cod_departamento = $('#cod_departamento :selected').val();
+		codigo_departamento = $('#codigo_departamento').val();
 
 
-		console.log(rut,fecha_desde,fecha_hasta,fecha_creacion,cod_departamento);
+		var first = fecha_hasta;
+		var second =fecha_desde;
+
+		var x = new Date(first);
+		var y = new Date(second);
+		var diff = x - y;
+		var dias = diff/(1000*60*60*24) ;
+		costo_base = costo_base * dias;
+
+		console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
 
   // validaciones and focus();
 
@@ -305,16 +169,16 @@ $('#fecha_creacion').attr("hidden" , true);
          data:{
 
          	"rut":rut,
+         	"costo_base":costo_base,
          	"fecha_desde":fecha_desde,
          	"fecha_hasta":fecha_hasta,
          	"fecha_creacion":fecha_creacion,
-         	"cod_departamento":cod_departamento
+         	"codigo_departamento":codigo_departamento
          },
 
           // data recive un objeto con la informacion que se enviara al servidor
          success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
          	console.log(data);
-
 
          	if (data=='LISTASO') {
          		alert('RESERVA REGISTRADA');
@@ -323,7 +187,7 @@ $('#fecha_creacion').attr("hidden" , true);
          		alert('ERROR');
          	}
          },
-     });
+       });
 	}
 
 
