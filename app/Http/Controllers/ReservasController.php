@@ -7,7 +7,9 @@ use App\Models\Departamento;
 use App\Models\Inventario_departamento;
 use App\Models\Reservas;  
 use App\Models\Servicios;  
-use App\Models\ServicioSolicitados;  
+use App\Models\ServicioSolicitados; 
+use App\Models\User; 
+use Barryvdh\DomPDF\Facade\Pdf; 
 
 class ReservasController extends Controller
 {
@@ -69,6 +71,27 @@ class ReservasController extends Controller
 
     return $reservas;
   }
+
+  public function checkIn($id){
+
+    $reserva = Reservas::where('id',$id)->first();
+
+    $departamento = Departamento::where('codigo_departamento',$reserva->cod_departamento)->first();
+
+    $usuario = User::where('rut',$reserva->rut)->first();
+
+    $data = [
+      'reserva' => $reserva,
+      'departamento' => $departamento,
+      'usuario' => $usuario
+    ];
+
+    $pdf = PDF::loadView('PDF-reservas',$data)->setOptions(['defaultFont' => 'sans-serif'])->setPaper('a4', 'landscape');
+
+    return $pdf->download('archivo-pdf.pdf');
+
+  }
+
 
 
   public function show($id)

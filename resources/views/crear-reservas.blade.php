@@ -113,7 +113,7 @@ input[type=number] {
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->function}}">
 			<label class="form-check-label" for="flexCheckDefault">
-				{{$servicios->nombre_servicio}}
+				{{$servicios->nombre_servicio}} ${{$servicios->precio}}
 			</label>
 		</div>
 		@endforeach

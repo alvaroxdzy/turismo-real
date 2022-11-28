@@ -58,7 +58,8 @@ Route::get('/filtrar-comunas',[App\Http\Controllers\ReservasController::class, '
 Route::get('/almacenar-reservas',[App\Http\Controllers\ReservasController::class, 'store'])->name('reservas.store');
 Route::get('/traer-reservas',[App\Http\Controllers\ReservasController::class, 'traerReservasClientes'])->name('reservas.traerReservasClientes');
 
-
+//REPORTES
+Route::get('/PDF-reservas/{id}',[App\Http\Controllers\ReservasController::class, 'checkIn'])->name('reservas.store');
 
 //RUTAS USUARIO
 Route::get('/mi-cuenta',function(){
