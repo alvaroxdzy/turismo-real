@@ -8,7 +8,8 @@ use App\Models\Inventario_departamento;
 use App\Models\Reservas;  
 use App\Models\Servicios;  
 use App\Models\ServicioSolicitados; 
-use App\Models\User; 
+use App\Models\User;
+use DB;  
 use Barryvdh\DomPDF\Facade\Pdf; 
 
 class ReservasController extends Controller
@@ -80,10 +81,16 @@ class ReservasController extends Controller
 
     $usuario = User::where('rut',$reserva->rut)->first();
 
+    $servicios_solicitados = ServicioSolicitados::where('cod_reserva',$reserva->id)->get();
+
+    $servicio = ServicioSolicitados::join('servicios','servicios-solicitados.cod_servicio','=','servicios.id')->where('servicios-solicitados.cod_reserva',$reserva->id)->get();
+
     $data = [
       'reserva' => $reserva,
       'departamento' => $departamento,
-      'usuario' => $usuario
+      'usuario' => $usuario,
+      'servicios_solicitados' =>$servicios_solicitados,
+      'servicio' => $servicio
     ];
 
     $pdf = PDF::loadView('PDF-reservas',$data)->setOptions(['defaultFont' => 'sans-serif'])->setPaper('a4', 'landscape');

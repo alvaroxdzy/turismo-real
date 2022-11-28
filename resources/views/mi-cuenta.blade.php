@@ -72,7 +72,7 @@
 			</div>
 
 			<br>
-									<h5 style="text-align: center;"> Mis reservas </h5>
+			<h5 style="text-align: center;"> Mis reservas </h5>
 			<div class="card border-primary mb-3"> 
 				<div class="card-body">
 
@@ -162,6 +162,7 @@
          				'<td style="width:450px;">'+
          				'<div class="box-datos">'+
          				'<div class="texto">Dias reservados: ' +dias+'</div>'+
+         				'<div class="texto"> <button><a style="color:whitesmoke;" href="/PDF-reservas/'+detalle.id+'"> Ver detalle &#10095; </a></button></div>'+
          				'</div>'+
          				'</td>'+
 
