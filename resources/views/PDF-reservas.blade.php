@@ -44,7 +44,7 @@
 
     <h5>RESERVA</h5>
 
-    <label> ID Reserva : {{$reserva->id}}</label>
+    <label style="color: blue;"> ID Reserva : {{$reserva->id}}</label>
     <br>
     <label> Codigo departamento : {{$reserva->cod_departamento}}</label>
     <br>
