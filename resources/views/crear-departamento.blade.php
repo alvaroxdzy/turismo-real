@@ -59,13 +59,13 @@ input[type=number] {
 
        <div class="mb-2 col-md-4">
         <label for="region">Región</label>
-        <select class="form-control" id="regiones" name="region"></select>
+        <select class="form-control" id="region" name="region"></select>
 
     </div>
 
     <div class="mb-2 col-md-4">
         <label for="comuna">Comuna</label>
-        <select class="form-control" id="comunas" name="comuna"></select>
+        <select class="form-control" id="comuna" name="comuna"></select>
 
     </div>
 </div>
