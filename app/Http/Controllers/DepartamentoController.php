@@ -7,6 +7,7 @@ use App\Models\Departamento;
 use App\Models\Inventario_departamento; 
 use App\Models\Folios; 
 use DB;
+use App\Helper\Files;
 
 
 class DepartamentoController extends Controller
@@ -24,6 +25,8 @@ class DepartamentoController extends Controller
         if ($departamentoValidar) {
          return 'YA ESTA EN USO EL CODIGO DEPARTAMENTO';
      }
+
+
      $departamento =new Departamento();
      $departamento->codigo_departamento=$request->codigo_departamento; 
      $departamento->nombre_departamento=$request->nombre_departamento;
@@ -36,7 +39,6 @@ class DepartamentoController extends Controller
      $departamento->estado='DISPONIBLE';
      $departamento->usuario=$request->usuario;
      $departamento->costo_base = $request->costo_base;
-
 
      $arrayDatos = $request->arrayMovimiento;
      if($arrayDatos) {

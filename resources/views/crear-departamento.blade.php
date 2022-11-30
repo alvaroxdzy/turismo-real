@@ -27,76 +27,68 @@ input[type=number] {
 
           <div class="mb-2 row">
             <label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                <input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();">
            </div>
+       </div>
 
-           <label  class="col-sm-2 col-form-label" for="numero">Numero departamento</label>
-           <div class="col-sm-2">
+       <div class="mb-2 row">
+           <label  class="col-2 col-form-label" for="numero">Número departamento</label>
+           <div class="col-sm-5">
                <input  type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
            </div>
        </div>
 
-
-
-
-
-
        <div class="mb-2 row">
-        <label  class="col-sm-1 col-form-label" for="direccion">Direccion</label>
-        <div class="col-sm-2">
-           <input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+        <label  class="col-sm-2 col-form-label" for="direccion">Direccion</label>
+        <div class="col-sm-5">
+            <input style="text-transform:uppercase;" type="text" class="form-control" id="direccion" name="direccion" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();">
+        </div>
+    </div>
+
+
+    <div class="mb-2 row"> 
+        <label class="col-sm-2 col-form-label" for="region">Región</label>
+        <div class="col-sm-5">
+            <select style="text-align:center;" class="form-control" id="regiones" name="region"></select>
+        </div>
+    </div>
+
+    <div class="mb-2 row"> 
+        <label class="col-sm-2 col-form-label" for="region">Comuna</label>
+        <div class="col-sm-5">
+            <select style="text-align:center;" class="form-control" id="comunas" name="comuna"></select>
+        </div>
+    </div>
+
+    <div class="mb-2 row">
+        <label  class="col-sm-2 col-form-label" for="cantidad_habitaciones">Cantidad dormitorios</label>
+        <div class="col-sm-5">
+           <input  type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
        </div>
    </div>
 
-   <input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" hidden>		
-
-   <input type="hidden" name="folios" value="{{$folio->folio}}" id="folios">
-
-
-   <div class="row"> 
-
-
-       <div class="mb-2 col-md-4">
-        <label for="region">Región</label>
-        <select class="form-control" id="region" name="region"></select>
-
-    </div>
-
-    <div class="mb-2 col-md-4">
-        <label for="comuna">Comuna</label>
-        <select class="form-control" id="comuna" name="comuna"></select>
-
-    </div>
+   <div class="mb-2 row">
+    <label  class="col-sm-2 col-form-label" for="cantidad_banos">Cantidad baños</label>
+    <div class="col-sm-5">
+       <input  type="text" class="form-control" id="cantidad_banos" name="cantidad_banos"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+   </div>
 </div>
-<div class="row">
-   <div class="mb-2 col-md-2">
-    <label for="cantidad_habitaciones">Cantidad de habitaciones</label>
-    <input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-</div>
-<div class="mb-3 col-md-2">
-    <label for="cantidad_banos">Cantidad de baños </label>
-    <input style="text-transform:uppercase" type="text" class="form-control" id="cantidad_banos" name="cantidad_banos" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-</div>
-
-<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-</div>
-
 
 <div class="mb-2 row">
-    <label  class="col-sm-3 col-form-label" for="costo_base">Arriendo diario departamento en CLP</label>
-    <div class="col-sm-2">
-        <input type="text" onkeypress="return valideKey(event);" class="form-control" id="costo_base" name="costo_base" placeholder="$" >
-    </div>
-
+    <label  class="col-sm-2 col-form-label" for="costo_base">Arriendo diario</label>
+    <div class="col-sm-5">
+       <input  type="text" class="form-control" id="costo_base" name="costo_base"  onkeypress="return valideKey(event);" placeholder="$">
+   </div>
 </div>
 
 <input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-
+<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+<input style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" hidden>        
+<input type="hidden" name="folios" value="{{$folio->folio}}" id="folios">
 
 </form>
+
 </div>
 </div>
 
@@ -104,13 +96,13 @@ input[type=number] {
     <div class="card-body">
      <table class="table table-sm" id="tableMovimiento" style="width:100%">
       <thead>
-        <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
+        <button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" >AGREGAR INVENTARIO</button>
         <br>
         <tr>
-            <th>Nombre objeto:</th>
-            <th>Detalles:</th>
-            <th>Cantidad:</th>
-            <th>Precio unitario:</th>
+            <th>Nombre objeto</th>
+            <th>Detalles</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
             <th>Total</th>             
             <th style="margin-left: 200px;">Gestionar</th>
         </tr>
@@ -121,7 +113,7 @@ input[type=number] {
 
     </tbody>
 </table>
-<input type="" class="btn btn-primary"  value="Guardar departamento" onclick="validarDepartamento()">  </input>
+<button type="button" class="btn btn-primary"   onclick="validarDepartamento()">REGISTRAR DEPARTAMENTO</input>
 </div>
 </div>
 </div>
@@ -143,11 +135,11 @@ input[type=number] {
             $('#contador').val(contador);
             var html = '';
             html+='<tr>'; 
-            html+='<td style="width:800px"><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required placeholder=""></td>';
-            html+='<td style="width:600px"><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required placeholder=""></td>';
-            html+='<td style="width:600px"><input id="cantidad'+contador+'" class="form-control" type="text"  onblur="calcularTotal('+contador+')"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
-            html+='<td style="width:600px"><input id="valoracion'+contador+'" class="form-control"  onblur="calcularTotal('+contador+')" onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
-            html+='<td style="width:600px"><input id="total'+contador+'"  class="form-control" type="text" name="total" required placeholder=""></td>';
+            html+='<td style="width:350px" ><input id="nombre_objetos'+contador+'" class="form-control" type="text" name="nombre" required onkeyup="javascript:this.value=this.value.toUpperCase();"></td>';
+            html+='<td ><input id="detalles'+contador+'" class="form-control" type="text" name="detalles" required onkeyup="javascript:this.value=this.value.toUpperCase();"></td>';
+            html+='<td ><input id="cantidad'+contador+'" class="form-control" type="text"  onkeypress="return valideKey(event);"  onblur="calcularTotal('+contador+')"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
+            html+='<td ><input id="valoracion'+contador+'" class="form-control"  onblur="calcularTotal('+contador+')"  onkeypress="return valideKey(event);" onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
+            html+='<td ><input id="total'+contador+'"  class="form-control" type="text" name="total" required placeholder=""></td>';
             html+='<td><button  class="btn btn-primary"  id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
             html+='<tr>';
 

@@ -12,6 +12,7 @@ input[type=number] {
 }
 </style>
 
+
 @section('content')
 
 <div class="container">
@@ -99,24 +100,24 @@ input[type=number] {
 
 	<input type="" class="btn btn-primary"  value=" Registrar reserva" onclick="grabarReserva()" > </input>
 
-			<h5 style="text-align: center;"> Servicios adicionales</h5>
+	<h5 style="text-align: center;"> Servicios adicionales</h5>
 
-		<select id="servicios_oculto" hidden>
-			@foreach($servicio as $servicios) 
-			<option value="{{$servicios->function}}">{{$servicios->function}}</option>
+	<select id="servicios_oculto" hidden>
+		@foreach($servicio as $servicios) 
+		<option value="{{$servicios->function}}">{{$servicios->function}}</option>
 		@endforeach
-			
+
 	</select>
 
-		@foreach($servicio as $servicios) 
+	@foreach($servicio as $servicios) 
 
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->function}}">
-			<label class="form-check-label" for="flexCheckDefault">
-				{{$servicios->nombre_servicio}} ${{$servicios->precio}}
-			</label>
-		</div>
-		@endforeach
+	<div class="form-check">
+		<input class="form-check-input" type="checkbox" value="{{$servicios->nombre_servicio}}" id="{{$servicios->function}}">
+		<label class="form-check-label" for="flexCheckDefault">
+			{{$servicios->nombre_servicio}} ${{$servicios->precio}}
+		</label>
+	</div>
+	@endforeach
 
 </div>
 
@@ -167,7 +168,7 @@ input[type=number] {
 			//var element = document.getElementById(servicio);
 			//console.log(element);
 			if( $('#'+servicio).prop('checked') ) {
-			    arrayServiciosSeleccionados.push(servicio);
+				arrayServiciosSeleccionados.push(servicio);
 			}
 
 		});
@@ -175,35 +176,35 @@ input[type=number] {
 		
 
 
-	  rut = $('#rut').val();
-	  email = $('#email').val();
-	  nombres = $('#nombres').val();
-	  apellidos = $('#apellidos').val();
-	  costo_base = $('#costo_base').val();
-	  fecha_desde = $('#fecha_desde').val();
-	  fecha_hasta = $('#fecha_hasta').val();
-	  fecha_creacion = $('#fecha_creacion').val();
-	  codigo_departamento = $('#codigo_departamento').val();
+		rut = $('#rut').val();
+		email = $('#email').val();
+		nombres = $('#nombres').val();
+		apellidos = $('#apellidos').val();
+		costo_base = $('#costo_base').val();
+		fecha_desde = $('#fecha_desde').val();
+		fecha_hasta = $('#fecha_hasta').val();
+		fecha_creacion = $('#fecha_creacion').val();
+		codigo_departamento = $('#codigo_departamento').val();
 
-	 
-	  var first = fecha_hasta;
-	  var second =fecha_desde;
 
-	  var x = new Date(first);
-	  var y = new Date(second);
-	  var diff = x - y;
-	  var dias = diff/(1000*60*60*24) ;
-	  costo_base = costo_base * dias;
+		var first = fecha_hasta;
+		var second =fecha_desde;
 
-	  console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
+		var x = new Date(first);
+		var y = new Date(second);
+		var diff = x - y;
+		var dias = diff/(1000*60*60*24) ;
+		costo_base = costo_base * dias;
 
-	  $.ajaxSetup({
-	  	headers: {
-	  		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	  	}
-	  });
+		console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
 
-	  $.ajax({
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/almacenar-reservas", //url guarda la ruta hacia donde se hace la peticion
          data:{

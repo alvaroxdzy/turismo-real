@@ -17,7 +17,8 @@ class Departamento extends Model
         'cantidad_habitaciones',
         'cantidad_banos',
         'estado',
-        'usuario'
+        'usuario',
+        'imagen'
     ]
     ;
     public $timestamps = false;
