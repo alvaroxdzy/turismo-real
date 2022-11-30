@@ -32,6 +32,9 @@ Route::get('/modificar-inventario/{id}',[App\Http\Controllers\DepartamentoContro
 Route::get('/actualizar-inventario',[App\Http\Controllers\DepartamentoController::class, 'updateInventario'])->name('departamento.update');
 Route::get('/eliminar-inventario/{id}',[App\Http\Controllers\DepartamentoController::class, 'eliminarInventario'])->name('departamento.eliminar');
 
+Route::get('/rango-fechas',[App\Http\Controllers\DepartamentoController::class, 'index'])->name('departamento.create');
+
+
 
 Route::get('/reservar-departamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'departamentoReserva'])->name('departamento.traer');
 Route::get('/traer-departamento',[App\Http\Controllers\DepartamentoController::class, 'traerDepartamento'])->name('departamento.traer');

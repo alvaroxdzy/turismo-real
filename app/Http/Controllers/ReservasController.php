@@ -11,6 +11,8 @@ use App\Models\ServicioSolicitados;
 use App\Models\User;
 use DB;  
 use Barryvdh\DomPDF\Facade\Pdf; 
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class ReservasController extends Controller
 {
@@ -59,8 +61,13 @@ class ReservasController extends Controller
       $servicios_solicitados->save();
     }
 
-
-    return "LISTASO" ;
+    $startDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_desde);
+    $startDate = $startDate->format('Y-m-d');
+    $endDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_hasta);
+    $endDate = $endDate->format('Y-m-d');
+    $dateRange = CarbonPeriod::create($startDate, $endDate);
+  
+    return $dateRange  ;
   }
 
   public function traerReservasClientes(Request $request)
