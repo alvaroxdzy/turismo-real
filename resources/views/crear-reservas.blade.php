@@ -93,6 +93,12 @@ input[type=number] {
 			</div>
 		</div>
 
+		<div class="mb-2 row">
+			<label  class="col-sm-1 col-form-label" for="fecha_hasta">Fecha hasta</label>
+			<div class="col-sm-6">
+				<input type="text" id="datepicker"  class="form-control">
+			</div>
+		</div>
 
 
 
@@ -120,6 +126,17 @@ input[type=number] {
 	@endforeach
 
 </div>
+
+<script>
+	var array = <?php echo $arrayFechas?>;
+
+	$('#datepicker').datepicker({
+		beforeShowDay: function(date){
+			var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+			return [ array.indexOf(string) == -1 ]
+		}
+	});
+</script>
 
 
 

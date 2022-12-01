@@ -22,12 +22,12 @@ class ReservasController extends Controller
 
   public function create($codigo_departamento)
   {
-    $servicio = Servicios::orderBy('nombre_servicio','asc')->get();
+$servicio = Servicios::orderBy('nombre_servicio','asc')->get();
     $departamento = Departamento::where('codigo_departamento',$codigo_departamento)->first();
 
     $fechas = Reservas::select('fecha_desde','fecha_hasta')->where('cod_departamento',$codigo_departamento)->get();
 
-    $ArrayFechas = [] ;
+    $arrayFechas = [] ;
 
     foreach($fechas as $fecha)
     {
@@ -36,14 +36,15 @@ class ReservasController extends Controller
     $dateRange = CarbonPeriod::create($startDate, $endDate);
   
     foreach($dateRange as $date){
-      array_push($ArrayFechas, $date);
+      $date = $date->format('d-m-Y');
+      array_push($arrayFechas, $date);
     }
 
     //array_push($ArrayFechas,$dateRange);
     
     }
-
-    return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio)->with('ArrayFechas',$ArrayFechas);
+    $arrayFechas = json_encode($arrayFechas);
+    return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio)->with('arrayFechas',$arrayFechas);
   }
 
   public function filterComuna(Request $request)
