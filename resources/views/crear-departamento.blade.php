@@ -113,7 +113,7 @@ input[type=number] {
 
     </tbody>
 </table>
-<button type="button" class="btn btn-primary"   onclick="validarDepartamento()">REGISTRAR DEPARTAMENTO</input>
+<button type="button" class="btn btn-primary"   onclick="validarDepartamento()">REGISTRAR DEPARTAMENTO</button>
 </div>
 </div>
 </div>

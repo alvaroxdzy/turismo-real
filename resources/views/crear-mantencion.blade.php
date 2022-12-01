@@ -17,35 +17,42 @@ input[type=number] {
 <div class="container">
 	<form class="form-inline" type="get" action="{{ url('/almacenar-mantencion') }}">
 		{{ csrf_field() }}
-		<div class="row" style="background: antiquewhite;"> 
-			<div class="mb-3 col-md-2">
-				<label for="cod_departamento">Codigo departamento</label>
-				<input style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="cod_departamento" name="cod_departamento"  minlength="1" maxlength="10" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-			</div>
-			<div class="mb-3 col-md-2">
-				<label for="fecha">Fecha</label>
-				<input style="text-transform:uppercase;width:500px;" type="date" class="form-control" id="fecha" name="fecha" required value="<?php echo date("d-m-Y\TH-i");?>">
-			</div>
-
-		</div>
-		<br> 
-		<div class="row" style="background: antiquewhite;"> 
-			<div class="mb-3 col-md-2">
-				<label for="encargado">Encargado</label>
-				<input style="width:500px"style="text-transform:uppercase" type="text" class="form-control" id="encargado" name="encargado"  minlength="1"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
-
-			</div>
-
-			<div >
-				<label for="observaciones">Observaciones</label>
-				<textarea style="text-transform:uppercase;width:500px" type="text-center" class="form-control" id="observaciones"  name="observaciones"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto"></textarea>
-<br>
+		
+		<div class="mb-2 row">
+			<label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->nombre_departamento}}">
 			</div>
 		</div>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="numero">Número departamento</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}">
+			</div>
+		</div>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="fecha">Fecha mantención</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="fecha" name="fecha" required value="<?php echo date("d-m-Y\TH-i");?>">
+			</div>
+		</div>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="encargado">Encargado</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="encargado" name="encargado" onkeyup="javascript:this.value=this.value.toUpperCase();" required >
+			</div>
+		</div>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="observaciones">Detalles mantención</label>
+			<div class="col-sm-5">
+				<textarea style="text-transform:uppercase;" type="text-center" class="form-control" id="observaciones"  name="observaciones"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto"></textarea>
+			</div>
+		</div>
+
+		<input  type="text" class="form-control" id="cod_departamento" name="cod_departamento" value="{{$departamento->codigo_departamento}}" hidden>
 		<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-		<br>
-		<input type="submit" class="btn btn-primary"  value=" Registrar "> </input>
+
+		<button type="submit" class="btn btn-primary" >Registrar mantención</button>
 	</div>
 	<br>
 
@@ -68,8 +75,8 @@ input[type=number] {
 
 
 <script type="text/javascript">
-    function cargarFecha()
-    {
+	function cargarFecha()
+	{
         var fecha = new Date(); //Fecha actual
     var mes = fecha.getMonth()+1; //obteniendo mes
     var dia = fecha.getDate(); //obteniendo dia

@@ -24,7 +24,26 @@ class ReservasController extends Controller
   {
     $servicio = Servicios::orderBy('nombre_servicio','asc')->get();
     $departamento = Departamento::where('codigo_departamento',$codigo_departamento)->first();
-    return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio);
+
+    $fechas = Reservas::select('fecha_desde','fecha_hasta')->where('cod_departamento',$codigo_departamento)->get();
+
+    $ArrayFechas = [] ;
+
+    foreach($fechas as $fecha)
+    {
+    $startDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_desde);
+    $endDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_hasta);
+    $dateRange = CarbonPeriod::create($startDate, $endDate);
+  
+    foreach($dateRange as $date){
+      array_push($ArrayFechas, $date);
+    }
+
+    //array_push($ArrayFechas,$dateRange);
+    
+    }
+
+    return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio)->with('ArrayFechas',$ArrayFechas);
   }
 
   public function filterComuna(Request $request)
@@ -61,13 +80,7 @@ class ReservasController extends Controller
       $servicios_solicitados->save();
     }
 
-    $startDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_desde);
-    $startDate = $startDate->format('Y-m-d');
-    $endDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_hasta);
-    $endDate = $endDate->format('Y-m-d');
-    $dateRange = CarbonPeriod::create($startDate, $endDate);
-  
-    return $dateRange  ;
+    return 'LISTASO';
   }
 
   public function traerReservasClientes(Request $request)

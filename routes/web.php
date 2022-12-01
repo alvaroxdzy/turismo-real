@@ -41,7 +41,7 @@ Route::get('/traer-departamento',[App\Http\Controllers\DepartamentoController::c
 Route::get('/departamentos-disponibles',[App\Http\Controllers\DepartamentoController::class, 'departamentosDisponibles'])->name('departamento.departamentosDisponibles');
 
 //RUTAS MANTENCIONES
-Route::get('/crear-mantencion',[App\Http\Controllers\MantencionesController::class, 'create'])->name('mantencion.create');
+Route::get('/crear-mantencion/{codigo_departamento}',[App\Http\Controllers\MantencionesController::class, 'create'])->name('mantencion.create');
 Route::get('/buscar-mantencion',[App\Http\Controllers\MantencionesController::class, 'search'])->name('mantencion.search');
 Route::get('/almacenar-mantencion',[App\Http\Controllers\MantencionesController::class, 'store'])->name('mantencion.store');
 Route::get('/modificar-mantencion/{id}',[App\Http\Controllers\MantencionesController::class, 'edit'])->name('mantencion.edit');

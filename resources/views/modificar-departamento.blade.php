@@ -27,6 +27,13 @@ input[type=number] {
 					<div class="col-xl-12"> 
 						<br>
 						{{ csrf_field() }}
+						
+
+						<div class="mb-2 row">
+							<div class="col-sm-5">
+								<a href="/crear-mantencion/{{$departamento->codigo_departamento}}" class="btn btn-outline-primary btn-sm" role="button">Programar mantención</a>
+							</div>
+						</div>
 
 						<div class="mb-2 row">
 							<label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
@@ -45,6 +52,7 @@ input[type=number] {
 							<label   class="col-sm-2 col-form-label" for="numero">Estado</label>
 							<div class="col-sm-2">
 								<select class="form-control" id="estado" name="estado">
+									<option value="{{$departamento->estado}}" hidden>{{$departamento->estado}}</option>
 									<option value="DISPONIBLE">DISPONIBLE</option>
 									<option value="NO DISPONIBLE">NO DISPONIBLE</option>
 								</select>
@@ -101,130 +109,119 @@ input[type=number] {
 							</div>
 						</div>
 
+						<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+						<input type="text" id="id" name="id" hidden> 
+						<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+						<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->codigo_departamento}}" hidden>		
 
 					</div>
+				</div>
 
 
-					<div class="mb-2 row">
-						<label  class="col-sm-3 col-form-label" for="costo_base">Arriendo diario departamento en CLP</label>
-						<div class="col-sm-2">
-							<input type="text" onkeypress="return valideKey(event);" class="form-control" id="costo_base" name="costo_base" placeholder="$" >
-						</div>
 
+				<div class="card" > 
+					<div class="card-body">
+						<table class="table table-sm" id="tablaInventario">
+							<thead>
+								<button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
+								<tr>
+									<th>Nombre objeto:</th>
+									<th>Detalles:</th>
+									<th>Cantidad:</th>
+									<th>Valoracion:</th>   
+									<th>Total</th>          
+									<th>Gestionar</th>
+								</tr>
+							</thead>
+							<tbody id="tbodyInventario">
+
+								<input type="text" name="contador" value="0" id="contador" hidden>
+
+							</tbody >
+						</table>
+						<input type="" class="btn btn-primary"  value="Guardar departamento" onclick="grabar()">  </input>
 					</div>
 
-					<input type="text" id="id" name="id" hidden> 
-					<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-					<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->codigo_departamento}}" hidden>		
-
-				</div>
-			</div>
-
-			<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
-
-			<div class="card" > 
-				<div class="card-body">
-					<table class="table table-sm" id="tablaInventario">
-						<thead>
-							<button class="btn btn-outline-primary btn-sm" type="button" id="agregar_btn" > AGREGAR DETALLE </button>
-							<tr>
-								<th>Nombre objeto:</th>
-								<th>Detalles:</th>
-								<th>Cantidad:</th>
-								<th>Valoracion:</th>   
-								<th>Total</th>          
-								<th>Gestionar</th>
-							</tr>
-						</thead>
-						<tbody id="tbodyInventario">
-
-							<input type="text" name="contador" value="0" id="contador" hidden>
-
-						</tbody >
-					</table>
-					<input type="" class="btn btn-primary"  value="Guardar departamento" onclick="grabar()">  </input>
 				</div>
 
+				<div id="error"> </div>
+				@if(session()->has('message'))
+				<div class="alert alert-success">
+					{{ session()->get('message') }}
+				</div>
+				@endif
+				@if(session()->has('error'))
+				<div class="alert alert-danger">
+					{{ session()->get('error') }}
+				</div>
+				@endif
 			</div>
-
-			<div id="error"> </div>
-			@if(session()->has('message'))
-			<div class="alert alert-success">
-				{{ session()->get('message') }}
-			</div>
-			@endif
-			@if(session()->has('error'))
-			<div class="alert alert-danger">
-				{{ session()->get('error') }}
-			</div>
-			@endif
 		</div>
 	</div>
-</div>
 
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-	$(document).ready(function(){
-		var contador = 0;
+		$(document).ready(function(){
+			var contador = 0;
 
-		$('#agregar_btn').on('click',function(){
-			if (contador==0){
+			$('#agregar_btn').on('click',function(){
+				if (contador==0){
 
-			} else {
-				$('#borrar_btn'+contador).attr('hidden',true);
-			}
-
-
-			contador = $('#contador').val();
-			contador++;
-			$('#contador').val(contador);
-
-			var html = '';
-			html+='<tr>'; 
-			html+='<td><input style="width:350px" id="nombre_objetos'+contador+'"  type="text" name="nombre" required placeholder=""></td>';
-			html+='<td><input style="width:100px" id="detalles'+contador+'"  type="text" name="detalles" required placeholder=""></td>';
-			html+='<td><input style="width:100px" id="cantidad'+contador+'"  type="text"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
-			html+='<td><input style="width:100px" id="valoracion'+contador+'"  onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
-			html+='<td><input style="width:100px" id="total'+contador+'"  type="text" name="total" required placeholder=""></td>';
-			html+='<td><button id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
-			html+='<tr>';
+				} else {
+					$('#borrar_btn'+contador).attr('hidden',true);
+				}
 
 
-			$('tbody').append(html);
-
-			$(document).on('click','#borrar_btn'+contador,function(){
-
-				$(this).closest('tr').remove();
-				contador = contador-1;
+				contador = $('#contador').val();
+				contador++;
 				$('#contador').val(contador);
-				$('#borrar_btn'+contador).attr('hidden',false);
 
-			});
-		})
+				var html = '';
+				html+='<tr>'; 
+				html+='<td><input style="width:350px" id="nombre_objetos'+contador+'"  type="text" name="nombre" required placeholder=""></td>';
+				html+='<td><input style="width:100px" id="detalles'+contador+'"  type="text" name="detalles" required placeholder=""></td>';
+				html+='<td><input style="width:100px" id="cantidad'+contador+'"  type="text"  onchange="calcularTotal('+contador+')" name="cantidad" required placeholder=""></td>';
+				html+='<td><input style="width:100px" id="valoracion'+contador+'"  onchange="calcularTotal('+contador+')" type="text" name="valoracion" required placeholder=""></td>';
+				html+='<td><input style="width:100px" id="total'+contador+'"  type="text" name="total" required placeholder=""></td>';
+				html+='<td><button id="borrar_btn'+contador+'" type="button"> Eliminar </button> </td>';
+				html+='<tr>';
 
-	});
-</script>
+
+				$('tbody').append(html);
+
+				$(document).on('click','#borrar_btn'+contador,function(){
+
+					$(this).closest('tr').remove();
+					contador = contador-1;
+					$('#contador').val(contador);
+					$('#borrar_btn'+contador).attr('hidden',false);
+
+				});
+			})
+
+		});
+	</script>
 
 
 
 
-<script type="text/javascript">
-	function traerDepartamento()
-	{
-		$('#contador').val(0);
+	<script type="text/javascript">
+		function traerDepartamento()
+		{
+			$('#contador').val(0);
 
-		$('#tbodyInventario> tr').remove();
-		var codigo_departamento = $('#codigo_departamento').val();
+			$('#tbodyInventario> tr').remove();
+			var codigo_departamento = $('#codigo_departamento').val();
 
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		}); 
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			}); 
 
-		$.ajax({
+			$.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/traer-departamento", //url guarda la ruta hacia donde se hace la peticion
          data:{
@@ -268,21 +265,21 @@ input[type=number] {
 
 
 
-	}
-</script>
+		}
+	</script>
 
-<script type="text/javascript">
-	function eliminarInventario(id)
-	{
-		var result = confirm("SEGURO QUE DESEA ELIMINAR?");
-		if (result){
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
+	<script type="text/javascript">
+		function eliminarInventario(id)
+		{
+			var result = confirm("SEGURO QUE DESEA ELIMINAR?");
+			if (result){
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
 
-			$.ajax({
+				$.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/eliminar-inventario/" +id, //url guarda la ruta hacia donde se hace la peticion
          success:function(data){ //success es una funcion que se utiliza si el servidor retorna informacion
@@ -291,64 +288,64 @@ input[type=number] {
          	}
          },
      });
-		}
-	} 
-</script>
-
-
-<script type="text/javascript">
-	window.onload=traerDepartamento();
-</script>
-
-<script type="text/javascript">
-	function grabar()
-	{
-		m = 0;
-		n = $('#contador').val();
-		console.log('contador'+n)
-		arrayMovimiento = [];
-
-
-		if (n == 0 ){
-			arrayMovimiento;
-		} else {
-
-			while (m < n) {
-				m ++;
-
-
-				var datos = {
-					'nombre_objetos':$("#nombre_objetos"+m).val(),
-					'detalles':$("#detalles"+m).val(),
-					'cantidad':$("#cantidad"+m).val(),
-					'valoracion':$('#valoracion'+m).val(),
-					'total':$('#total'+m).val()          
-				};
-
-				arrayMovimiento.push(datos);
-
 			}
-			console.log(arrayMovimiento);
-		}
+		} 
+	</script>
 
-		codigo_departamento = $('#codigo_departamento').val();
-		nombre_departamento = $('#nombre_departamento').val();
-		direccion = $('#direccion').val();
-		comuna = $('#comuna').val();
-		region = $('#region').val();
-		numero = $('#numero').val();
-		cantidad_habitaciones = $('#cantidad_habitaciones').val();
-		cantidad_banos = $('#cantidad_banos').val();
-		estado = $('#estado').val();
-		usuario = $('#usuario').val();
-		costo_base = $('#costo_base').val();
 
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	<script type="text/javascript">
+		window.onload=traerDepartamento();
+	</script>
+
+	<script type="text/javascript">
+		function grabar()
+		{
+			m = 0;
+			n = $('#contador').val();
+			console.log('contador'+n)
+			arrayMovimiento = [];
+
+
+			if (n == 0 ){
+				arrayMovimiento;
+			} else {
+
+				while (m < n) {
+					m ++;
+
+
+					var datos = {
+						'nombre_objetos':$("#nombre_objetos"+m).val(),
+						'detalles':$("#detalles"+m).val(),
+						'cantidad':$("#cantidad"+m).val(),
+						'valoracion':$('#valoracion'+m).val(),
+						'total':$('#total'+m).val()          
+					};
+
+					arrayMovimiento.push(datos);
+
+				}
+				console.log(arrayMovimiento);
 			}
-		});
-		$.ajax({
+
+			codigo_departamento = $('#codigo_departamento').val();
+			nombre_departamento = $('#nombre_departamento').val();
+			direccion = $('#direccion').val();
+			comuna = $('#comunas').val();
+			region = $('#regiones').val();
+			numero = $('#numero').val();
+			cantidad_habitaciones = $('#cantidad_habitaciones').val();
+			cantidad_banos = $('#cantidad_banos').val();
+			estado = $('#estado').val();
+			usuario = $('#usuario').val();
+			costo_base = $('#costo_base').val();
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			$.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/actualizar-departamento", //url guarda la ruta hacia donde se hace la peticion
          data:{
@@ -377,10 +374,10 @@ input[type=number] {
          	}
          },
      });
-	}
+		}
 
-</script>
+	</script>
 
-@endsection
+	@endsection
 
 

@@ -9,9 +9,10 @@ use App\Models\Departamento;
 
 class MantencionesController extends Controller
 {
-    public function create()
+    public function create($codigo_departamento)
     {
-        return view('crear-mantencion');
+        $departamento = Departamento::where('codigo_departamento',$codigo_departamento)->first();
+        return view('crear-mantencion')->with('departamento',$departamento);
     }
 
     public function store(Request $request)
@@ -45,7 +46,8 @@ if($validarEstado) {
 public function edit($id)
 {
     $mantencion = Mantenciones::where('id',$id)->first();
-    return view('modificar-mantencion')->with('mantencion',$mantencion);
+    $departamento = Departamento::where('codigo_departamento',$mantencion->cod_departamento)->first();
+    return view('modificar-mantencion')->with('mantencion',$mantencion)->with('departamento',$departamento);
 }
 
 public function update(Request $request)

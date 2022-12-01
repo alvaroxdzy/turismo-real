@@ -21,39 +21,46 @@ input[type=number] {
 			<form class="form-inline" type="get" action="{{ url('/actualizar-mantencion') }}">
 				{{ csrf_field() }}    
 
-				<input value="{{$mantencion->id}}" type="hidden" name="id">
-
-				<div class="row" style="background: antiquewhite;"> 
-
-					<div class="mb-3 col-md-2">
-						<label for="cod_departamento">Codigo departamento</label>
-						<input value="{{$mantencion->cod_departamento}}" style="width:100px"style="text-transform:uppercase" type="text" class="form-control" id="cod_departamento" name="cod_departamento"  minlength="1" maxlength="10" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">numero departamento</small>
-					</div>
-					<div class="mb-3 col-md-2">
-						<label for="fecha">fecha</label>
-						<input value="{{$mantencion->fecha}}" style="text-transform:uppercase;width:500px;" type="date" class="form-control" id="fecha" name="fecha" required>
-						<small class="form-text text-muted">fecha mantencion</small>
-					</div>
-				</div>
-				<br> 
-				<div class="row" style="background: antiquewhite;"> 
-					<div class="mb-3 col-md-2">
-						<label for="encargado">Encargado</label>
-						<input value="{{$mantencion->encargado}}" style="width:500px"style="text-transform:uppercase" type="text" class="form-control" id="encargado" name="encargado"  minlength="1"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
-						<small class="form-text text-muted">encargado de la mantención</small>
-					</div>
-
-					<div >
-						<label for="observaciones">Observaciones</label>
-						<textarea value="{{$mantencion->observaciones}}" style="text-transform:uppercase;width:500px" type="text-center" class="form-control" id="observaciones"  name="observaciones"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto">{{$mantencion->observaciones}}</textarea>
-						<small class="form-text text-muted">observaciones</small>
-					</div>
-				</div>
-				<br>
-				<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
 				
-				<input type="submit" class="btn btn-primary"  value="Actualizar ">  </input>
+
+				
+
+				<div class="mb-2 row">
+					<label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->nombre_departamento}}">
+					</div>
+				</div>
+				<div class="mb-2 row">
+					<label  class="col-2 col-form-label" for="numero">Número departamento</label>
+					<div class="col-sm-5">
+						<input  type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}">
+					</div>
+				</div>
+				<div class="mb-2 row">
+					<label  class="col-2 col-form-label" for="fecha">Fecha mantención</label>
+					<div class="col-sm-5">
+						<input  type="date" class="form-control" id="fecha" name="fecha" required value="{{$mantencion->fecha}}">
+					</div>
+				</div>
+				<div class="mb-2 row">
+					<label  class="col-2 col-form-label" for="encargado">Encargado</label>
+					<div class="col-sm-5">
+						<input value="{{$mantencion->encargado}}"  type="text" class="form-control" id="encargado" name="encargado" onkeyup="javascript:this.value=this.value.toUpperCase();" required >
+					</div>
+				</div>
+				<div class="mb-2 row">
+					<label  class="col-2 col-form-label" for="observaciones">Detalles mantención</label>
+					<div class="col-sm-5">
+						<textarea value="{{$mantencion->observaciones}}" style="text-transform:uppercase;width:500px" type="text-center" class="form-control" id="observaciones"  name="observaciones"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto">{{$mantencion->observaciones}}</textarea>
+					</div>
+				</div>
+
+				<input type="text" name="cod_departamento" id="cod_departamento" value="{{$departamento->codigo_departamento}}" hidden>
+				<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
+				<input value="{{$mantencion->id}}" type="hidden" name="id">
+				<input type="submit" class="btn btn-primary"  value="Actualizar"></input>
+
 			</form>
 			<div id="error"> </div>
 			@if(session()->has('message'))
