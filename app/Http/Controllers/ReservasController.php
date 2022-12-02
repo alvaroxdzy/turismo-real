@@ -9,6 +9,7 @@ use App\Models\Reservas;
 use App\Models\Servicios;  
 use App\Models\ServicioSolicitados; 
 use App\Models\User;
+use App\Models\Mantenciones;
 use DB;  
 use Barryvdh\DomPDF\Facade\Pdf; 
 use Carbon\Carbon;
