@@ -77,26 +77,19 @@ input[type=number] {
 		<input value="{{$userId = Auth::user()->rut;}}" id="rut" type="hidden" name="rut">
 		<input value="{{$userId = Auth::user()->nombres;}}" id="nombres" type="hidden" name="nombres">
 		<input value="{{$userId = Auth::user()->apellidos;}}" id="apellidos" type="hidden" name="apellidos">
-		<input name="fecha_creacion" type="date" id="fecha_creacion"> 
+		<input name="fecha_creacion" type="date" id="fecha_creacion" > 
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="fecha_desde">Fecha desde</label>
 			<div class="col-sm-6">
-				<input  id="fecha_desde" name="fecha_desde" type="date" class="form-control">
+				<input type="text" id="fecha_desde" name="fecha_desde" class="form-control">
 			</div>
 		</div>
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="fecha_hasta">Fecha hasta</label>
 			<div class="col-sm-6">
-				<input  id="fecha_hasta" name="fecha_hasta" type="date" class="form-control">
-			</div>
-		</div>
-
-		<div class="mb-2 row">
-			<label  class="col-sm-1 col-form-label" for="fecha_hasta">Fecha hasta</label>
-			<div class="col-sm-6">
-				<input type="text" id="datepicker"  class="form-control">
+				<input type="text" id="fecha_hasta" name="fecha_hasta" class="form-control">
 			</div>
 		</div>
 
@@ -130,7 +123,7 @@ input[type=number] {
 <script>
 	var array = <?php echo $arrayFechas?>;
 
-	$('#datepicker').datepicker({
+	$('#fecha_hasta').datepicker({
 		beforeShowDay: function(date){
 			var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
 			return [ array.indexOf(string) == -1 ]
@@ -138,9 +131,16 @@ input[type=number] {
 	});
 </script>
 
+<script>
+	var array = <?php echo $arrayFechas?>;
 
-
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	$('#fecha_desde').datepicker({
+		beforeShowDay: function(date){
+			var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+			return [ array.indexOf(string) == -1 ]
+		}
+	});
+</script>
 
 <script type="text/javascript">
 	window.onload = function(){
@@ -152,9 +152,6 @@ input[type=number] {
     dia='0'+dia; //agrega cero si el menor de 10
   if(mes<10)
     mes='0'+mes //agrega cero si el menor de 10
-  document.getElementById('fecha_desde').value=ano+"-"+mes+"-"+dia;
-  document.getElementById('fecha_hasta').value=ano+"-"+mes+"-"+dia;
-
   document.getElementById('fecha_creacion').value=ano+"-"+mes+"-"+dia;
   $('#fecha_creacion').attr("hidden" , true);
 }
@@ -162,10 +159,7 @@ input[type=number] {
 
 
 
-
-
-
-
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 	function grabarReserva()
@@ -190,38 +184,35 @@ input[type=number] {
 
 		});
 
-		
+			rut = $('#rut').val();
+			email = $('#email').val();
+			nombres = $('#nombres').val();
+			apellidos = $('#apellidos').val();
+			costo_base = $('#costo_base').val();
+			fecha_desde = $('#fecha_desde').val();
+			fecha_hasta = $('#fecha_hasta').val();
+			fecha_creacion = $('#fecha_creacion').val();
+			codigo_departamento = $('#codigo_departamento').val();
 
 
-		rut = $('#rut').val();
-		email = $('#email').val();
-		nombres = $('#nombres').val();
-		apellidos = $('#apellidos').val();
-		costo_base = $('#costo_base').val();
-		fecha_desde = $('#fecha_desde').val();
-		fecha_hasta = $('#fecha_hasta').val();
-		fecha_creacion = $('#fecha_creacion').val();
-		codigo_departamento = $('#codigo_departamento').val();
+			var first = fecha_hasta;
+			var second =fecha_desde;
 
+			var x = new Date(first);
+			var y = new Date(second);
+			var diff = x - y;
+			var dias = diff/(1000*60*60*24) ;
+			costo_base = costo_base * dias;
 
-		var first = fecha_hasta;
-		var second =fecha_desde;
+			console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
 
-		var x = new Date(first);
-		var y = new Date(second);
-		var diff = x - y;
-		var dias = diff/(1000*60*60*24) ;
-		costo_base = costo_base * dias;
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
 
-		console.log(rut,email,nombres,apellidos,fecha_desde,fecha_hasta,fecha_creacion,codigo_departamento);
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-
-		$.ajax({
+			$.ajax({
          type:"GET", // la variable type guarda el tipo de la peticion GET,POST,..
          url:"/almacenar-reservas", //url guarda la ruta hacia donde se hace la peticion
          data:{
@@ -247,47 +238,23 @@ input[type=number] {
          	}
          },
        });
-	}
+		}
 
 
-</script>
-
-<script type="text/javascript">
-	function guardarRangoFecha() {
-
-		const fecha_desde = new Date();
-
-		var fecha_inicio = $('#fecha_desde').val();
-		fecha_desde.setDate(fecha_inicio);
-
-		var fecha_hasta = $('#fecha_hasta').val();
-		var arrayFechas = [];
-
-		//while (fecha_desde <= fecha_hasta) {
-		//	arrayFechas.push(new Date(fecha_desde));
-			//fecha_desde.getDate();
-		//}
-		console.log(fecha_desde, fecha_hasta);
-	}
+	</script>
 
 
-
-
-</script>
-
-
-
-<div id="error"> </div>
-@if(session()->has('message'))
-<div class="alert alert-success">
-	{{ session()->get('message') }}
-</div>
-@endif
-@if(session()->has('error'))
-<div class="alert alert-danger">
-	{{ session()->get('error') }}
-</div>
-@endif
+	<div id="error"> </div>
+	@if(session()->has('message'))
+	<div class="alert alert-success">
+		{{ session()->get('message') }}
+	</div>
+	@endif
+	@if(session()->has('error'))
+	<div class="alert alert-danger">
+		{{ session()->get('error') }}
+	</div>
+	@endif
 
 </div>
 @endsection

@@ -67,27 +67,24 @@ input[type=number] {
 							</div>
 						</div>
 
-
-
-
-
-
-
-
-						<div class="mb-2 row"> 
-							<label class="col-sm-2 col-form-label" for="region">Región</label>
+						<div class="mb-2 row">
+							<label  class="col-sm-2 col-form-label" for="region">Región</label>
 							<div class="col-sm-5">
-								<select style="text-align:center;" class="form-control" id="regiones" name="region"></select>
+								<input style="text-transform:uppercase;" type="text" class="form-control" id="region" name="region" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
+							</div>
+						</div>
+						<div class="mb-2 row">
+							<label  class="col-sm-2 col-form-label" for="comuna">Comuna</label>
+							<div class="col-sm-5">
+								<input style="text-transform:uppercase;" type="text" class="form-control" id="comuna" name="comuna" required maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();" readonly>
 							</div>
 						</div>
 
-						<div class="mb-2 row"> 
-							<label class="col-sm-2 col-form-label" for="region">Comuna</label>
-							<div class="col-sm-5">
-								<select style="text-align:center;" class="form-control" id="comunas" name="comuna"></select>
-							</div>
-						</div>
 
+
+
+
+						
 						<div class="mb-2 row">
 							<label  class="col-sm-2 col-form-label" for="cantidad_habitaciones">Cantidad dormitorios</label>
 							<div class="col-sm-5">

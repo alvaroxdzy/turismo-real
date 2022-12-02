@@ -161,22 +161,6 @@ public function departamentoReserva($id)
     return [$departamento, $depInventario]; 
 }
 
-    public function index()
 
-    {
-
-        $startDate = Carbon::createFromFormat('Y-m-d', '2020-11-28');
-
-        $endDate = Carbon::createFromFormat('Y-m-d', '2020-11-30');
-
- 
-
-        $dateRange = CarbonPeriod::create($startDate, $endDate);
-
-              
-
-        dd($dateRange->toArray());
-
-    }
 
 }
