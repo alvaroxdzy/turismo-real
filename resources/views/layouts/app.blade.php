@@ -64,14 +64,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container" id="container-nav">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Turismo real
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav justify-content-end" id="ul_layout">
@@ -114,18 +110,19 @@
                             @else
 
 
-                            <div >
-                                <marquee  >
+                            <div style="width: 400px;">
+                                <marquee >
                                    Bienvenido : {{ Auth::user()->nombres }}
                                </marquee>
 
-                               <h6><a class="link-secondary" style="display:block;text-align:right;"  href="{{ url('/mi-cuenta') }}">Mi cuenta</a></h6>
-
-                               <h6><a class="link-secondary" style="display:block;text-align:right;"  href="{{ route('logout') }}"
+                               <table id="login-opt">
+                                <td style="width: 110px;"><a class="link-secondary" style="display:block;text-align:center;"  href="{{ url('/mi-cuenta') }}">Mi cuenta</a></td>
+                                <td><a class="link-secondary" style="display:block;text-align:center;"  href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                                    {{ __('Cerrar sesion') }}
-                               </a></h6>
+                               </a></td>
+                               </table>
 
                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

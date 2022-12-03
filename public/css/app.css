@@ -67,11 +67,39 @@ nav {
   border-bottom-color: #d2cac3;
 }
 
+nav {
+  padding-left: 80px;
+  height: 75px;
+  padding-right: 80px;
+  
+}
 
-#container-home{
-  background-color: green;
+#navbarSupportedContent {
+  color:#d2cac3;
+
 }
 
 #container-nav {
-  background-color: #f9fbeb;
+  width: 100%;
+}
+
+#login-opt a {
+  color: #203342;
+  text-align: center;
+}
+
+#login-opt a:hover {
+  color: white;
+  background-color: #203342;
+  padding: 3px 12px;
+  border-radius: 5px;
+  text-decoration:none;
+}
+
+nav table {
+  margin-left: 165px;
+}
+
+nav table td {
+  width: 130px;
 }

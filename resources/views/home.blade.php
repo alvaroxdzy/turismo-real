@@ -106,7 +106,6 @@
     font-weight:500;
   }
 
-
   small {
     padding: 3px;
   }
