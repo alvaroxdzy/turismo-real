@@ -33,7 +33,7 @@ input[type=number] {
 		<div class="mb-2 row">
 			<label  class="col-2 col-form-label" for="fecha">Fecha mantención</label>
 			<div class="col-sm-5">
-				<input  type="text" class="form-control" id="fecha" name="fecha" required value="<?php echo date("d-m-Y\TH-i");?>">
+				<input  type="text" class="form-control" id="fecha" name="fecha" required >
 			</div>
 		</div>
 		<div class="mb-2 row">
@@ -73,6 +73,16 @@ input[type=number] {
 </div>
 
 
+<script>
+	var array = <?php echo $arrayFechas?>;
+
+	$('#fecha').datepicker({
+		beforeShowDay: function(date){
+			var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+			return [ array.indexOf(string) == -1 ]
+		}
+	});
+</script>
 
 <script type="text/javascript">
 	function cargarFecha()
@@ -88,7 +98,6 @@ if(mes<10)
 document.getElementById('fecha').value=ano+"-"+mes+"-"+dia;
 }
 </script>
-
 
 <script type="text/javascript">
 	window.onload=cargarFecha();

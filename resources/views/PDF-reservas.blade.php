@@ -122,7 +122,7 @@
 
       <tr>
         <td>N° de días</td>
-        <td style="text-align:right;">7</td>
+        <td style="text-align:right;">{{$diferencia_en_dias}}</td>
       </tr>
       </table >
       <hr>
@@ -135,7 +135,7 @@
 
       <tr>
         <td style="width:200px">Servicios Adicionales</td>
-        <td style="width:100px; text-align:right; font-weight: bold;">${{$reserva->costo_base}}</td>
+        <td style="width:100px; text-align:right; font-weight: bold;">${{$costo_servicios}}</td>
       </tr>
       </table>
       <hr>
@@ -143,7 +143,7 @@
 
       <tr style="font-weight: bold;">
         <td>Total</td>
-        <td style="text-align:right;">${{$departamento->costo_base}}</td>
+        <td style="text-align:right;">${{$total}}</td>
       </tr>
 
       </table>   

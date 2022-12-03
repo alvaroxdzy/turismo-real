@@ -27,101 +27,105 @@ class ReservasController extends Controller
     $departamento = Departamento::where('codigo_departamento',$codigo_departamento)->first();
 
     $fechas = Reservas::select('fecha_desde','fecha_hasta')->where('cod_departamento',$codigo_departamento)->get();
+    $mantenciones = Mantenciones::select('fecha')->where('cod_departamento',$codigo_departamento)->get();
 
     $arrayFechas = [] ;
 
     foreach($fechas as $fecha)
     {
-      $startDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_desde);
-      $endDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_hasta);
-      $dateRange = CarbonPeriod::create($startDate, $endDate);
+     $startDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_desde);
+     $endDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_hasta);
+     $dateRange = CarbonPeriod::create($startDate, $endDate);
 
-      foreach($dateRange as $date){
-        $date = $date->format('d-m-Y');
-        array_push($arrayFechas, $date);
-      }
-
-    //array_push($ArrayFechas,$dateRange);
-
-    }
-    $arrayFechas = json_encode($arrayFechas);
-    return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio)->with('arrayFechas',$arrayFechas);
-  }
-
-  public function filterComuna(Request $request)
-  {
-    $comuna = $request->comunas;
-    $departamentoComuna = Departamento::where('comuna',$comuna)->where('estado','DISPONIBLE')->get();
-
-    return $departamentoComuna;
-
-  }
-
-  public function store(Request $request)
-  {
-    $dateinit = \Carbon\Carbon::parse($request->fecha_desde);
-    $datefim = \Carbon\Carbon::parse($request->fecha_hasta);
-    $dateinit = $dateinit->format('Y-m-d');
-    $datefim = $datefim->format('Y-m-d');
-
-    $fechas = Reservas::select('fecha_desde','fecha_hasta')->where('cod_departamento',$request->codigo_departamento)->get();
-
-    $arrayFechas = [] ;
-
-    foreach($fechas as $fecha)
-    {
-      $startDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_desde);
-      $endDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_hasta);
-      $dateRange = CarbonPeriod::create($startDate, $endDate);
-      
-      foreach($dateRange as $date){
-        $date = $date->format('d-m-Y');
-        array_push($arrayFechas, $date);
-      }
-    }
-
-    $arrayFechas2 = [];
-    $dateRange2 = CarbonPeriod::create($dateinit,$datefim);
-    foreach($dateRange2 as $date2){
-      $date2 = $date2->format('d-m-Y');
-      array_push($arrayFechas2, $date2);
-    }
-
-
-
-    if($dateRange2 = array_intersect($arrayFechas2, $arrayFechas)) {
-      return 'HOLA' ;
-    } else {
-      $reserva = new Reservas();
-      $reserva->rut=$request->rut;
-      $reserva->costo_base=$request->costo_base;
-      $reserva->fecha_desde=$dateinit;
-      $reserva->fecha_hasta=$datefim;
-      $reserva->fecha_creacion=$request->fecha_creacion;
-      $reserva->cod_departamento=$request->codigo_departamento;
-      $reserva->save();
-
-      $arrayServ = $request->arrayServiciosSeleccionados;
-
-      if ($arrayServ) {
-        foreach ($arrayServ as $servicio) 
-        {
-         $servicio = Servicios::where('function',$servicio)->first();
-
-         $servicios_solicitados = new ServicioSolicitados();
-         $servicios_solicitados->cod_Servicio = $servicio->id;
-         $servicios_solicitados->fecha =$request->fecha_creacion;
-         $servicios_solicitados->costo =$servicio->precio;
-         $servicios_solicitados->cod_reserva = $reserva->id;
-         $servicios_solicitados->save();
-       }
+     foreach($dateRange as $date){
+       $date = $date->format('d-m-Y');
+       array_push($arrayFechas, $date);
      }
    }
-      return 'LISTASO';
- }
 
- public function traerReservasClientes(Request $request)
- {
+   foreach($mantenciones as $man){
+    $fman = Carbon::createFromFormat('Y-m-d',$man->fecha);    
+    $fman = $fman->format('d-m-Y');
+    array_push($arrayFechas, $fman);
+  }
+  $arrayFechas = json_encode($arrayFechas);
+  return view('crear-reservas')->with('departamento',$departamento)->with('servicio',$servicio)->with('arrayFechas',$arrayFechas);
+}
+
+public function filterComuna(Request $request)
+{
+  $comuna = $request->comunas;
+  $departamentoComuna = Departamento::where('comuna',$comuna)->where('estado','DISPONIBLE')->get();
+
+  return $departamentoComuna;
+
+}
+
+public function store(Request $request)
+{
+  $dateinit = \Carbon\Carbon::parse($request->fecha_desde);
+  $datefim = \Carbon\Carbon::parse($request->fecha_hasta);
+  $dateinit = $dateinit->format('Y-m-d');
+  $datefim = $datefim->format('Y-m-d');
+
+  $fechas = Reservas::select('fecha_desde','fecha_hasta')->where('cod_departamento',$request->codigo_departamento)->get();
+
+  $arrayFechas = [] ;
+
+  foreach($fechas as $fecha)
+  {
+    $startDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_desde);
+    $endDate = Carbon::createFromFormat('Y-m-d', $fecha->fecha_hasta);
+    $dateRange = CarbonPeriod::create($startDate, $endDate);
+
+    foreach($dateRange as $date){
+      $date = $date->format('d-m-Y');
+      array_push($arrayFechas, $date);
+    }
+  }
+
+  $arrayFechas2 = [];
+  $dateRange2 = CarbonPeriod::create($dateinit,$datefim);
+  foreach($dateRange2 as $date2){
+    $date2 = $date2->format('d-m-Y');
+    array_push($arrayFechas2, $date2);
+  }
+
+
+
+  if($dateRange2 = array_intersect($arrayFechas2, $arrayFechas)) {
+    return 'HOLA' ;
+  } else {
+    $reserva = new Reservas();
+    $reserva->rut=$request->rut;
+    $reserva->costo_base=$request->costo_base;
+    $reserva->fecha_desde=$dateinit;
+    $reserva->fecha_hasta=$datefim;
+    $reserva->fecha_creacion=$request->fecha_creacion;
+    $reserva->cod_departamento=$request->codigo_departamento;
+    $reserva->save();
+
+    $arrayServ = $request->arrayServiciosSeleccionados;
+
+    if ($arrayServ) {
+      foreach ($arrayServ as $servicio) 
+      {
+       $servicio = Servicios::where('function',$servicio)->first();
+
+       $servicios_solicitados = new ServicioSolicitados();
+       $servicios_solicitados->cod_Servicio = $servicio->id;
+       $servicios_solicitados->fecha =$request->fecha_creacion;
+       $servicios_solicitados->costo =$servicio->precio;
+       $servicios_solicitados->cod_reserva = $reserva->id;
+       $servicios_solicitados->save();
+     }
+   }
+ }
+ return 'LISTASO';
+}
+
+public function traerReservasClientes(Request $request)
+{
   $rut = $request->rut;
       //$reservas = Reservas::where('rut',$rut)->get();
 
@@ -142,12 +146,23 @@ public function checkIn($id){
 
   $servicio = ServicioSolicitados::join('servicios','servicios-solicitados.cod_servicio','=','servicios.id')->where('servicios-solicitados.cod_reserva',$reserva->id)->get();
 
+  $currentDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_desde);
+  $shippingDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_hasta);
+
+  $diferencia_en_dias = $currentDate->diffInDays($shippingDate);
+  $costo_servicios = ServicioSolicitados::where('cod_reserva',$reserva->id)->sum('costo');
+
+  $total = $costo_servicios+$reserva->costo_base;
+
   $data = [
     'reserva' => $reserva,
     'departamento' => $departamento,
     'usuario' => $usuario,
     'servicios_solicitados' =>$servicios_solicitados,
-    'servicio' => $servicio
+    'servicio' => $servicio,
+    'diferencia_en_dias' => $diferencia_en_dias,
+    'costo_servicios' => $costo_servicios,
+    'total' => $total
   ];
 
   $pdf = PDF::loadView('PDF-reservas',$data)->setOptions(['defaultFont' => 'sans-serif'])->setPaper('a4', 'landscape');
