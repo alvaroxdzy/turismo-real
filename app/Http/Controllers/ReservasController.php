@@ -173,14 +173,34 @@ public function checkIn($id){
 
 
 
-public function show($id)
+public function buscar()
 {
-        //
+ $reservas = Reservas::all();
+
+ return view('busqueda-reservas',compact('reservas'));
 }
 
-public function edit($id)
+public function detalleReserva($id)
 {
-        //
+  $reserva = Reservas::where('id',$id)->first();
+
+  $departamento = Departamento::where('codigo_departamento',$reserva->cod_departamento)->first();
+
+  $usuario = User::where('rut',$reserva->rut)->first();
+
+  $servicios_solicitados = ServicioSolicitados::where('cod_reserva',$reserva->id)->get();
+
+  $servicio = ServicioSolicitados::join('servicios','servicios-solicitados.cod_servicio','=','servicios.id')->where('servicios-solicitados.cod_reserva',$reserva->id)->get();
+
+  $currentDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_desde);
+  $shippingDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_hasta);
+
+  $diferencia_en_dias = $currentDate->diffInDays($shippingDate);
+  $costo_servicios = ServicioSolicitados::where('cod_reserva',$reserva->id)->sum('costo');
+
+  $total = $costo_servicios+$reserva->costo_base;
+
+  return view('detalle-reserva')->with('reserva',$reserva)->with('departamento',$departamento)->with('usuario',$usuario)->with('Servicios_solicitados',$servicios_solicitados)->with('servicio',$servicio)->with('diferencia_en_dias',$diferencia_en_dias)->with('costo_servicios',$costo_servicios)->with('total',$total);
 }
 
 public function update(Request $request, $id)

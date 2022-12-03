@@ -1,9 +1,13 @@
+@extends('layouts.app')
+
+@section('content')
+
 </head>
 <body style="font-family: Helvetica; color: #232323;">
   <main>
     <div  class="container"> 
      <div class="card" >
-      <h3 style="width:30%"> Turismo Real</h3>
+      <h3 style="text-align: center;"> Turismo Real</h3>
     </div>
 
 
@@ -103,10 +107,10 @@
 
     </table><br>     
   
-    </td> <!--no me borri pq soy el cierre de la primera columna, aweonaito-->
+    </td> <!--no me borri pq soy el cierre de la primera columna, -->
 
     <!-- ESTA COLUMNA ES LA DE RESUMEN RESERVA-->
-    <td style="border-left: 1px solid #444444; background-color:#eef1f5; width: 300px; padding-right:20px; padding-left:20px;">
+    <td style="border-left: 1px solid #444444; background-color:#eef1f5; width: 700px; padding-right:20px; padding-left:20px;">
       <div class="title-res"> Resumen Reserva</div><hr>
 
       <table class="resumen">
@@ -196,4 +200,5 @@
     width: 325px;
   }
 </style>
+@endsection
 
