@@ -65,29 +65,29 @@
 
 
                 <div class="mb-2 row">
-                    <label  class="col-2 col-form-label" for="email">Correo @</label>
+                    <label  class="col-2 col-form-label" for="email">Email</label>
                     <div class="col-sm-5">
-                        <input  type="email" class="form-control" id="email" name="email"  required >
+                        <input  type="email" class="form-control" id="email" name="email"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label  class="col-2 col-form-label" for="rut">Rut</label>
                     <div class="col-sm-5">
-                        <input  type="text" class="form-control" id="rut" name="rut"  required >
+                        <input  type="text" class="form-control" id="rut" name="rut"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
                 <div class="mb-2 row">
                     <label  class="col-2 col-form-label" for="nombres">Nombres</label>
                     <div class="col-sm-5">
-                        <input  type="text" class="form-control" id="nombres" name="nombres"  required >
+                        <input  type="text" class="form-control" id="nombres" name="nombres"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label  class="col-2 col-form-label" for="apellidos">Apellidos</label>
                     <div class="col-sm-5">
-                        <input  type="text" class="form-control" id="apellidos" name="apellidos"  required >
+                        <input  type="text" class="form-control" id="apellidos" name="apellidos"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
                 <div class="mb-2 row">
@@ -99,13 +99,13 @@
                 <div class="mb-2 row">
                     <label  class="col-2 col-form-label" for="direccion">Dirección</label>
                     <div class="col-sm-5">
-                        <input  type="text" class="form-control" id="direccion" name="direccion"  required >
+                        <input  type="text" class="form-control" id="direccion" name="direccion"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
                 <div class="mb-2 row">
                     <label  class="col-2 col-form-label" for="telefono">Telefono</label>
                     <div class="col-sm-5">
-                        <input  type="text" class="form-control" id="telefono" name="telefono"  required >
+                        <input  type="text" class="form-control" id="telefono" name="telefono"  required onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>
                 </div>
 
