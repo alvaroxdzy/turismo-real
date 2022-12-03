@@ -101,7 +101,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container" style="padding: 80px 200px;">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
@@ -165,4 +165,3 @@
                 </div>
             </div>
         </div>
-

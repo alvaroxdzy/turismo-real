@@ -111,7 +111,7 @@
 
 
                             <div style="width: 400px;">
-                                <marquee >
+                                <marquee>
                                    Bienvenido : {{ Auth::user()->nombres }}
                                </marquee>
 

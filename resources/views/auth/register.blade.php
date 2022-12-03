@@ -7,7 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title> Turismo real </title>
+
 
         <!-- Scripts Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -47,8 +47,15 @@
         <style type="text/css"></style>
     </head>
 
-
-    <div class="container" >
+    <title> Turismo real </title>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                <div class="container" id="app">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        Turismo Real </a>
+                </div>
+    </nav>
+    
+    <div class="container" style="padding: 35px 200px;" >
 
         <div class="card border-info mb-3" style="width:100%" >
             <div class="card-header">{{ __('Registro') }}</div>
@@ -67,7 +74,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="mb-2 col-md-2">
+                        <div class="mb-2 col-md-2" >
                             <label for="rut" > Rut </label>
                             <input id="rut" type="text" class="form-control" name="rut" required >
                             <small class="form-text text-muted">formato 11222333-1</small>
@@ -141,4 +148,3 @@
             </div>
 
         </div>
-
