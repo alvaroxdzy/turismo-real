@@ -48,20 +48,6 @@
 						<input id="direccion" type="text" class="form-control" name="direccion" value="{{ auth()->user()->direccion }}" readonly>
 					</div>
 
-					<div class="mb-2 col-md-3">
-
-						<label for="region" >{{ __('Region') }}</label>
-
-						<input id="region" type="text" class="form-control" name="region" value="{{ auth()->user()->region }}" readonly>
-					</div>                       
-
-					<div class="mb-2 col-md-3">
-
-						<label for="comuna">{{ __('Comuna') }}</label>
-						<input id="comuna" type="text" class="form-control" name="comuna" value="{{ auth()->user()->comuna }}" readonly>
-					</div>
-				</div>
-
 				<div class="row">
 					<div class="mb-2 col-md-4">
 						<label for="telefono" >{{ __('Telefono') }}</label>

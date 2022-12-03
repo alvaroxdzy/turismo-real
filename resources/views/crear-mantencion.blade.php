@@ -18,16 +18,18 @@ input[type=number] {
 	<form class="form-inline" type="get" action="{{ url('/almacenar-mantencion') }}">
 		{{ csrf_field() }}
 		
+		<h3> Gestion de mantenciones</h3>
+
 		<div class="mb-2 row">
 			<label  class="col-sm-2 col-form-label" for="nombre_departamento">Nombre condominio</label>
 			<div class="col-sm-5">
-				<input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->nombre_departamento}}">
+				<input type="text" class="form-control" id="nombre_departamento" name="nombre_departamento" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->nombre_departamento}}" readonly>
 			</div>
 		</div>
 		<div class="mb-2 row">
 			<label  class="col-2 col-form-label" for="numero">Número departamento</label>
 			<div class="col-sm-5">
-				<input  type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}">
+				<input  type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6" required onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}" readonly>
 			</div>
 		</div>
 		<div class="mb-2 row">

@@ -65,8 +65,11 @@ Route::get('/revisar-reservas/{id}',[App\Http\Controllers\ReservasController::cl
 Route::get('/ganancias-departamento',[App\Http\Controllers\ReservasController::class, 'gananciasDepartamento'])->name('reservas.gananciasDepartamento');
 Route::get('/filtrar-ganancias',[App\Http\Controllers\ReservasController::class, 'gananciasDepartamentoFiltrar'])->name('reservas.gananciasDepartamentoFiltrar');
 
+
+
 //REPORTES
 Route::get('/PDF-reservas/{id}',[App\Http\Controllers\ReservasController::class, 'checkIn'])->name('reservas.store');
+Route::get('/PDF-checkOut/{id}',[App\Http\Controllers\ReservasController::class, 'checkOut'])->name('reservas.checkOut');
 
 //RUTAS USUARIO
 Route::get('/mi-cuenta',function(){

@@ -104,6 +104,7 @@ public function store(Request $request)
     $reserva->fecha_hasta=$datefim;
     $reserva->fecha_creacion=$request->fecha_creacion;
     $reserva->cod_departamento=$request->codigo_departamento;
+    $reserva->estado = 'DISPONIBLE';
     $reserva->save();
 
     $arrayServ = $request->arrayServiciosSeleccionados;
@@ -231,4 +232,45 @@ public function gananciasDepartamentoFiltrar(Request $request)
 
   return $ganancias;
 }
+
+public function checkOut($id){
+
+  $reserva = Reservas::where('id',$id)->first();
+
+  $departamento = Departamento::where('codigo_departamento',$reserva->cod_departamento)->first();
+
+  $usuario = User::where('rut',$reserva->rut)->first();
+
+  $servicios_solicitados = ServicioSolicitados::where('cod_reserva',$reserva->id)->get();
+
+  $servicio = ServicioSolicitados::join('servicios','servicios-solicitados.cod_servicio','=','servicios.id')->where('servicios-solicitados.cod_reserva',$reserva->id)->get();
+
+  $currentDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_desde);
+  $shippingDate = Carbon::createFromFormat('Y-m-d', $reserva->fecha_hasta);
+
+  $diferencia_en_dias = $currentDate->diffInDays($shippingDate);
+  $costo_servicios = ServicioSolicitados::where('cod_reserva',$reserva->id)->sum('costo');
+
+  $total = $costo_servicios+$reserva->costo_base;
+
+  $data = [
+    'reserva' => $reserva,
+    'departamento' => $departamento,
+    'usuario' => $usuario,
+    'servicios_solicitados' =>$servicios_solicitados,
+    'servicio' => $servicio,
+    'diferencia_en_dias' => $diferencia_en_dias,
+    'costo_servicios' => $costo_servicios,
+    'total' => $total
+  ];
+
+  $pdf = PDF::loadView('PDF-check-out',$data)->setOptions(['defaultFont' => 'sans-serif'])->setPaper('a4', 'landscape');
+
+  return $pdf->download('archivo-pdf.pdf');
+
+}
+
+
+
+
 }

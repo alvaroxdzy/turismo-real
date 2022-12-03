@@ -1,13 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
-
 </head>
 <body style="font-family: Helvetica; color: #232323;">
   <main>
     <div  class="container"> 
      <div class="card" >
-      <h3 style="text-align: center;"> Turismo Real</h3>
+      <h3 style="width:30%"> Turismo Real CHECK OUT</h3>
     </div>
 
 
@@ -107,12 +103,10 @@
 
         </table><br>     
 
-      </td> <!--no me borri pq soy el cierre de la primera columna, -->
+      </td> <!--no me borri pq soy el cierre de la primera columna, aweonaito-->
 
       <!-- ESTA COLUMNA ES LA DE RESUMEN RESERVA-->
-      <br>
-
-      <td style="border-left: 1px solid #444444; background-color:#eef1f5; width: 700px; padding-right:20px; padding-left:20px;">
+      <td style="border-left: 1px solid #444444; background-color:#eef1f5; width: 300px; padding-right:20px; padding-left:20px;">
         <div class="title-res"> Resumen Reserva</div><hr>
 
         <table class="resumen">
@@ -177,9 +171,11 @@
         @endforeach
       </tbody>
     </table>  
-
-
-    <button id="btn-checkout" type="button" class="btn btn-primary"><a style="color:whitesmoke;" href="/PDF-checkOut/{{$reserva->id}}"> Check OUT &#10095; </a></button>
+    <br>
+    <p><label for="w3review">Observaciones y daños:</label></p>
+    <textarea id="w3review" name="" rows="15" cols="100"></textarea>
+    <br>
+    <p><label for="w3review">Firma en conformidad</label></p>
     <style>
       .resumen td {
         width: 150px;
@@ -204,5 +200,3 @@
         width: 325px;
       }
     </style>
-    @endsection
-
