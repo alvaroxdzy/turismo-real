@@ -207,10 +207,16 @@ public function detalleReserva($id)
   return view('detalle-reserva')->with('reserva',$reserva)->with('departamento',$departamento)->with('usuario',$usuario)->with('Servicios_solicitados',$servicios_solicitados)->with('servicio',$servicio)->with('diferencia_en_dias',$diferencia_en_dias)->with('costo_servicios',$costo_servicios)->with('total',$total);
 }
 
-public function update(Request $request, $id)
+public function gananciasDepartamento()
 {
-        //
+      $ganancias =  Departamento::join('reservas','departamento.codigo_departamento','=','reservas.cod_departamento')
+      ->select('departamento.nombre_departamento',DB::raw('SUM(reservas.costo_base) as costo_base'),'departamento.numero','departamento.codigo_departamento')
+      ->groupBy('departamento.nombre_departamento','departamento.numero','departamento.codigo_departamento')->get();
+
+      return view('estadisticas-departamento')->with('ganancias',$ganancias);
 }
+
+
 
 public function destroy($id)
 {
