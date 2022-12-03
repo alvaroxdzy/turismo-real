@@ -70,3 +70,10 @@
 
 
 @endsection
+
+<style>
+  #myTable tbody tr:hover {
+  background-color: #f3f3f3;
+  cursor:pointer;
+}
+</style>

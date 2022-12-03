@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> Turismo real </title>
+    <title> &#9992; Turismo real </title>
 
     <!-- Scripts Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -111,8 +111,8 @@
 
 
                             <div style="width: 400px;">
-                                <marquee>
-                                   Bienvenido : {{ Auth::user()->nombres }}
+                                <marquee style="text-transform: uppercase; font-family:Verdana;">
+                                   Bienvenido : {{ Auth::user()->nombres }} &#128526;
                                </marquee>
 
                                <table id="login-opt">

@@ -162,7 +162,7 @@
          				'<td style="width:450px;">'+
          				'<div class="box-datos">'+
          				'<div class="texto">Dias reservados: ' +dias+'</div>'+
-         				'<div class="texto"> <button><a style="color:whitesmoke;" href="/PDF-reservas/'+detalle.id+'"> Ver detalle &#10095; </a></button></div>'+
+         				'<div class="texto"> <button class="btn btn-primary btn-sm" "><a style="color:whitesmoke;text-decoration:none;" href="/PDF-reservas/'+detalle.id+'"> Ver detalle &#10095; </a></button></div>'+
          				'</div>'+
          				'</td>'+
 
@@ -177,5 +177,6 @@
 			});
 		</script>
 		@endsection
+
 
 

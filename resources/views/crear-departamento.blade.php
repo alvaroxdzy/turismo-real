@@ -107,7 +107,7 @@ input[type=number] {
             <th style="margin-left: 200px;">Gestionar</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="inventariobody">
 
         <input type="hidden" name="contador" value="0" id="contador">
 
@@ -144,7 +144,7 @@ input[type=number] {
             html+='<tr>';
 
 
-            $('tbody').append(html);
+            $('#inventariobody').append(html);
 
             $(document).on('click','#borrar_btn'+contador,function(){
 

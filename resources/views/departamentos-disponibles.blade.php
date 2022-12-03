@@ -139,7 +139,6 @@
     font-family: Helvetica;
     font-size: medium;
     font-weight: bold;
-
   }
 
   button:hover {
@@ -148,6 +147,9 @@
 
   }
 
+  button a {
+    text-decoration: none;
+  }
   .nombre-dpto {
     font-size: large;
     font-weight: bold;

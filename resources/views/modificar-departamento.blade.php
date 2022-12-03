@@ -186,7 +186,7 @@ input[type=number] {
 				html+='<tr>';
 
 
-				$('tbody').append(html);
+				$('#tbodyInventario').append(html);
 
 				$(document).on('click','#borrar_btn'+contador,function(){
 

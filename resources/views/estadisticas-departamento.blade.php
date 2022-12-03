@@ -2,14 +2,16 @@
 
 @section('content')
 
+<div style="padding: 0 120px;">
 <h3> Ganancias por departamento</h3>
 
-<table id="myTable" class="table dataTable no-footer dtr-inline collapsed">
+<table id="myTable" class="table dataTable no-footer dtr-inline collapsed" style="width: 100%;">
 
 	<thead>
 		<tr>
 			<th>Departamento</th>
-			<th style="width:200px;">Ganancias</th>
+			<th>Ganancias</th>
+			<th>Reservas</th>
 
 		</tr>
 	</thead>
@@ -23,11 +25,20 @@
 					<div class="texto"> Codigo:  {{$ganancia->codigo_departamento}} </div>
 				</div>
 			</td>
-			<td>{{$ganancia->costo_base}}</td>
+			<td>
+				${{$ganancia->costo_base}}
+				
+			</td>
+			<td>
+				200
+			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>  
+
+</div>
+
 <script>
 	var dataTable = new DataTable("#myTable", {
 		perPage: 10,
