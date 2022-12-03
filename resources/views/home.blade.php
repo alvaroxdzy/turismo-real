@@ -106,9 +106,6 @@
     font-weight:500;
   }
 
-  .active {
-    background-color: black;
-  }
 
   small {
     padding: 3px;
