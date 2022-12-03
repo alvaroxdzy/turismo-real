@@ -68,8 +68,7 @@ jQuery(document).ready(function () {
 
 
 function validarCampos() {
-  var region = $('#regiones').val();
-  var comuna = $('#comunas').val();
+
   var rut = $('#rut').val();
   var nombres = $('#nombres').val();
   var apellidos = $('#apellidos').val();
@@ -77,7 +76,7 @@ function validarCampos() {
   var direccion = $('#direccion').val();
   var telefono = $('#telefono').val();
 
-  if (region=='sin-region'||comuna=='sin-comuna'||rut==''||nombres==''||apellidos==''||fecha_nacimiento==''||direccion==''||telefono==''){
+  if (rut==''||nombres==''||apellidos==''||fecha_nacimiento==''||direccion==''||telefono==''){
    alert('Debe completar todos los campos');
  } else {
   $('#guardar').submit();

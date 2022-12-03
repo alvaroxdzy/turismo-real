@@ -100,19 +100,7 @@
                             <input id="direccion" type="text" class="form-control" name="direccion"  required >
                         </div>
 
-                        <div class="mb-2 col-md-3">
 
-                            <label for="region" >{{ __('Region') }}</label>
-
-                            <select class="form-control" id="regiones" name="region"></select>
-                        </div>                       
-
-                        <div class="mb-2 col-md-3">
-
-                            <label for="comuna">{{ __('Comuna') }}</label>
-                                <select class="form-control" id="comunas" name="comuna"></select>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="mb-2 col-md-4">
