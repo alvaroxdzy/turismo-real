@@ -21,28 +21,39 @@
 
         <thead>
           <tr>
-            <th>Codigo</th>
-            <th>Dirección</th>
-            <th>Comuna</th>
-            <th>Región</th>
-            <th>Nombre</th>
-            <th>Número</th>
-            <th>Habitaciones</th>
-            <th>Baños</th>
+            <th>Identificación</th>
+            <th>Ubicacion</th>
+            <th>Inmueble</th>
             <th>Estado</th>     
           </tr>
         </thead>
         <tbody>
           @foreach($departamentos as $departamento) 
           <tr class='clickable-row' data-href="modificar-departamento/{{$departamento->codigo_departamento}}">
-            <td>{{$departamento->codigo_departamento}} </a></td>
-            <td>{{$departamento->direccion}}</td>
-            <td>{{$departamento->comuna}}</td>
-            <td>{{$departamento->region}}</td>
-            <td>{{$departamento->nombre_departamento}}</td>
-            <td>{{$departamento->numero}}</td>
-            <td>{{$departamento->cantidad_habitaciones}}</td>
-            <td>{{$departamento->cantidad_banos}}</td>
+
+            <td>
+              <div class="box-datos">
+                <div class="nombre-dpto">Codigo: {{$departamento->codigo_departamento}}</div>
+                <div class="nombre-dpto">Nombre: {{$departamento->nombre_departamento}}</div>
+                <div class="nombre-dpto">Numero: {{$departamento->numero}}</div>
+              </div>
+            </td>
+
+
+            <td>
+              <div class="box-datos">
+                <div class="nombre-dpto">Direccion: {{$departamento->direccion}}</div>
+                <div class="nombre-dpto">Comuna: {{$departamento->comuna}}</div>
+                <div class="nombre-dpto">Region: {{$departamento->region}}</div>
+              </div>
+            </td>
+
+            <td>
+              <div class="box-datos">
+                <div class="nombre-dpto">Dormitorios: {{$departamento->cantidad_habitaciones}}</div>
+                <div class="nombre-dpto">Baños: {{$departamento->cantidad_banos}}</div>
+              </div>
+            </td>
             <td>{{$departamento->estado}}</td>
           </tr>
           @endforeach
@@ -82,7 +93,7 @@
 
 <style>
   #myTable tbody tr:hover {
-  background-color: #f3f3f3;
-  cursor:pointer;
-}
+    background-color: #f3f3f3;
+    cursor:pointer;
+  }
 </style>

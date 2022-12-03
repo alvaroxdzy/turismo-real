@@ -24,27 +24,23 @@ input[type=number] {
 
 	<form class="form-inline" type="get" action="{{ url('/almacenar-servicio') }}">
 		{{ csrf_field() }}
-		<div class="row" style="background: antiquewhite;"> 
-			<div class="mb-3 col-md-5">
-				<label for="nombre_servicio">Nombre servicio</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="nombre_servicio" name="nombre_servicio"  minlength="1" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-				
-			</div>
-			<div class="mb-3 col-md-5">
-				<label for="precio">Precio</label>
-				<input style="text-transform:uppercase" type="text" class="form-control" id="precio" name="precio"  required onkeypress="return valideKey(event);">
-				
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="nombre_servicio">Nombre servicio</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="nombre_servicio" name="nombre_servicio" onkeyup="javascript:this.value=this.value.toUpperCase();" required >
 			</div>
 		</div>
-		<br> 
-		<div class="row" style="background: antiquewhite;"> 
-			
-			<div >
-				<label for="detalles">Detalles</label>
-				<textarea style="text-transform:uppercase;width:500px" type="text-center" class="form-control" id="detalles"  name="detalles"  required onkeyup="javascript:this.value=this.value.toUpperCase();" for="observacion_producto"></textarea>
-				<br>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="detalles">Detalles servicio</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="detalles" name="detalles" onkeyup="javascript:this.value=this.value.toUpperCase();" required >
 			</div>
-
+		</div>
+		<div class="mb-2 row">
+			<label  class="col-2 col-form-label" for="precio">Precio servicio</label>
+			<div class="col-sm-5">
+				<input  type="text" class="form-control" id="precio" name="precio" onkeypress="return valideKey(event);" required >
+			</div>
 		</div>
 		<input value="{{$userId = Auth::user()->email;}}" id="usuario" type="hidden" name="usuario">
 		<br>

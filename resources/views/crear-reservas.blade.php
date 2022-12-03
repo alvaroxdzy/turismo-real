@@ -29,7 +29,7 @@ input[type=number] {
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="numero">Numero</label>
 			<div class="col-sm-2">
-				<input style="width:100px" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6"  onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}">
+				<input style="width:100px" type="text" class="form-control" id="numero" name="numero"  minlength="1" maxlength="6"  onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->numero}}" readonly>
 			</div>
 		</div>
 
@@ -37,39 +37,39 @@ input[type=number] {
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="direccion">Direccion</label>
 			<div class="col-sm-2">
-				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion"  maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->direccion}}">
+				<input style="text-transform:uppercase;width:500px;" type="text" class="form-control" id="direccion" name="direccion"  maxlength="75" onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{$departamento->direccion}}" readonly>
 			</div>
 		</div>
 
 		<input type="text" id="id" name="id" hidden> 
 
-		<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20"  onkeyup="javascript:this.value=this.value.toUpperCase();" hidden value="{{$departamento->codigo_departamento}}">		
+		<input style="width:100px" style="text-transform:uppercase" type="text" class="form-control" id="codigo_departamento" name="codigo_departamento" minlength="1" maxlength="20"  onkeyup="javascript:this.value=this.value.toUpperCase();" hidden value="{{$departamento->codigo_departamento}}" readonly>		
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="comuna">Comuna</label>
 			<div class="col-sm-6">
-				<input  value="{{$departamento->comuna}} , {{$departamento->region}}" id="comuna" name="comuna" type="text" class="form-control">
+				<input  value="{{$departamento->comuna}} , {{$departamento->region}}" id="comuna" name="comuna" type="text" class="form-control" readonly>
 			</div>
 		</div>
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="cantidad_habitaciones">Habitaciones</label>
 			<div class="col-sm-6">
-				<input  value="{{$departamento->cantidad_habitaciones}}" id="cantidad_habitaciones" name="cantidad_habitaciones" type="text" class="form-control">
+				<input  value="{{$departamento->cantidad_habitaciones}}" id="cantidad_habitaciones" name="cantidad_habitaciones" type="text" class="form-control" readonly>
 			</div>
 		</div>
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="cantidad_banos">Baños</label>
 			<div class="col-sm-6">
-				<input  value="{{$departamento->cantidad_banos}}" id="cantidad_banos" name="cantidad_banos" type="text" class="form-control">
+				<input  value="{{$departamento->cantidad_banos}}" id="cantidad_banos" name="cantidad_banos" type="text" class="form-control" readonly>
 			</div>
 		</div>
 
 		<div class="mb-2 row">
 			<label  class="col-sm-1 col-form-label" for="costo_base">Arriendo</label>
 			<div class="col-sm-6">
-				<input  value="{{$departamento->costo_base}}" id="costo_base" name="costo_base" type="text" class="form-control">
+				<input  value="{{$departamento->costo_base}}" id="costo_base" name="costo_base" type="text" class="form-control" readonly>
 			</div>
 		</div>
 		<input value="{{$departamento->codigo_departamento}}" type="hidden" name="codigo_departamento" id="codigo_departamento">
@@ -165,24 +165,28 @@ input[type=number] {
 	function grabarReserva()
 	{
 
-		arrayServicios = [];
-		arrayServiciosSeleccionados = [];
 
-		$("#servicios_oculto option").each(function() {
+		var result = confirm("SEGURO QUE DESEA RESERVAR??");
+		if (result){
 
-			arrayServicios.push($(this).val());
+			arrayServicios = [];
+			arrayServiciosSeleccionados = [];
 
-		});
+			$("#servicios_oculto option").each(function() {
 
-		arrayServicios.forEach(function(servicio){
+				arrayServicios.push($(this).val());
+
+			});
+
+			arrayServicios.forEach(function(servicio){
 
 			//var element = document.getElementById(servicio);
 			//console.log(element);
-			if( $('#'+servicio).prop('checked') ) {
-				arrayServiciosSeleccionados.push(servicio);
-			}
+				if( $('#'+servicio).prop('checked') ) {
+					arrayServiciosSeleccionados.push(servicio);
+				}
 
-		});
+			});
 
 			rut = $('#rut').val();
 			email = $('#email').val();
@@ -238,6 +242,7 @@ input[type=number] {
          	}
          },
        });
+		}
 		}
 
 

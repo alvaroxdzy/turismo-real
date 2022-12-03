@@ -63,6 +63,7 @@ Route::get('/traer-reservas',[App\Http\Controllers\ReservasController::class, 't
 Route::get('/buscar-reservas',[App\Http\Controllers\ReservasController::class, 'buscar'])->name('reservas.buscar');
 Route::get('/revisar-reservas/{id}',[App\Http\Controllers\ReservasController::class, 'detalleReserva'])->name('reservas.revisar');
 Route::get('/ganancias-departamento',[App\Http\Controllers\ReservasController::class, 'gananciasDepartamento'])->name('reservas.gananciasDepartamento');
+Route::get('/filtrar-ganancias',[App\Http\Controllers\ReservasController::class, 'gananciasDepartamentoFiltrar'])->name('reservas.gananciasDepartamentoFiltrar');
 
 //REPORTES
 Route::get('/PDF-reservas/{id}',[App\Http\Controllers\ReservasController::class, 'checkIn'])->name('reservas.store');

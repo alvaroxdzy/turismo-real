@@ -64,15 +64,15 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Turismo real
-                </a>
-                
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav justify-content-end" id="ul_layout">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                Turismo real
+            </a>
 
-                      <li id="li_layout" class="nav-item dropdown">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav justify-content-end" id="ul_layout">
+
+                  <li id="li_layout" class="nav-item dropdown">
                             <!--
                             <a id="navbarDropdown" class="nav-link dropdown-toggle font-small"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" >Movimientos </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -87,57 +87,62 @@
                                 <a class="dropdown-item" href="/buscar-departamento"> Departamento </a> 
                                 <a class="dropdown-item" href="/buscar-mantencion"> Mantenciones  </a> 
                                 <a class="dropdown-item" href="/buscar-servicio"> Servicio </a> 
+                                <a class="dropdown-item" href="/buscar-reservas"> Reservas </a> 
                             </div>     
-                            <li id="li_layout"><a class="nav-link" href="/departamentos-disponibles" id="linkLayout" >Reservar</a></li>                
-                        </ul>
+                            <li id="li_layout"><a class="nav-link" href="/departamentos-disponibles" id="linkLayout" >Reservar hotel</a></li>       
+                            <li id="li_layout" class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle font-small"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" href="/bodegas"> Estadisticas  </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/ganancias-departamento"> Ganancias </a>          
+                                </ul>
 
 
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ms-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                            @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
-                            </li>
-                            @endif
+                                <!-- Right Side Of Navbar -->
+                                <ul class="navbar-nav ms-auto">
+                                    <!-- Authentication Links -->
+                                    @guest
+                                    @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
+                                    </li>
+                                    @endif
 
-                            @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
-                            </li>
-                            @endif
-                            @else
+                                    @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                    </li>
+                                    @endif
+                                    @else
 
 
-                            <div style="width: 400px;">
-                                <marquee style="text-transform: uppercase; font-family:Verdana;">
-                                   Bienvenido : {{ Auth::user()->nombres }} &#128526;
-                               </marquee>
+                                    <div style="width: 400px;">
+                                        <marquee style="text-transform: uppercase; font-family:Verdana;">
+                                         Bienvenido : {{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} &#128526;
+                                     </marquee>
 
-                               <table id="login-opt">
-                                <td style="width: 110px;"><a class="link-secondary" style="display:block;text-align:center;"  href="{{ url('/mi-cuenta') }}">Mi cuenta</a></td>
-                                <td><a class="link-secondary" style="display:block;text-align:center;"  href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                   document.getElementById('logout-form').submit();">
-                                   {{ __('Cerrar sesion') }}
-                               </a></td>
-                               </table>
+                                     <table id="login-opt">
+                                        <td style="width: 110px;"><a class="link-secondary" style="display:block;text-align:center;"  href="{{ url('/mi-cuenta') }}">Mi cuenta</a></td>
+                                        <td><a class="link-secondary" style="display:block;text-align:center;"  href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                         {{ __('Cerrar sesion') }}
+                                     </a></td>
+                                 </table>
 
-                               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                    @endguest
-                </ul>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="py-4" >
-        @yield('content')
-    </main>
-</div>
+        <main class="py-4" >
+            @yield('content')
+        </main>
+    </div>
 </body>
 </html>

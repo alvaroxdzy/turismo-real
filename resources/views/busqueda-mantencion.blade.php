@@ -7,11 +7,7 @@
 <div  class="container"> 
   <h4>Registro de mantenciones</h4>
   <div> 
-   <form class="form-text-input" type="get">
 
-     <a href="crear-mantencion" class="btn btn-outline-primary btn-sm" role="button">Registrar mantencion</a>
-
-   </form>
  </div>
  <div class="row"> 
    <div class="clod-md-4"> </div>

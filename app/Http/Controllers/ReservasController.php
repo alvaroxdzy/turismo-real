@@ -23,6 +23,7 @@ class ReservasController extends Controller
 
   public function create($codigo_departamento)
   {
+
     $servicio = Servicios::orderBy('nombre_servicio','asc')->get();
     $departamento = Departamento::where('codigo_departamento',$codigo_departamento)->first();
 
@@ -177,7 +178,7 @@ public function buscar()
 {
 
  $reservas = Reservas::join('departamento','reservas.cod_departamento','=','departamento.codigo_departamento')
-                     ->join('users','reservas.rut','=','users.rut')->select('reservas.id','departamento.nombre_departamento','departamento.numero','users.nombres','users.apellidos','users.rut','reservas.fecha_desde','reservas.fecha_hasta')->get();
+ ->join('users','reservas.rut','=','users.rut')->select('reservas.id','departamento.nombre_departamento','departamento.numero','users.nombres','users.apellidos','users.rut','reservas.fecha_desde','reservas.fecha_hasta')->get();
 
 
 
@@ -209,17 +210,25 @@ public function detalleReserva($id)
 
 public function gananciasDepartamento()
 {
-      $ganancias =  Departamento::join('reservas','departamento.codigo_departamento','=','reservas.cod_departamento')
-      ->select('departamento.nombre_departamento',DB::raw('SUM(reservas.costo_base) as costo_base'),'departamento.numero','departamento.codigo_departamento')
-      ->groupBy('departamento.nombre_departamento','departamento.numero','departamento.codigo_departamento')->get();
+  $ganancias =  Departamento::join('reservas','departamento.codigo_departamento','=','reservas.cod_departamento')
+  ->select('departamento.nombre_departamento',DB::raw('SUM(reservas.costo_base) as costo_base'),'departamento.numero','departamento.codigo_departamento',DB::raw('COUNT(reservas.id) as reservas'))
+  ->groupBy('departamento.nombre_departamento','departamento.numero','departamento.codigo_departamento')->get();
 
-      return view('estadisticas-departamento')->with('ganancias',$ganancias);
+  return view('estadisticas-departamento')->with('ganancias',$ganancias);
 }
 
 
 
-public function destroy($id)
+public function gananciasDepartamentoFiltrar(Request $request)
 {
-        //
+  $fecha_desde = $request->fecha_desde;
+  $fecha_hasta = $request->fecha_hasta;
+
+  $ganancias =  Departamento::join('reservas','departamento.codigo_departamento','=','reservas.cod_departamento')
+  ->whereBetween('reservas.fecha_desde', [$fecha_desde, $fecha_hasta])
+  ->select('departamento.nombre_departamento',DB::raw('SUM(reservas.costo_base) as costo_base'),'departamento.numero','departamento.codigo_departamento',DB::raw('COUNT(reservas.id) as reservas'))
+  ->groupBy('departamento.nombre_departamento','departamento.numero','departamento.codigo_departamento')->get();
+
+  return $ganancias;
 }
 }
