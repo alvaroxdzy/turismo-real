@@ -175,9 +175,13 @@ public function checkIn($id){
 
 public function buscar()
 {
- $reservas = Reservas::all();
 
- return view('busqueda-reservas',compact('reservas'));
+ $reservas = Reservas::join('departamento','reservas.cod_departamento','=','departamento.codigo_departamento')
+                     ->join('users','reservas.rut','=','users.rut')->select('reservas.id','departamento.nombre_departamento','departamento.numero','users.nombres','users.apellidos','users.rut','reservas.fecha_desde','reservas.fecha_hasta')->get();
+
+
+
+ return view('busqueda-reservas')->with('reservas',$reservas);
 }
 
 public function detalleReserva($id)
